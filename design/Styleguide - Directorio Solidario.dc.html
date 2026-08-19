@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/nocturne-e8c6b891-378e-4d6f-9cc8-5194f3483bad/styles.css">
+  <script src="_ds/nocturne-e8c6b891-378e-4d6f-9cc8-5194f3483bad/_ds_bundle.js"></script>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; }
+    @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    @keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+    .spin { animation: spin 0.75s linear infinite; display: inline-flex; }
+    .skel {
+      background: linear-gradient(90deg, var(--sk-base) 25%, var(--sk-shine) 50%, var(--sk-base) 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.4s infinite;
+    }
+    code { font-family: 'Roboto Mono', monospace; font-size: 11.5px; background: var(--color-divider); padding: 2px 7px; border-radius: 4px; color: var(--color-text-secondary); }
+    input, select, textarea, button { font-family: inherit; }
+    a { color: inherit; }
+    .section-header { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-primary); margin-bottom: 6px; }
+  </style>
+</helmet>
+
+<div style="{{ containerStyle }}">
+
+  <!-- ── Sticky header ── -->
+  <div style="position:sticky; top:0; z-index:100; background:var(--color-bg); border-bottom:1px solid var(--color-divider); padding:12px 32px; display:flex; align-items:center; justify-content:space-between; gap:16px;">
+    <div>
+      <div style="font-size:11px; font-weight:600; color:var(--color-primary); letter-spacing:0.1em; text-transform:uppercase; margin-bottom:1px;">Directorio Solidario · Manizales</div>
+      <div style="font-size:17px; font-weight:600; color:var(--color-text);">Styleguide v1.0</div>
+    </div>
+    <div style="display:flex; align-items:center; gap:8px; flex-shrink:0;">
+      <span style="font-size:12px; color:var(--color-text-secondary);">Paleta activa:</span>
+      <button onClick="{{ setPaletteA }}" style="{{ btnAStyle }}">A · Tierra Nocturna</button>
+      <button onClick="{{ setPaletteB }}" style="{{ btnBStyle }}">B · Luz Comunitaria ★ rec.</button>
+    </div>
+  </div>
+
+  <!-- ── Content ── -->
+  <div style="max-width:900px; margin:0 auto; padding:48px 32px 96px;">
+
+    <!-- ═════════════════════════════════════ 01 PALETAS ═════════════════════════════════════ -->
+    <div style="margin-bottom:56px;">
+      <div class="section-header">01 · Paletas de color</div>
+      <div style="font-size:24px; font-weight:600; color:var(--color-text); margin-bottom:6px;">Color tokens</div>
+      <div style="font-size:14px; color:var(--color-text-secondary); margin-bottom:28px; line-height:1.6;">Ambas opciones siempre visibles. El toggle de arriba controla cuál se aplica a los átomos. Contrastes verificados WCAG AA mínimo 4.5:1 para texto normal, 3:1 para componentes UI.</div>
+
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px;">
+
+        <!-- Palette A -->
+        <div style="{{ palACardStyle }}">
+          <div style="{{ palAHeaderStyle }}">
+            <div>
+              <div style="font-size:15px; font-weight:700; color:{{ palATextOnPrimary }};">A · {{ palAName }}</div>
+              <div style="font-size:12px; color:{{ palATextOnPrimary }}; opacity:0.75;">{{ palADesc }}</div>
+            </div>
+            <div style="font-size:12px; font-weight:600; color:{{ palATextOnPrimary }}; background:rgba(0,0,0,0.2); padding:3px 8px; border-radius:6px;">Nocturna</div>
+          </div>
+          <div style="{{ palABodyStyle }}">
+            <sc-for list="{{ aSwatches }}" as="sw" hint-placeholder-count="10">
+              <div style="flex:1; min-width:72px; max-width:80px;">
+                <div style="{{ sw.boxStyle }}"></div>
+                <div style="font-size:9.5px; color:{{ palAText }}; opacity:0.6; margin-top:4px; line-height:1.3; word-break:break-all;">{{ sw.token }}</div>
+                <div style="font-size:11px; font-weight:500; color:{{ palAText }};">{{ sw.label }}</div>
+                <div style="font-size:10px; color:{{ palAText }}; opacity:0.55;">{{ sw.hex }}</div>
+                <div style="font-size:10px; color:#25D366; font-weight:600;">{{ sw.note }}</div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <!-- Palette B -->
+        <div style="{{ palBCardStyle }}">
+          <div style="{{ palBHeaderStyle }}">
+            <div>
+              <div style="font-size:15px; font-weight:700; color:{{ palBTextOnPrimary }};">B · {{ palBName }} ★</div>
+              <div style="font-size:12px; color:{{ palBTextOnPrimary }}; opacity:0.75;">{{ palBDesc }}</div>
+            </div>
+            <div style="font-size:12px; font-weight:600; color:{{ palBTextOnPrimary }}; background:rgba(0,0,0,0.15); padding:3px 8px; border-radius:6px;">Recomendada</div>
+          </div>
+          <div style="{{ palBBodyStyle }}">
+            <sc-for list="{{ bSwatches }}" as="sw" hint-placeholder-count="10">
+              <div style="flex:1; min-width:72px; max-width:80px;">
+                <div style="{{ sw.boxStyle }}"></div>
+                <div style="font-size:9.5px; color:{{ palBText }}; opacity:0.6; margin-top:4px; line-height:1.3; word-break:break-all;">{{ sw.token }}</div>
+                <div style="font-size:11px; font-weight:500; color:{{ palBText }};">{{ sw.label }}</div>
+                <div style="font-size:10px; color:{{ palBText }}; opacity:0.55;">{{ sw.hex }}</div>
+                <div style="font-size:10px; color:#1C5935; font-weight:600;">{{ sw.note }}</div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ═════════════════════════════════════ 02 TIPOGRAFÍA ═════════════════════════════════════ -->
+    <div style="margin-bottom:56px;">
+      <div class="section-header">02 · Tipografía</div>
+      <div style="font-size:24px; font-weight:600; color:var(--color-text); margin-bottom:6px;">Type scale</div>
+      <div style="font-size:14px; color:var(--color-text-secondary); margin-bottom:8px;"><code>--font-primary</code>: <strong>'Roboto', system-ui, -apple-system, sans-serif</strong></div>
+      <div style="font-size:14px; color:var(--color-text-secondary); margin-bottom:24px;">Pesos: <code>--weight-regular: 400</code> · <code>--weight-medium: 500</code> · <code>--weight-semibold: 600</code></div>
+
+      <div style="display:flex; flex-direction:column; gap:0;">
+
+        <div style="display:grid; grid-template-columns:220px 1fr; gap:16px; padding:16px 0; border-bottom:1px solid var(--color-divider); align-items:center;">
+          <div>
+            <code>--text-display</code>
+            <div style="font-size:12px; color:var(--color-text-secondary); margin-top:3px;">32px · w-semibold · lh-tight 1.2</div>
+            <div style="font-size:11px; color:var(--color-text-secondary); opacity:0.7; margin-top:2px;">Pantalla de bienvenida, titulares</div>
+          </div>
+          <div style="font-size:32px; font-weight:600; color:var(--color-text); line-height:1.2; text-align:right;">Directorio Solidario</div>
+        </div>
+
+        <div style="display:grid; grid-template-columns:220px 1fr; gap:16px; padding:16px 0; border-bottom:1px solid var(--color-divider); align-items:center;">
+          <div>
+            <code>--text-heading</code>
+            <div style="font-size:12px; color:var(--color-text-secondary); margin-top:3px;">22px · w-semibold · lh-tight 1.2</div>
+            <div style="font-size:11px; color:var(--color-text-secondary); opacity:0.7; margin-top:2px;">Nombre del negocio en detalle</div>
+          </div>
+          <div style="font-size:22px; font-weight:600; color:var(--color-text); line-height:1.2; text-align:right;">Panadería La Esperanza</div>
+        </div>
+
+        <div style="display:grid; grid-template-columns:220px 1fr; gap:16px; padding:16px 0; border-bottom:1px solid var(--color-divider); align-items:center;">
+          <div>
+            <code>--text-title</code>
+            <div style="font-size:12px; color:var(--color-text-secondary); margin-top:3px;">18px · w-semibold · lh-base 1.5</div>
+            <div style="font-size:11px; color:var(--color-text-secondary); opacity:0.7; margin-top:2px;">Encabezados de sección, tabs</div>
+          </div>
+          <div style="font-size:18px; font-weight:600; color:var(--color-text); text-align:right;">Muro de Apoyo</div>
+        </div>
+
+        <div style="display:grid; grid-template-columns:220px 1fr; gap:16px; padding:16px 0; border-bottom:1px solid var(--color-divider); align-items:center;">
+          <div>
+            <code>--text-body</code>
+            <div style="font-size:12px; color:var(--color-text-secondary); margin-top:3px;">16px · w-regular · lh-relaxed 1.6</div>
+            <div style="font-size:11px; color:var(--color-text-secondary); opacity:0.7; margin-top:2px;">Texto principal. Mínimo obligatorio.</div>
+          </div>
+          <div style="font-size:16px; font-weight:400; color:var(--color-text); line-height:1.6; text-align:right;">Arreglos de ropa, uniformes y cortinas. Atención a domicilio disponible.</div>
+        </div>
+
+        <div style="display:grid; grid-template-columns:220px 1fr; gap:16px; padding:16px 0; border-bottom:1px solid var(--color-divider); align-items:center;">
+          <div>
+            <code>--text-label</code>
+            <div style="font-size:12px; color:var(--color-text-secondary); margin-top:3px;">14px · w-medium · lh-base 1.5</div>
+            <div style="font-size:11px; color:var(--color-text-secondary); opacity:0.7; margin-top:2px;">Etiquetas de campo, chips, meta</div>
+          </div>
+          <div style="font-size:14px; font-weight:500; color:var(--color-text-secondary); text-align:right;">Barrio o zona · Chipre · La Enea · Palermo</div>
+        </div>
+
+        <div style="display:grid; grid-template-columns:220px 1fr; gap:16px; padding:16px 0; align-items:center;">
+          <div>
+            <code>--text-caption</code>
+            <div style="font-size:12px; color:var(--color-text-secondary); margin-top:3px;">12px · w-regular · lh-base 1.5</div>
+            <div style="font-size:11px; color:var(--color-text-secondary); opacity:0.7; margin-top:2px;">Timestamps, disclaimers, helper text</div>
+          </div>
+          <div style="font-size:12px; color:var(--color-text-secondary); text-align:right;">Hace 2 horas · Al tocar, abrirá WhatsApp. Esta app no procesa pagos.</div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ═════════════════════════════════════ 03 ESPACIADO Y RADIOS ═════════════════════════════════════ -->
+    <div style="margin-bottom:56px;">
+      <div class="section-header">03 · Espaciado y radios</div>
+      <div style="font-size:24px; font-weight:600; color:var(--color-text); margin-bottom:24px;">Spacing &amp; radius tokens</div>
+
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:32px;">
+
+        <!-- Spacing -->
+        <div>
+          <div style="font-size:13px; font-weight:600; color:var(--color-text-secondary); text-transform:uppercase; letter-spacing:0.07em; margin-bottom:16px;">Base 4px</div>
+          <div style="display:flex; flex-direction:column; gap:10px;">
+            <sc-for list="{{ spacingTokens }}" as="sp" hint-placeholder-count="8">
+              <div style="display:flex; align-items:center; gap:12px;">
+                <code style="width:110px; flex-shrink:0;">{{ sp.token }}</code>
+                <div style="{{ sp.barStyle }}"></div>
+                <span style="font-size:12px; color:var(--color-text-secondary); flex-shrink:0;">{{ sp.label }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <!-- Radii -->
+        <div>
+          <div style="font-size:13px; font-weight:600; color:var(--color-text-secondary); text-transform:uppercase; letter-spacing:0.07em; margin-bottom:16px;">Corner radius</div>
+          <div style="display:flex; flex-direction:column; gap:10px;">
+            <sc-for list="{{ radiusTokens }}" as="r" hint-placeholder-count="5">
+              <div style="display:flex; align-items:center; gap:12px;">
+                <code style="width:110px; flex-shrink:0;">{{ r.token }}</code>
+                <div style="{{ r.boxStyle }}"></div>
+                <span style="font-size:12px; color:var(--color-text-secondary);">{{ r.label }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ═════════════════════════════════════ 04 BOTONES ═════════════════════════════════════ -->
+    <div style="margin-bottom:56px;">
+      <div class="section-header">04 · Botones</div>
+      <div style="font-size:24px; font-weight:600; color:var(--color-text); margin-bottom:24px;">Button atoms</div>
+
+      <!-- Primary -->
+      <div style="margin-bottom:28px;">
+        <div style="font-size:13px; font-weight:600; color:var(--color-text); margin-bottom:14px;">Primario <span style="font-size:12px; font-weight:400; color:var(--color-text-secondary);">height 56px · --radius-lg · --color-primary</span></div>
+        <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:12px; align-items:end;">
+          <div>
+            <div style="font-size:11px; color:var(--color-text-secondary); text-align:center; margin-bottom:8px; font-weight:500;">Normal</div>
+            <button style="width:100%; height:56px; background:var(--color-primary); color:var(--color-text-on-primary); border:none; border-radius:12px; font-size:16px; font-weight:600; cursor:pointer; display:flex; align-items:center; justify-content:center;">Buscar negocio</button>
+          </div>
+          <div>
+            <div style="font-size:11px; color:var(--color-text-secondary); text-align:center; margin-bottom:8px; font-weight:500;">Presionado</div>
+            <button style="width:100%; height:56px; background:var(--color-primary-pressed); color:var(--color-text-on-primary); border:none; border-radius:12px; font-size:16px; font-weight:600; cursor:pointer; display:flex; align-items:center; justify-content:center; transform:scale(0.97);">Buscar negocio</button>
+          </div>
+          <div>
+            <div style="font-size:11px; color:var(--color-text-secondary); text-align:center; margin-bottom:8px; font-weight:500;">Deshabilitado</div>
+            <button disabled style="width:100%; height:56px; background:var(--color-primary); color:var(--color-text-on-primary); border:none; border-radius:12px; font-size:16px; font-weight:600; cursor:not-allowed; display:flex; align-items:center; justify-content:center; opacity:0.4;">Buscar negocio</button>
+          </div>
+          <div>
+            <div style="font-size:11px; color:var(--color-text-secondary); text-align:center; margin-bottom:8px; font-weight:500;">Cargando</div>
+            <button style="width:100%; height:56px; background:var(--color-primary); color:var(--color-text-on-primary); border:none; border-radius:12px; font-size:16px; font-weight:600; cursor:not-allowed; display:flex; align-items:center; justify-content:center; gap:8px; opacity:0.8;">
+              <svg class="spin" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10" stroke-opacity="0.25"></circle><path d="M12 2a10 10 0 0 1 10 10"></path></svg>
+              Buscando...
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Secondary -->
+      <div style="margin-bottom:28px;">
+        <div style="font-size:13px; font-weight:600; color:var(--color-text); margin-bottom:14px;">Secundario <span style="font-size:12px; font-weight:400; color:var(--color-text-secondary);">borde 1.5px --color-primary · fondo transparente</span></div>
+        <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:12px; align-items:end;">
+          <div>
+            <div style="font-size:11px; color:var(--color-text-secondary); text-align:center; margin-bottom:8px; font-weight:500;">Normal</div>
+            <button style="width:100%; height:56px; background:transparent; color:var(--color-primary); border:1.5px solid var(--color-primary); border-radius:12px; font-size:16px; font-weight:600; cursor:pointer; display:flex; align-items:center; justify-content:center;">Ver directorio</button>
+          </div>
+          <div>
+            <div style="font-size:11px; color:var(--color-text-secondary); text-align:center; margin-bottom:8px; font-weight:500;">Presionado</div>
+            <button style="width:100%; height:56px; background:var(--color-primary-dim); color:var(--color-primary); border:1.5px solid var(--color-primary); border-radius:12px; font-size:16px; font-weight:600; cursor:pointer; display:flex; align-items:center; justify-content:center; transform:scale(0.97);">Ver directorio</button>
+          </div>
+          <div>
+            <div style="font-size:11px; color:var(--color-text-secondary); text-align:center; margin-bottom:8px; font-weight:500;">Deshabilitado</div>
+            <button disabled style="width:100%; height:56px; background:transparent; color:var(--color-primary); border:1.5px solid var(--color-primary); border-radius:12px; font-size:16px; font-weight:600; cursor:not-allowed; display:flex; align-items:center; justify-content:center; opacity:0.4;">Ver directorio</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- WhatsApp -->
+      <div>
+        <div style="font-size:13px; font-weight:600; color:var(--color-text); margin-bottom:14px;">WhatsApp CTA <span style="font-size:12px; font-weight:400; color:var(--color-text-secondary);">--color-whatsapp · texto --color-whatsapp-text · verificado 3:1+ AA componente</span></div>
+        <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:12px; align-items:end;">
+          <div>
+            <div style="font-size:11px; color:var(--color-text-secondary); text-align:center; margin-bottom:8px; font-weight:500;">Normal</div>
+            <button style="width:100%; height:56px; background:var(--color-whatsapp); color:var(--color-whatsapp-text); border:none; border-radius:12px; font-size:16px; font-weight:600; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:10px;">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"></path></svg>
+              Escribir por WhatsApp
+            </button>
+          </div>
+          <div>
+            <div style="font-size:11px; color:var(--color-text-secondary); text-align:center; margin-bottom:8px; font-weight:500;">Presionado</div>
+            <button style="width:100%; height:56px; background:var(--color-whatsapp-pressed); color:var(--color-whatsapp-text); border:none; border-radius:12px; font-size:16px; font-weight:600; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:10px; transform:scale(0.97);">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"></path></svg>
+              Escribir por WhatsApp
+            </button>
+          </div>
+          <div>
+            <div style="font-size:11px; color:var(--color-text-secondary); text-align:center; margin-bottom:8px; font-weight:500;">Deshabilitado</div>
+            <button disabled style="width:100%; height:56px; background:var(--color-whatsapp); color:var(--color-whatsapp-text); border:none; border-radius:12px; font-size:16px; font-weight:600; cursor:not-allowed; display:flex; align-items:center; justify-content:center; gap:10px; opacity:0.4;">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"></path></svg>
+              Escribir por WhatsApp
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═════════════════════════════════════ 05 INPUTS ═════════════════════════════════════ -->
+    <div style="margin-bottom:56px;">
+      <div class="section-header">05 · Campos de texto</div>
+      <div style="font-size:24px; font-weight:600; color:var(--color-text); margin-bottom:24px;">Input &amp; select atoms</div>
+      <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:20px; align-items:start;">
+
+        <!-- Normal -->
+        <div>
+          <div style="font-size:11px; font-weight:500; color:var(--color-text-secondary); margin-bottom:12px; text-align:center;">Normal</div>
+          <div style="display:flex; flex-direction:column; gap:6px;">
+            <label style="font-size:14px; font-weight:500; color:var(--color-text-secondary);">Nombre del negocio</label>
+            <input type="text" placeholder="Ej: Panadería La Esperanza" style="background:var(--color-surface); border:1.5px solid var(--color-border); border-radius:10px; padding:14px; font-size:16px; color:var(--color-text); outline:none; width:100%;" />
+            <div style="font-size:12px; color:var(--color-text-secondary);">Escríbelo tal como aparece en tu negocio.</div>
+          </div>
+        </div>
+
+        <!-- Error -->
+        <div>
+          <div style="font-size:11px; font-weight:500; color:var(--color-text-secondary); margin-bottom:12px; text-align:center;">Error</div>
+          <div style="display:flex; flex-direction:column; gap:6px;">
+            <label style="font-size:14px; font-weight:500; color:var(--color-error);">Número de WhatsApp</label>
+            <input type="tel" value="123" style="background:var(--color-surface); border:2px solid var(--color-error); border-radius:10px; padding:14px; font-size:16px; color:var(--color-text); outline:none; width:100%;" />
+            <div style="font-size:12px; color:var(--color-error); display:flex; align-items:center; gap:5px;">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+              Ingresa 10 dígitos sin espacios.
+            </div>
+          </div>
+        </div>
+
+        <!-- Select -->
+        <div>
+          <div style="font-size:11px; font-weight:500; color:var(--color-text-secondary); margin-bottom:12px; text-align:center;">Select</div>
+          <div style="display:flex; flex-direction:column; gap:6px;">
+            <label style="font-size:14px; font-weight:500; color:var(--color-text-secondary);">Tipo de negocio</label>
+            <div style="position:relative;">
+              <select style="width:100%; background:var(--color-surface); border:1.5px solid var(--color-border); border-radius:10px; padding:14px; font-size:16px; color:var(--color-text); outline:none; appearance:none;">
+                <option>Alimentos y bebidas</option>
+                <option>Ferretería y construcción</option>
+                <option>Confección y costura</option>
+                <option>Mecánica y autos</option>
+              </select>
+              <svg style="position:absolute; right:14px; top:50%; transform:translateY(-50%); pointer-events:none;" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-text-secondary)" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </div>
+            <div style="font-size:12px; color:var(--color-text-secondary);">Elige el que mejor describe tu negocio.</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ═════════════════════════════════════ 06 CHIPS Y BADGES ═════════════════════════════════════ -->
+    <div style="margin-bottom:56px;">
+      <div class="section-header">06 · Chips y badges</div>
+      <div style="font-size:24px; font-weight:600; color:var(--color-text); margin-bottom:24px;">Filter chips &amp; status badges</div>
+
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:32px;">
+
+        <!-- Chips -->
+        <div>
+          <div style="font-size:13px; font-weight:600; color:var(--color-text); margin-bottom:6px;">Chip de filtro <span style="font-size:12px; font-weight:400; color:var(--color-text-secondary);">--radius-full</span></div>
+          <div style="font-size:12px; color:var(--color-text-secondary); margin-bottom:16px;">Zona o sector. Scroll horizontal en pantallas pequeñas.</div>
+          <div style="display:flex; flex-wrap:wrap; gap:8px;">
+            <button style="display:inline-flex; align-items:center; padding:8px 16px; border-radius:9999px; font-size:14px; font-weight:500; background:var(--color-primary-dim); color:var(--color-primary); border:1.5px solid var(--color-primary); cursor:pointer;">Todos ✓</button>
+            <button style="display:inline-flex; align-items:center; padding:8px 16px; border-radius:9999px; font-size:14px; font-weight:400; background:transparent; color:var(--color-text-secondary); border:1.5px solid var(--color-border); cursor:pointer;">Chipre</button>
+            <button style="display:inline-flex; align-items:center; padding:8px 16px; border-radius:9999px; font-size:14px; font-weight:400; background:transparent; color:var(--color-text-secondary); border:1.5px solid var(--color-border); cursor:pointer;">La Enea</button>
+            <button style="display:inline-flex; align-items:center; padding:8px 16px; border-radius:9999px; font-size:14px; font-weight:400; background:transparent; color:var(--color-text-secondary); border:1.5px solid var(--color-border); cursor:pointer;">Palermo</button>
+            <button style="display:inline-flex; align-items:center; padding:8px 16px; border-radius:9999px; font-size:14px; font-weight:400; background:transparent; color:var(--color-text-secondary); border:1.5px solid var(--color-border); cursor:pointer;">San José</button>
+          </div>
+          <div style="margin-top:12px; font-size:11px; color:var(--color-text-secondary);">
+            <span style="display:inline-block; width:10px; height:10px; border-radius:2px; background:var(--color-primary-dim); border:1px solid var(--color-primary); margin-right:4px; vertical-align:middle;"></span>Activo
+            <span style="display:inline-block; width:10px; height:10px; border-radius:2px; background:transparent; border:1px solid var(--color-border); margin-left:10px; margin-right:4px; vertical-align:middle;"></span>Inactivo
+          </div>
+        </div>
+
+        <!-- Badges -->
+        <div>
+          <div style="font-size:13px; font-weight:600; color:var(--color-text); margin-bottom:6px;">Badge de estado <span style="font-size:12px; font-weight:400; color:var(--color-text-secondary);">negocios y publicaciones</span></div>
+          <div style="font-size:12px; color:var(--color-text-secondary); margin-bottom:16px;">Aparece en tarjetas del directorio y panel de moderación.</div>
+          <div style="display:flex; flex-direction:column; gap:12px;">
+            <div style="display:flex; align-items:center; gap:12px;">
+              <span style="display:inline-flex; align-items:center; gap:6px; padding:5px 12px; border-radius:9999px; font-size:12px; font-weight:600; background:var(--color-success-dim); color:var(--color-success);">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                Visible
+              </span>
+              <code>--color-success</code>
+            </div>
+            <div style="display:flex; align-items:center; gap:12px;">
+              <span style="display:inline-flex; align-items:center; gap:6px; padding:5px 12px; border-radius:9999px; font-size:12px; font-weight:600; background:var(--color-warning-dim); color:var(--color-warning);">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+                En revisión
+              </span>
+              <code>--color-warning</code>
+            </div>
+            <div style="display:flex; align-items:center; gap:12px;">
+              <span style="display:inline-flex; align-items:center; gap:6px; padding:5px 12px; border-radius:9999px; font-size:12px; font-weight:600; background:var(--color-text-secondary-dim); color:var(--color-text-secondary);">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"></path><path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"></path><line x1="1" y1="1" x2="23" y2="23"></line></svg>
+                Oculto
+              </span>
+              <code>--color-text-secondary</code>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ═════════════════════════════════════ 07 CARD / VACÍO / SKELETON ═════════════════════════════════════ -->
+    <div style="margin-bottom:56px;">
+      <div class="section-header">07 · Tarjeta, estado vacío y skeleton</div>
+      <div style="font-size:24px; font-weight:600; color:var(--color-text); margin-bottom:24px;">Card, empty state &amp; loading skeleton</div>
+      <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:20px; align-items:start;">
+
+        <!-- Business card -->
+        <div>
+          <div style="font-size:11px; font-weight:500; color:var(--color-text-secondary); margin-bottom:12px; text-align:center;">Tarjeta base</div>
+          <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:12px; padding:16px; display:flex; flex-direction:column; gap:10px; cursor:pointer;">
+            <div style="display:flex; align-items:flex-start; gap:12px;">
+              <div style="width:44px; height:44px; border-radius:10px; background:var(--color-surface-raised); display:flex; align-items:center; justify-content:center; font-size:20px; flex-shrink:0;">🥖</div>
+              <div style="flex:1; min-width:0;">
+                <div style="font-size:16px; font-weight:600; color:var(--color-text); line-height:1.2; margin-bottom:3px;">Panadería La Esperanza</div>
+                <div style="font-size:12px; color:var(--color-text-secondary);">Chipre · Alimentos</div>
+              </div>
+              <div style="color:var(--color-primary); font-size:20px; line-height:1; flex-shrink:0;">›</div>
+            </div>
+            <div style="font-size:14px; color:var(--color-text-secondary); line-height:1.45; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;">Pan artesanal, arepas y pandebonos hechos a diario. Vendemos por mayor y detal.</div>
+          </div>
+        </div>
+
+        <!-- Empty state -->
+        <div>
+          <div style="font-size:11px; font-weight:500; color:var(--color-text-secondary); margin-bottom:12px; text-align:center;">Estado vacío</div>
+          <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:12px; padding:32px 16px; display:flex; flex-direction:column; align-items:center; text-align:center; gap:10px;">
+            <div style="width:52px; height:52px; border-radius:12px; background:var(--color-surface-raised); display:flex; align-items:center; justify-content:center;">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-text-secondary)" stroke-width="1.75" stroke-linecap="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            </div>
+            <div style="font-size:16px; font-weight:600; color:var(--color-text);">Sin resultados</div>
+            <div style="font-size:14px; color:var(--color-text-secondary); line-height:1.5;">Intenta con otro barrio o tipo de negocio.</div>
+            <button style="margin-top:4px; background:var(--color-primary-dim); color:var(--color-primary); border:1.5px solid var(--color-primary); border-radius:8px; padding:10px 20px; font-size:14px; font-weight:500; cursor:pointer;">Ver todos</button>
+          </div>
+        </div>
+
+        <!-- Skeleton -->
+        <div>
+          <div style="font-size:11px; font-weight:500; color:var(--color-text-secondary); margin-bottom:12px; text-align:center;">Skeleton de carga</div>
+          <div style="display:flex; flex-direction:column; gap:10px;">
+            <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:12px; padding:16px;">
+              <div style="display:flex; gap:12px; margin-bottom:10px;">
+                <div class="skel" style="width:44px; height:44px; border-radius:10px; flex-shrink:0;"></div>
+                <div style="flex:1; display:flex; flex-direction:column; gap:6px; justify-content:center;">
+                  <div class="skel" style="height:14px; border-radius:4px; width:75%;"></div>
+                  <div class="skel" style="height:11px; border-radius:4px; width:50%;"></div>
+                </div>
+              </div>
+              <div class="skel" style="height:11px; border-radius:4px; width:100%; margin-bottom:5px;"></div>
+              <div class="skel" style="height:11px; border-radius:4px; width:70%;"></div>
+            </div>
+            <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:12px; padding:16px; opacity:0.6;">
+              <div style="display:flex; gap:12px; margin-bottom:10px;">
+                <div class="skel" style="width:44px; height:44px; border-radius:10px; flex-shrink:0;"></div>
+                <div style="flex:1; display:flex; flex-direction:column; gap:6px; justify-content:center;">
+                  <div class="skel" style="height:14px; border-radius:4px; width:60%;"></div>
+                  <div class="skel" style="height:11px; border-radius:4px; width:45%;"></div>
+                </div>
+              </div>
+              <div class="skel" style="height:11px; border-radius:4px; width:100%; margin-bottom:5px;"></div>
+              <div class="skel" style="height:11px; border-radius:4px; width:55%;"></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ═════════════════════════════════════ 08 ICONOS ═════════════════════════════════════ -->
+    <div style="margin-bottom:56px;">
+      <div class="section-header">08 · Iconografía</div>
+      <div style="font-size:24px; font-weight:600; color:var(--color-text); margin-bottom:6px;">Icon set — SVG inline trazo</div>
+      <div style="font-size:14px; color:var(--color-text-secondary); margin-bottom:24px;">24×24 · stroke 1.75 · linecap round · linejoin round · currentColor. Área táctil mínima 48×48 px.</div>
+
+      <div style="display:grid; grid-template-columns:repeat(6,1fr); gap:16px;">
+
+        <div style="display:flex; flex-direction:column; align-items:center; gap:8px; padding:16px 8px; background:var(--color-surface); border-radius:10px; border:1px solid var(--color-border);">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-text)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          <span style="font-size:11px; color:var(--color-text-secondary); text-align:center;">buscar</span>
+        </div>
+
+        <div style="display:flex; flex-direction:column; align-items:center; gap:8px; padding:16px 8px; background:var(--color-surface); border-radius:10px; border:1px solid var(--color-border);">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-text)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon></svg>
+          <span style="font-size:11px; color:var(--color-text-secondary); text-align:center;">filtro</span>
+        </div>
+
+        <div style="display:flex; flex-direction:column; align-items:center; gap:8px; padding:16px 8px; background:var(--color-surface); border-radius:10px; border:1px solid var(--color-border);">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-text)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+          <span style="font-size:11px; color:var(--color-text-secondary); text-align:center;">ubicación</span>
+        </div>
+
+        <div style="display:flex; flex-direction:column; align-items:center; gap:8px; padding:16px 8px; background:var(--color-surface); border-radius:10px; border:1px solid var(--color-border);">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-text)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.62 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.09 6.09l1.07-1.07a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+          <span style="font-size:11px; color:var(--color-text-secondary); text-align:center;">teléfono</span>
+        </div>
+
+        <div style="display:flex; flex-direction:column; align-items:center; gap:8px; padding:16px 8px; background:var(--color-surface); border-radius:10px; border:1px solid var(--color-border);">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="var(--color-text)"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"></path></svg>
+          <span style="font-size:11px; color:var(--color-text-secondary); text-align:center;">whatsapp</span>
+        </div>
+
+        <div style="display:flex; flex-direction:column; align-items:center; gap:8px; padding:16px 8px; background:var(--color-surface); border-radius:10px; border:1px solid var(--color-border);">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-text)" stroke-width="1.75" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+          <span style="font-size:11px; color:var(--color-text-secondary); text-align:center;">más / agregar</span>
+        </div>
+
+        <div style="display:flex; flex-direction:column; align-items:center; gap:8px; padding:16px 8px; background:var(--color-surface); border-radius:10px; border:1px solid var(--color-border);">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-text)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+          <span style="font-size:11px; color:var(--color-text-secondary); text-align:center;">atrás</span>
+        </div>
+
+        <div style="display:flex; flex-direction:column; align-items:center; gap:8px; padding:16px 8px; background:var(--color-surface); border-radius:10px; border:1px solid var(--color-border);">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-text)" stroke-width="1.75" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+          <span style="font-size:11px; color:var(--color-text-secondary); text-align:center;">cerrar</span>
+        </div>
+
+        <div style="display:flex; flex-direction:column; align-items:center; gap:8px; padding:16px 8px; background:var(--color-surface); border-radius:10px; border:1px solid var(--color-border);">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-text)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+          <span style="font-size:11px; color:var(--color-text-secondary); text-align:center;">ojo</span>
+        </div>
+
+        <div style="display:flex; flex-direction:column; align-items:center; gap:8px; padding:16px 8px; background:var(--color-surface); border-radius:10px; border:1px solid var(--color-border);">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-text)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"></path><path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"></path><line x1="1" y1="1" x2="23" y2="23"></line></svg>
+          <span style="font-size:11px; color:var(--color-text-secondary); text-align:center;">ojo tachado</span>
+        </div>
+
+        <div style="display:flex; flex-direction:column; align-items:center; gap:8px; padding:16px 8px; background:var(--color-surface); border-radius:10px; border:1px solid var(--color-border);">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-text)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+          <span style="font-size:11px; color:var(--color-text-secondary); text-align:center;">escudo</span>
+        </div>
+
+        <div style="display:flex; flex-direction:column; align-items:center; gap:8px; padding:16px 8px; background:var(--color-surface); border-radius:10px; border:1px solid var(--color-border);">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-text)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+          <span style="font-size:11px; color:var(--color-text-secondary); text-align:center;">historial</span>
+        </div>
+
+        <div style="display:flex; flex-direction:column; align-items:center; gap:8px; padding:16px 8px; background:var(--color-surface); border-radius:10px; border:1px solid var(--color-border);">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-text)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+          <span style="font-size:11px; color:var(--color-text-secondary); text-align:center;">cerrar sesión</span>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ═════════════════════════════════════ 09 RECOMENDACIÓN ═════════════════════════════════════ -->
+    <div>
+      <div class="section-header">09 · Recomendación</div>
+      <div style="font-size:24px; font-weight:600; color:var(--color-text); margin-bottom:20px;">Paleta recomendada</div>
+
+      <div style="background:var(--color-primary-dim); border:2px solid var(--color-primary); border-radius:16px; padding:28px; display:flex; gap:24px; align-items:flex-start;">
+        <div style="width:56px; height:56px; border-radius:12px; background:var(--color-primary); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--color-text-on-primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+        </div>
+        <div>
+          <div style="font-size:20px; font-weight:600; color:var(--color-text); margin-bottom:4px;">B · Luz Comunitaria</div>
+          <div style="font-size:14px; color:var(--color-text-secondary); line-height:1.7;">
+            <strong style="color:var(--color-text);">Legibilidad solar:</strong> Fondo crema (#F2EDE4) y texto muy oscuro (#1A1310) ofrecen 16.4:1 de contraste — esencial en exteriores post-sismo bajo luz directa.<br>
+            <strong style="color:var(--color-text);">Familiaridad digital:</strong> La mayoría de usuarios de gama baja usa WhatsApp, Facebook y apps del Estado con fondos claros; la curva de aprendizaje es menor y genera confianza inmediata.<br>
+            <strong style="color:var(--color-text);">Calidez sin alarma:</strong> El terracota (#6D3A18) y el verde bosque (#245839) evocan comunidad y recuperación — sobrios, cálidos, sin parecer comerciales ni institucionales.
+          </div>
+        </div>
+      </div>
+
+      <!-- Token reference block -->
+      <div style="margin-top:24px; background:var(--color-surface); border:1px solid var(--color-border); border-radius:12px; padding:24px;">
+        <div style="font-size:13px; font-weight:600; color:var(--color-text); margin-bottom:16px;">Tokens completos — copia directa a tu :root CSS</div>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px 24px;">
+          <sc-for list="{{ tokenLines }}" as="t" hint-placeholder-count="20">
+            <div style="font-size:12px; font-family:monospace; color:var(--color-text-secondary); padding:3px 0; border-bottom:1px solid var(--color-divider); display:flex; align-items:center; gap:8px;">
+              <span style="{{ t.dotStyle }}"></span>
+              <span>{{ t.line }}</span>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{
+  &quot;$preview&quot;: { &quot;width&quot;: 1200, &quot;height&quot;: 900 }
+}">
+class Component extends DCLogic {
+  _palettes = {
+    A: {
+      name: 'Tierra Nocturna', desc: 'Oscura · cálida · OLED-friendly',
+      bg: '#181614', surface: '#242220', surfaceRaised: '#302C29',
+      primary: '#D18F5C', primaryPressed: '#BB7B48', primaryDim: '#3A2818',
+      secondary: '#6A9B78',
+      text: '#EDEAE5', textSecondary: '#A59E97', textOnPrimary: '#181614',
+      success: '#5D9B70', error: '#C85C5C', warning: '#CFA66C',
+      whatsapp: '#25D366', whatsappPressed: '#1FB056', whatsappText: '#181614',
+      border: 'rgba(237,234,229,0.11)', divider: 'rgba(237,234,229,0.07)',
+      skBase: '#2A2724', skShine: '#353230',
+      primaryContrast: '7.5:1 AA ✓', secondaryContrast: '4.7:1 AA ✓', textContrast: '13.8:1 AA ✓',
+    },
+    B: {
+      name: 'Luz Comunitaria', desc: 'Clara · cálida · legible al sol',
+      bg: '#F2EDE4', surface: '#FFFFFF', surfaceRaised: '#ECE6DD',
+      primary: '#6D3A18', primaryPressed: '#572E12', primaryDim: '#F5E6D6',
+      secondary: '#245839',
+      text: '#1A1310', textSecondary: '#6A5A4F', textOnPrimary: '#FFFFFF',
+      success: '#1C5935', error: '#8A1E1E', warning: '#754808',
+      whatsapp: '#0B7130', whatsappPressed: '#095826', whatsappText: '#FFFFFF',
+      border: 'rgba(26,19,16,0.14)', divider: 'rgba(26,19,16,0.07)',
+      skBase: '#E8E1D6', skShine: '#F2EDE4',
+      primaryContrast: '8.1:1 AA ✓', secondaryContrast: '6.1:1 AA ✓', textContrast: '16.4:1 AA ✓',
+    },
+  };
+
+  state = { palette: 'B' };
+
+  _makeSwatches(pal) {
+    const box = (hex, extra) => ({ background: hex, height: '36px', borderRadius: '6px', marginBottom: '4px', border: '1px solid rgba(128,128,128,0.15)', ...(extra || {}) });
+    return [
+      { token: '--color-bg', hex: pal.bg, label: 'Fondo', note: '', boxStyle: box(pal.bg, { border: '1px solid rgba(128,128,128,0.3)' }) },
+      { token: '--color-surface', hex: pal.surface, label: 'Superficie', note: '', boxStyle: box(pal.surface, { border: '1px solid rgba(128,128,128,0.3)' }) },
+      { token: '--color-surface-raised', hex: pal.surfaceRaised, label: 'Elevada', note: '', boxStyle: box(pal.surfaceRaised, { border: '1px solid rgba(128,128,128,0.25)' }) },
+      { token: '--color-primary', hex: pal.primary, label: 'Primario', note: pal.primaryContrast, boxStyle: box(pal.primary) },
+      { token: '--color-secondary', hex: pal.secondary, label: 'Secundario', note: pal.secondaryContrast, boxStyle: box(pal.secondary) },
+      { token: '--color-text', hex: pal.text, label: 'Texto', note: pal.textContrast, boxStyle: box(pal.text) },
+      { token: '--color-success', hex: pal.success, label: 'Éxito', note: '', boxStyle: box(pal.success) },
+      { token: '--color-error', hex: pal.error, label: 'Error', note: '', boxStyle: box(pal.error) },
+      { token: '--color-warning', hex: pal.warning, label: 'Aviso', note: '', boxStyle: box(pal.warning) },
+      { token: '--color-whatsapp', hex: pal.whatsapp, label: 'WhatsApp', note: '', boxStyle: box(pal.whatsapp) },
+    ];
+  }
+
+  renderVals() {
+    const s = this.state;
+    const p = this._palettes[s.palette];
+    const pA = this._palettes.A;
+    const pB = this._palettes.B;
+    const isA = s.palette === 'A';
+
+    const containerStyle = {
+      '--color-bg': p.bg,
+      '--color-surface': p.surface,
+      '--color-surface-raised': p.surfaceRaised,
+      '--color-primary': p.primary,
+      '--color-primary-pressed': p.primaryPressed,
+      '--color-primary-dim': p.primaryDim,
+      '--color-secondary': p.secondary,
+      '--color-text': p.text,
+      '--color-text-secondary': p.textSecondary,
+      '--color-text-secondary-dim': p.textSecondary + '28',
+      '--color-text-on-primary': p.textOnPrimary,
+      '--color-success': p.success,
+      '--color-success-dim': p.success + '22',
+      '--color-error': p.error,
+      '--color-error-dim': p.error + '22',
+      '--color-warning': p.warning,
+      '--color-warning-dim': p.warning + '22',
+      '--color-whatsapp': p.whatsapp,
+      '--color-whatsapp-pressed': p.whatsappPressed,
+      '--color-whatsapp-text': p.whatsappText,
+      '--color-border': p.border,
+      '--color-divider': p.divider,
+      '--sk-base': p.skBase,
+      '--sk-shine': p.skShine,
+      background: p.bg,
+      color: p.text,
+      fontFamily: "'Roboto', system-ui, -apple-system, sans-serif",
+      minHeight: '100vh',
+      transition: 'background 0.25s, color 0.25s',
+    };
+
+    const makeToggle = (active) => ({
+      padding: '8px 14px', borderRadius: '8px', fontSize: '12px', fontWeight: '500',
+      cursor: 'pointer', transition: 'all 0.2s',
+      background: active ? p.primary : 'transparent',
+      color: active ? p.textOnPrimary : p.textSecondary,
+      border: active ? `1px solid ${p.primary}` : `1px solid ${p.border}`,
+    });
+
+    // Palette card styles (hardcoded - always show both palettes)
+    const makePalCard = (pal) => ({
+      cardStyle: { borderRadius: '12px', overflow: 'hidden', border: `2px solid ${pal.primary}33` },
+      headerStyle: { background: pal.primary, padding: '14px 16px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' },
+      bodyStyle: { background: pal.bg, padding: '16px', display: 'flex', flexWrap: 'wrap', gap: '8px' },
+    });
+
+    const cardA = makePalCard(pA);
+    const cardB = makePalCard(pB);
+
+    // Spacing tokens
+    const spacingTokens = [
+      { token: '--space-1', label: '4px · micro gap', barStyle: { width: '4px', height: '14px', background: p.primary, borderRadius: '2px' } },
+      { token: '--space-2', label: '8px · ícono+texto', barStyle: { width: '8px', height: '14px', background: p.primary, borderRadius: '2px' } },
+      { token: '--space-3', label: '12px · dentro de chips', barStyle: { width: '12px', height: '14px', background: p.primary, borderRadius: '2px' } },
+      { token: '--space-4', label: '16px · padding tarjeta', barStyle: { width: '16px', height: '14px', background: p.primary, borderRadius: '2px' } },
+      { token: '--space-6', label: '24px · sección interna', barStyle: { width: '24px', height: '14px', background: p.primary, borderRadius: '2px' } },
+      { token: '--space-8', label: '32px · entre secciones', barStyle: { width: '32px', height: '14px', background: p.primary, borderRadius: '2px' } },
+      { token: '--space-12', label: '48px · tap target min.', barStyle: { width: '48px', height: '14px', background: p.primary, borderRadius: '2px' } },
+      { token: '--space-16', label: '64px · bottom nav', barStyle: { width: '64px', height: '14px', background: p.primary, borderRadius: '2px' } },
+    ];
+
+    // Radius tokens
+    const radiusTokens = [
+      { token: '--radius-sm', label: '4px · badges, inputs helper', boxStyle: { width: '40px', height: '40px', background: p.primaryDim, border: `1.5px solid ${p.primary}`, borderRadius: '4px' } },
+      { token: '--radius-md', label: '8px · botones modera.', boxStyle: { width: '40px', height: '40px', background: p.primaryDim, border: `1.5px solid ${p.primary}`, borderRadius: '8px' } },
+      { token: '--radius-lg', label: '12px · tarjetas, botones', boxStyle: { width: '40px', height: '40px', background: p.primaryDim, border: `1.5px solid ${p.primary}`, borderRadius: '12px' } },
+      { token: '--radius-xl', label: '16px · modales, sheets', boxStyle: { width: '40px', height: '40px', background: p.primaryDim, border: `1.5px solid ${p.primary}`, borderRadius: '16px' } },
+      { token: '--radius-full', label: '9999px · chips, FAB', boxStyle: { width: '40px', height: '40px', background: p.primaryDim, border: `1.5px solid ${p.primary}`, borderRadius: '9999px' } },
+    ];
+
+    // Token reference lines for recommendation section
+    const tokenLines = [
+      { line: `--color-bg: ${pB.bg};`, dotStyle: { width: '10px', height: '10px', borderRadius: '3px', background: pB.bg, border: '1px solid rgba(0,0,0,0.2)', flexShrink: 0 } },
+      { line: `--color-surface: ${pB.surface};`, dotStyle: { width: '10px', height: '10px', borderRadius: '3px', background: pB.surface, border: '1px solid rgba(0,0,0,0.2)', flexShrink: 0 } },
+      { line: `--color-surface-raised: ${pB.surfaceRaised};`, dotStyle: { width: '10px', height: '10px', borderRadius: '3px', background: pB.surfaceRaised, border: '1px solid rgba(0,0,0,0.15)', flexShrink: 0 } },
+      { line: `--color-primary: ${pB.primary};`, dotStyle: { width: '10px', height: '10px', borderRadius: '3px', background: pB.primary, flexShrink: 0 } },
+      { line: `--color-primary-pressed: ${pB.primaryPressed};`, dotStyle: { width: '10px', height: '10px', borderRadius: '3px', background: pB.primaryPressed, flexShrink: 0 } },
+      { line: `--color-primary-dim: ${pB.primaryDim};`, dotStyle: { width: '10px', height: '10px', borderRadius: '3px', background: pB.primaryDim, border: '1px solid rgba(0,0,0,0.1)', flexShrink: 0 } },
+      { line: `--color-secondary: ${pB.secondary};`, dotStyle: { width: '10px', height: '10px', borderRadius: '3px', background: pB.secondary, flexShrink: 0 } },
+      { line: `--color-text: ${pB.text};`, dotStyle: { width: '10px', height: '10px', borderRadius: '3px', background: pB.text, flexShrink: 0 } },
+      { line: `--color-text-secondary: ${pB.textSecondary};`, dotStyle: { width: '10px', height: '10px', borderRadius: '3px', background: pB.textSecondary, flexShrink: 0 } },
+      { line: `--color-text-on-primary: ${pB.textOnPrimary};`, dotStyle: { width: '10px', height: '10px', borderRadius: '3px', background: pB.textOnPrimary, border: '1px solid rgba(0,0,0,0.1)', flexShrink: 0 } },
+      { line: `--color-success: ${pB.success};`, dotStyle: { width: '10px', height: '10px', borderRadius: '3px', background: pB.success, flexShrink: 0 } },
+      { line: `--color-error: ${pB.error};`, dotStyle: { width: '10px', height: '10px', borderRadius: '3px', background: pB.error, flexShrink: 0 } },
+      { line: `--color-warning: ${pB.warning};`, dotStyle: { width: '10px', height: '10px', borderRadius: '3px', background: pB.warning, flexShrink: 0 } },
+      { line: `--color-whatsapp: ${pB.whatsapp};`, dotStyle: { width: '10px', height: '10px', borderRadius: '3px', background: pB.whatsapp, flexShrink: 0 } },
+      { line: `--color-whatsapp-text: ${pB.whatsappText};`, dotStyle: { width: '10px', height: '10px', borderRadius: '3px', background: pB.whatsappText, border: '1px solid rgba(0,0,0,0.1)', flexShrink: 0 } },
+      { line: `--font-primary: 'Roboto', system-ui;`, dotStyle: { width: '10px', height: '10px', borderRadius: '3px', background: 'transparent', border: '1px solid rgba(0,0,0,0.2)', flexShrink: 0 } },
+      { line: '--text-display:32px  --text-heading:22px', dotStyle: { width: '10px', height: '10px', borderRadius: '3px', background: 'transparent', border: '1px solid rgba(0,0,0,0.2)', flexShrink: 0 } },
+      { line: '--text-title:18px  --text-body:16px', dotStyle: { width: '10px', height: '10px', borderRadius: '3px', background: 'transparent', border: '1px solid rgba(0,0,0,0.2)', flexShrink: 0 } },
+      { line: '--text-label:14px  --text-caption:12px', dotStyle: { width: '10px', height: '10px', borderRadius: '3px', background: 'transparent', border: '1px solid rgba(0,0,0,0.2)', flexShrink: 0 } },
+      { line: '--space-1:4px  --space-2:8px  --space-3:12px', dotStyle: { width: '10px', height: '10px', borderRadius: '3px', background: 'transparent', border: '1px solid rgba(0,0,0,0.2)', flexShrink: 0 } },
+      { line: '--space-4:16px  --space-6:24px  --space-8:32px', dotStyle: { width: '10px', height: '10px', borderRadius: '3px', background: 'transparent', border: '1px solid rgba(0,0,0,0.2)', flexShrink: 0 } },
+      { line: '--space-12:48px  --space-16:64px', dotStyle: { width: '10px', height: '10px', borderRadius: '3px', background: 'transparent', border: '1px solid rgba(0,0,0,0.2)', flexShrink: 0 } },
+      { line: '--radius-sm:4px  --radius-md:8px  --radius-lg:12px', dotStyle: { width: '10px', height: '10px', borderRadius: '4px', background: 'transparent', border: '1px solid rgba(0,0,0,0.2)', flexShrink: 0 } },
+      { line: '--radius-xl:16px  --radius-full:9999px', dotStyle: { width: '10px', height: '10px', borderRadius: '9999px', background: 'transparent', border: '1px solid rgba(0,0,0,0.2)', flexShrink: 0 } },
+    ];
+
+    return {
+      containerStyle,
+      setPaletteA: () => this.setState({ palette: 'A' }),
+      setPaletteB: () => this.setState({ palette: 'B' }),
+      btnAStyle: makeToggle(isA),
+      btnBStyle: makeToggle(!isA),
+
+      palAName: pA.name, palADesc: pA.desc,
+      palBName: pB.name, palBDesc: pB.desc,
+      palATextOnPrimary: pA.textOnPrimary,
+      palBTextOnPrimary: pB.textOnPrimary,
+      palAText: pA.text,
+      palBText: pB.text,
+
+      palACardStyle: cardA.cardStyle,
+      palAHeaderStyle: cardA.headerStyle,
+      palABodyStyle: cardA.bodyStyle,
+      palBCardStyle: cardB.cardStyle,
+      palBHeaderStyle: cardB.headerStyle,
+      palBBodyStyle: cardB.bodyStyle,
+
+      aSwatches: this._makeSwatches(pA),
+      bSwatches: this._makeSwatches(pB),
+
+      spacingTokens,
+      radiusTokens,
+      tokenLines,
+    };
+  }
+}
+</script>
+</body>
+</html>

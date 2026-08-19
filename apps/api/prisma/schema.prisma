@@ -1,0 +1,215 @@
+// Prisma schema del MVP — Directorio y Marketplace Solidario Post-Sismo (Manizales).
+// Los enums de dominio (Zone, Sector, DamageLevel, SupportPostType, ModerationStatus)
+// se duplican en packages/shared/src/index.ts para que apps/mobile los use sin
+// depender de @prisma/client. Si cambian aquí, hay que actualizarlos también allá.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ---------------------------------------------------------------------------
+// Enums de dominio (compartidos con packages/shared)
+// ---------------------------------------------------------------------------
+
+/// Comunas urbanas de Manizales (Acuerdo 589 de 2004, 11 comunas). Lista
+/// editable: agregar corregimientos rurales u otras zonas si hace falta
+/// durante la contingencia; OTRA cubre lo no listado mientras tanto.
+enum Zone {
+  ATARDECERES
+  CIUDADELA_DEL_NORTE
+  CUMANDAY
+  ECOTURISTICO_CERRO_DE_ORO
+  ESTACION
+  LA_FUENTE
+  LA_MACARENA
+  PALOGRANDE
+  SAN_JOSE
+  TESORITO
+  UNIVERSITARIA
+  OTRA
+}
+
+/// Rubro/actividad económica del negocio.
+enum Sector {
+  ALIMENTOS_Y_BEBIDAS
+  ABARROTES_Y_TIENDA
+  ROPA_Y_CALZADO
+  BELLEZA_Y_CUIDADO_PERSONAL
+  SALUD
+  EDUCACION
+  TECNOLOGIA
+  CONSTRUCCION_Y_FERRETERIA
+  TRANSPORTE
+  SERVICIOS_PROFESIONALES
+  ARTE_Y_ARTESANIAS
+  AGROPECUARIO
+  OTRO
+}
+
+/// Nivel de afectación principal reportado por el negocio.
+enum DamageLevel {
+  SIN_AFECTACION
+  AFECTACION_LEVE
+  AFECTACION_MODERADA
+  LOCAL_INHABITABLE
+  PERDIDA_TOTAL
+}
+
+/// Tipo de publicación en el muro solidario.
+enum SupportPostType {
+  BUSCO
+  OFREZCO
+}
+
+/// Estado de moderación de un contenido publicado.
+/// Default APROBADO: moderación reactiva (se ve de inmediato, el equipo lo
+/// retira si hace falta). Cambiar el @default a PENDIENTE activa
+/// pre-aprobación sin tocar el esquema.
+enum ModerationStatus {
+  PENDIENTE
+  APROBADO
+  RECHAZADO
+}
+
+// ---------------------------------------------------------------------------
+// Enums internos de moderación (solo backend, no se duplican en shared:
+// nunca se exponen a apps/mobile ni al público)
+// ---------------------------------------------------------------------------
+
+enum ModerationTargetType {
+  BUSINESS
+  PRODUCT
+  SUPPORT_POST
+}
+
+enum ModerationActionType {
+  APPROVE
+  REJECT
+  BAN
+  UNBAN
+  SOFT_DELETE
+  RESTORE
+  EDIT_NOTE
+}
+
+// ---------------------------------------------------------------------------
+// Modelos
+// ---------------------------------------------------------------------------
+
+/// Emprendimiento/negocio registrado. Solo datos no sensibles: nombre, zona,
+/// sector, afectación y un teléfono de contacto para wa.me. Nunca email ni
+/// documento de identidad (principio de privacidad por diseño del proyecto).
+model Business {
+  id          String      @id @default(cuid())
+  name        String
+  zone        Zone
+  sector      Sector
+  damageLevel DamageLevel
+  /// Formato E.164 (ej. +573001234567), se usa para armar el enlace wa.me.
+  phone       String
+  description String?
+
+  // --- Moderación ---
+  status         ModerationStatus @default(APROBADO)
+  deletedAt      DateTime?
+  bannedAt       DateTime?
+  moderationNote String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  products     Product[]
+  supportPosts SupportPost[]
+
+  @@index([zone])
+  @@index([sector])
+  @@index([status])
+}
+
+/// Producto o servicio del catálogo de un negocio. El contacto para comprar
+/// es el teléfono del Business padre; no se duplica el dato aquí.
+model Product {
+  id          String   @id @default(cuid())
+  businessId  String
+  business    Business @relation(fields: [businessId], references: [id])
+  name        String
+  description String?
+
+  // --- Moderación ---
+  status         ModerationStatus @default(APROBADO)
+  deletedAt      DateTime?
+  bannedAt       DateTime?
+  moderationNote String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([businessId])
+  @@index([status])
+}
+
+/// Publicación del muro "Busco / Ofrezco". Puede o no estar ligada a un
+/// negocio registrado: un vecino sin negocio también puede publicar.
+model SupportPost {
+  id          String          @id @default(cuid())
+  type        SupportPostType
+  title       String
+  description String
+  zone        Zone
+  sector      Sector?
+  /// Formato E.164, se usa para armar el enlace wa.me.
+  phone       String
+
+  businessId String?
+  business   Business? @relation(fields: [businessId], references: [id])
+
+  // --- Moderación ---
+  status         ModerationStatus @default(APROBADO)
+  deletedAt      DateTime?
+  bannedAt       DateTime?
+  moderationNote String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([zone])
+  @@index([sector])
+  @@index([type])
+  @@index([status])
+}
+
+/// Cuenta interna del equipo de moderación. No es un "usuario" público:
+/// se crea a mano (seed/consola), no hay registro público.
+model AdminUser {
+  id           String @id @default(cuid())
+  name         String
+  email        String @unique
+  passwordHash String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  moderationActions ModerationAction[]
+}
+
+/// Bitácora de acciones de moderación. Relación polimórfica simple
+/// (targetType + targetId) porque una acción puede recaer sobre Business,
+/// Product o SupportPost sin necesitar tres columnas FK nullable.
+model ModerationAction {
+  id         String               @id @default(cuid())
+  adminId    String
+  admin      AdminUser            @relation(fields: [adminId], references: [id])
+  targetType ModerationTargetType
+  targetId   String
+  action     ModerationActionType
+  note       String?
+  createdAt  DateTime             @default(now())
+
+  @@index([targetType, targetId])
+  @@index([adminId])
+}

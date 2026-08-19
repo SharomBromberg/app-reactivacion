@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/nocturne-e8c6b891-378e-4d6f-9cc8-5194f3483bad/styles.css">
+  <script src="_ds/nocturne-e8c6b891-378e-4d6f-9cc8-5194f3483bad/_ds_bundle.js"></script>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #DEDEDE; font-family: 'Roboto', system-ui, -apple-system, sans-serif; }
+    ::-webkit-scrollbar { height: 8px; background: #D4D4D4; }
+    ::-webkit-scrollbar-thumb { background: #ACACAC; border-radius: 4px; }
+  </style>
+</helmet>
+
+<div style="min-height:100vh; background:#DEDEDE;">
+
+  <!-- ── Legend bar ── -->
+  <div style="position:sticky; top:0; z-index:100; background:#FFFFFF; border-bottom:2px solid #CACACA; padding:10px 32px; display:flex; align-items:center; justify-content:space-between; gap:24px;">
+    <div>
+      <div style="font-size:16px; font-weight:700; color:#1A1A1A;">Wireframes MVP · Directorio Solidario</div>
+      <div style="font-size:12px; color:#6B6B6B; margin-top:1px;">12 pantallas · escala 1:1 · sin color final · flujo izquierda → derecha</div>
+    </div>
+    <div style="display:flex; gap:20px; align-items:center; flex-shrink:0;">
+      <div style="display:flex; align-items:center; gap:6px; font-size:12px; color:#6B6B6B;">
+        <div style="width:14px; height:14px; background:#F0F0F0; border:1.5px dashed #909090; border-radius:3px; flex-shrink:0;"></div>
+        Aviso de no pagos
+      </div>
+      <div style="display:flex; align-items:center; gap:6px; font-size:12px; color:#6B6B6B;">
+        <div style="width:14px; height:14px; background:#D4D4D4; border-radius:3px; flex-shrink:0;"></div>
+        Caja gris = placeholder
+      </div>
+      <div style="display:flex; align-items:center; gap:6px; font-size:12px; color:#6B6B6B;">
+        <div style="width:20px; height:14px; background:#404040; border-radius:3px; flex-shrink:0;"></div>
+        Elemento activo
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Horizontal scroll ── -->
+  <div style="overflow-x:auto; display:flex; align-items:flex-start; padding:36px 48px 56px; gap:0;">
+
+    <!-- ════ FLUJO PÚBLICO ════ -->
+    <div style="display:flex; flex-direction:column; align-items:center; justify-content:flex-start; padding-top:56px; margin-right:12px; flex-shrink:0;">
+      <div style="writing-mode:vertical-lr; transform:rotate(180deg); font-size:11px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:#FFFFFF; background:#404040; padding:12px 5px; border-radius:4px; white-space:nowrap;">Flujo Público · 1–8</div>
+    </div>
+
+    <!-- ══ 01 DIRECTORIO ══ -->
+    <div style="{{ screenCol }}">
+      <div style="{{ metaBox }}">
+        <div style="{{ numBadge }}">01</div>
+        <div style="{{ screenTitle }}">Directorio con filtros</div>
+        <div style="{{ actionNote }}">Acción: Seleccionar zona y sector para encontrar un negocio cercano</div>
+        <div style="{{ flowNote }}">→ 02 sin resultados · → 03 con resultados</div>
+      </div>
+      <div style="{{ phone }}">
+        <!-- Status bar -->
+        <div style="{{ sb }}"><span>9:41</span><span style="font-size:11px; color:#909090;">▲▲▲ WiFi ▌▌</span></div>
+        <!-- Header -->
+        <div style="{{ hdr }}">
+          <div>
+            <div style="font-size:10px; font-weight:600; color:#909090; text-transform:uppercase; letter-spacing:0.08em;">Manizales · Post-Sismo</div>
+            <div style="font-size:17px; font-weight:700; color:#1A1A1A;">Directorio Solidario</div>
+          </div>
+          <div style="width:36px; height:36px; background:#D4D4D4; border-radius:8px; flex-shrink:0;"></div>
+        </div>
+        <!-- Content -->
+        <div style="flex:1; overflow:hidden; padding:10px 14px; display:flex; flex-direction:column; gap:8px;">
+          <!-- Search -->
+          <div style="display:flex; align-items:center; gap:8px; background:#F3F3F3; border:1.5px solid #CACACA; border-radius:10px; padding:10px 12px;">
+            <div style="width:16px; height:16px; background:#ACACAC; border-radius:50%; flex-shrink:0;"></div>
+            <span style="font-size:14px; color:#ACACAC;">Buscar negocio, barrio o sector...</span>
+          </div>
+          <!-- Zone chips -->
+          <div style="font-size:11px; font-weight:600; color:#6B6B6B; text-transform:uppercase; letter-spacing:0.06em;">Zona</div>
+          <div style="display:flex; gap:6px; overflow:hidden; flex-wrap:nowrap;">
+            <div style="{{ chipOn }}">Todos</div>
+            <div style="{{ chipOff }}">Chipre</div>
+            <div style="{{ chipOff }}">La Enea</div>
+            <div style="{{ chipOff }}">Palermo</div>
+            <div style="{{ chipOff }}">San José</div>
+          </div>
+          <!-- Sector chips -->
+          <div style="font-size:11px; font-weight:600; color:#6B6B6B; text-transform:uppercase; letter-spacing:0.06em;">Sector</div>
+          <div style="display:flex; gap:6px; overflow:hidden; flex-wrap:nowrap;">
+            <div style="{{ chipOn }}">Todos</div>
+            <div style="{{ chipOff }}">Alimentos</div>
+            <div style="{{ chipOff }}">Ferretería</div>
+            <div style="{{ chipOff }}">Mecánica</div>
+          </div>
+          <div style="font-size:12px; color:#909090;">6 negocios encontrados</div>
+          <!-- Cards -->
+          <div style="{{ card }}">
+            <div style="display:flex; align-items:center; gap:10px;">
+              <div style="width:40px; height:40px; background:#D4D4D4; border-radius:8px; flex-shrink:0;"></div>
+              <div style="flex:1; min-width:0;">
+                <div style="font-size:14px; font-weight:600; color:#1A1A1A; line-height:1.2;">Panadería La Esperanza</div>
+                <div style="font-size:11px; color:#909090;">Chipre · Alimentos</div>
+              </div>
+              <div style="color:#404040; font-weight:700; font-size:18px; flex-shrink:0;">›</div>
+            </div>
+            <div style="font-size:13px; color:#6B6B6B; line-height:1.4; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;">Pan artesanal, arepas y pandebonos hechos a diario.</div>
+          </div>
+          <div style="{{ card }}">
+            <div style="display:flex; align-items:center; gap:10px;">
+              <div style="width:40px; height:40px; background:#D4D4D4; border-radius:8px; flex-shrink:0;"></div>
+              <div style="flex:1; min-width:0;">
+                <div style="font-size:14px; font-weight:600; color:#1A1A1A; line-height:1.2;">Ferretería El Volcán</div>
+                <div style="font-size:11px; color:#909090;">Palermo · Ferretería</div>
+              </div>
+              <div style="color:#404040; font-weight:700; font-size:18px; flex-shrink:0;">›</div>
+            </div>
+            <div style="font-size:13px; color:#6B6B6B; line-height:1.4; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;">Materiales de construcción y herramientas. Stock disponible.</div>
+          </div>
+          <div style="{{ card }}">
+            <div style="display:flex; align-items:center; gap:10px;">
+              <div style="width:40px; height:40px; background:#D4D4D4; border-radius:8px; flex-shrink:0;"></div>
+              <div style="flex:1; min-width:0;">
+                <div style="font-size:14px; font-weight:600; color:#1A1A1A; line-height:1.2;">Costura y Arreglos María</div>
+                <div style="font-size:11px; color:#909090;">San José · Confección</div>
+              </div>
+              <div style="color:#404040; font-weight:700; font-size:18px; flex-shrink:0;">›</div>
+            </div>
+            <div style="font-size:13px; color:#6B6B6B; line-height:1.4; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;">Arreglos de ropa, uniformes escolares y cortinas.</div>
+          </div>
+        </div>
+        <!-- Bottom nav: Directorio active -->
+        <div style="{{ nav }}">
+          <div style="{{ navOn }}"><div style="width:20px; height:20px; background:#D4D4D4; border-radius:4px;"></div><span>Directorio</span></div>
+          <div style="{{ navOff }}"><div style="width:20px; height:20px; background:#E8E8E8; border-radius:4px;"></div><span>Muro</span></div>
+          <div style="{{ navOff }}"><div style="width:20px; height:20px; background:#E8E8E8; border-radius:4px;"></div><span>Registrar</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div style="{{ arrow }}"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#909090" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+
+    <!-- ══ 02 VACÍOS / SIN CONEXIÓN ══ -->
+    <div style="{{ screenCol }}">
+      <div style="{{ metaBox }}">
+        <div style="{{ numBadge }}">02</div>
+        <div style="{{ screenTitle }}">Resultados vacíos / sin conexión</div>
+        <div style="{{ actionNote }}">Acción: Limpiar filtros o reintentar la conexión de red</div>
+        <div style="{{ flowNote }}">→ 01 (limpiar filtros o reintentar)</div>
+      </div>
+      <div style="{{ phone }}">
+        <div style="{{ sb }}"><span>9:41</span><span style="font-size:11px; color:#909090;">▲▲▲ WiFi ▌▌</span></div>
+        <div style="{{ hdr }}">
+          <div style="font-size:17px; font-weight:700; color:#1A1A1A;">Directorio Solidario</div>
+          <div style="width:36px; height:36px; background:#D4D4D4; border-radius:8px;"></div>
+        </div>
+        <div style="flex:1; overflow:hidden; display:flex; flex-direction:column;">
+          <!-- Search with query -->
+          <div style="padding:10px 14px 0;">
+            <div style="display:flex; align-items:center; gap:8px; background:#F3F3F3; border:1.5px solid #CACACA; border-radius:10px; padding:10px 12px;">
+              <div style="width:16px; height:16px; background:#ACACAC; border-radius:50%; flex-shrink:0;"></div>
+              <span style="font-size:14px; color:#1A1A1A;">Electricista</span>
+            </div>
+          </div>
+          <!-- Empty state -->
+          <div style="flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px; padding:20px 24px; border-bottom:1px dashed #CACACA;">
+            <div style="width:52px; height:52px; background:#D4D4D4; border-radius:12px;"></div>
+            <div style="font-size:16px; font-weight:700; color:#1A1A1A;">Sin resultados</div>
+            <div style="font-size:13px; color:#6B6B6B; text-align:center; line-height:1.5;">No encontramos negocios con esos filtros en Villamaría.</div>
+            <div style="display:flex; align-items:center; justify-content:center; height:44px; border:1.5px solid #404040; border-radius:8px; padding:0 20px; font-size:14px; font-weight:600; color:#404040; cursor:pointer; margin-top:4px;">Ver todos los negocios</div>
+          </div>
+          <!-- Sin conexión state -->
+          <div style="flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px; padding:20px 24px;">
+            <div style="width:52px; height:52px; background:#D4D4D4; border-radius:12px;"></div>
+            <div style="font-size:16px; font-weight:700; color:#1A1A1A;">Sin conexión</div>
+            <div style="font-size:13px; color:#6B6B6B; text-align:center; line-height:1.5;">Revisa tu señal e intenta de nuevo. El directorio funciona parcialmente sin internet.</div>
+            <div style="display:flex; align-items:center; justify-content:center; height:44px; background:#404040; border-radius:8px; padding:0 20px; font-size:14px; font-weight:600; color:#FFFFFF; cursor:pointer; margin-top:4px;">Reintentar</div>
+          </div>
+        </div>
+        <div style="{{ nav }}">
+          <div style="{{ navOn }}"><div style="width:20px; height:20px; background:#D4D4D4; border-radius:4px;"></div><span>Directorio</span></div>
+          <div style="{{ navOff }}"><div style="width:20px; height:20px; background:#E8E8E8; border-radius:4px;"></div><span>Muro</span></div>
+          <div style="{{ navOff }}"><div style="width:20px; height:20px; background:#E8E8E8; border-radius:4px;"></div><span>Registrar</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div style="{{ arrow }}"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#909090" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+
+    <!-- ══ 03 DETALLE ══ -->
+    <div style="{{ screenCol }}">
+      <div style="{{ metaBox }}">
+        <div style="{{ numBadge }}">03</div>
+        <div style="{{ screenTitle }}">Detalle de negocio</div>
+        <div style="{{ actionNote }}">Acción: Contactar al negocio directamente por WhatsApp</div>
+        <div style="{{ flowNote }}">→ WhatsApp externo · ← 01</div>
+      </div>
+      <div style="{{ phone }}">
+        <div style="{{ sb }}"><span>9:41</span><span style="font-size:11px; color:#909090;">▲▲▲ WiFi ▌▌</span></div>
+        <div style="{{ hdr }}">
+          <div style="display:flex; align-items:center; gap:10px;">
+            <div style="width:36px; height:36px; background:#D4D4D4; border-radius:8px; flex-shrink:0;"></div>
+            <div style="font-size:16px; font-weight:700; color:#1A1A1A;">Panadería La Esperanza</div>
+          </div>
+        </div>
+        <div style="flex:1; overflow:hidden; padding:14px; display:flex; flex-direction:column; gap:10px;">
+          <!-- Sector badge -->
+          <div style="display:inline-flex; align-items:center; padding:4px 10px; border-radius:4px; font-size:11px; font-weight:700; background:#E0E0E0; color:#404040; letter-spacing:0.05em; align-self:flex-start;">ALIMENTOS</div>
+          <!-- Name + location -->
+          <div>
+            <div style="font-size:22px; font-weight:700; color:#1A1A1A; line-height:1.2; margin-bottom:6px;">Panadería La Esperanza</div>
+            <div style="display:flex; align-items:center; gap:6px; font-size:13px; color:#6B6B6B;">
+              <div style="width:14px; height:14px; background:#D4D4D4; border-radius:3px; flex-shrink:0;"></div>
+              Chipre, Manizales
+            </div>
+          </div>
+          <!-- Description -->
+          <div style="font-size:14px; color:#404040; line-height:1.55;">Pan artesanal, arepas y pandebonos hechos a diario. Vendemos por mayor y detal. Atención a familias damnificadas con descuento solidario.</div>
+          <!-- Info card -->
+          <div style="{{ card }}; gap:0;">
+            <div style="display:flex; align-items:center; gap:10px; padding-bottom:10px;">
+              <div style="width:32px; height:32px; background:#D4D4D4; border-radius:6px; flex-shrink:0;"></div>
+              <div><div style="font-size:10px; color:#909090; margin-bottom:2px;">Horario</div><div style="font-size:13px; font-weight:500; color:#1A1A1A;">Lun–Dom 6:00 am – 6:00 pm</div></div>
+            </div>
+            <div style="height:1px; background:#E0E0E0; margin:0 -2px;"></div>
+            <div style="display:flex; align-items:center; gap:10px; padding-top:10px;">
+              <div style="width:32px; height:32px; background:#D4D4D4; border-radius:6px; flex-shrink:0;"></div>
+              <div><div style="font-size:10px; color:#909090; margin-bottom:2px;">Teléfono</div><div style="font-size:13px; font-weight:500; color:#1A1A1A;">310 123 4567</div></div>
+            </div>
+          </div>
+          <!-- ⚠ AVISO DE NO PAGOS ← APARECE AQUÍ -->
+          <div style="{{ disc }}">
+            <span style="font-size:14px; flex-shrink:0;">⚠</span>
+            <span><strong>Esta plataforma no procesa pagos;</strong> el contacto es directo por WhatsApp.</span>
+          </div>
+          <div style="flex:1;"></div>
+          <!-- WhatsApp CTA -->
+          <div style="display:flex; align-items:center; justify-content:center; gap:10px; height:56px; background:#404040; border-radius:12px; flex-shrink:0;">
+            <div style="width:20px; height:20px; background:#D4D4D4; border-radius:50%; flex-shrink:0;"></div>
+            <span style="font-size:16px; font-weight:700; color:#FFFFFF;">Escribir por WhatsApp</span>
+          </div>
+          <div style="font-size:11px; color:#909090; text-align:center; line-height:1.4;">Al tocar, abrirá WhatsApp. Esta app no procesa pagos.</div>
+        </div>
+        <div style="{{ nav }}">
+          <div style="{{ navOn }}"><div style="width:20px; height:20px; background:#D4D4D4; border-radius:4px;"></div><span>Directorio</span></div>
+          <div style="{{ navOff }}"><div style="width:20px; height:20px; background:#E8E8E8; border-radius:4px;"></div><span>Muro</span></div>
+          <div style="{{ navOff }}"><div style="width:20px; height:20px; background:#E8E8E8; border-radius:4px;"></div><span>Registrar</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div style="{{ arrow }}"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#909090" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+
+    <!-- ══ 04 REGISTRAR ══ -->
+    <div style="{{ screenCol }}">
+      <div style="{{ metaBox }}">
+        <div style="{{ numBadge }}">04</div>
+        <div style="{{ screenTitle }}">Registrar mi negocio</div>
+        <div style="{{ actionNote }}">Acción: Completar todos los campos y enviar para moderación</div>
+        <div style="{{ flowNote }}">→ 05 (envío exitoso)</div>
+      </div>
+      <div style="{{ phone }}">
+        <div style="{{ sb }}"><span>9:41</span><span style="font-size:11px; color:#909090;">▲▲▲ WiFi ▌▌</span></div>
+        <div style="{{ hdr }}">
+          <div style="font-size:17px; font-weight:700; color:#1A1A1A;">Registrar mi negocio</div>
+        </div>
+        <div style="flex:1; overflow:hidden; padding:12px 14px; display:flex; flex-direction:column; gap:10px;">
+          <div>
+            <div style="{{ lbl }}">Nombre del negocio *</div>
+            <div style="{{ inp }}"></div>
+          </div>
+          <div>
+            <div style="{{ lbl }}">Tipo de negocio *</div>
+            <div style="{{ sel }}"><span style="font-size:14px; color:#ACACAC;">Selecciona una opción...</span><div style="width:14px; height:14px; background:#D4D4D4; border-radius:3px;"></div></div>
+          </div>
+          <div>
+            <div style="{{ lbl }}">Zona o barrio *</div>
+            <div style="{{ sel }}"><span style="font-size:14px; color:#ACACAC;">Selecciona una opción...</span><div style="width:14px; height:14px; background:#D4D4D4; border-radius:3px;"></div></div>
+          </div>
+          <div>
+            <div style="{{ lbl }}">Número de WhatsApp *</div>
+            <div style="{{ inp }}; display:flex; align-items:center; gap:8px;"><span style="font-size:14px; color:#909090;">+57</span></div>
+          </div>
+          <div>
+            <div style="{{ lbl }}">¿Qué ofrecen? (descripción breve)</div>
+            <div style="background:#F3F3F3; border:1.5px solid #CACACA; border-radius:8px; height:56px;"></div>
+          </div>
+          <div>
+            <div style="{{ lbl }}">Horario de atención</div>
+            <div style="{{ inp }}"></div>
+          </div>
+          <!-- ⚠ AVISO DE NO PAGOS ← APARECE AQUÍ -->
+          <div style="{{ disc }}">
+            <span style="font-size:14px; flex-shrink:0;">⚠</span>
+            <span><strong>Esta plataforma no procesa pagos;</strong> el contacto es directo por WhatsApp.</span>
+          </div>
+          <div style="display:flex; align-items:center; justify-content:center; height:52px; background:#404040; border-radius:10px; flex-shrink:0;">
+            <span style="font-size:15px; font-weight:700; color:#FFFFFF;">Enviar para revisión</span>
+          </div>
+        </div>
+        <div style="{{ nav }}">
+          <div style="{{ navOff }}"><div style="width:20px; height:20px; background:#E8E8E8; border-radius:4px;"></div><span>Directorio</span></div>
+          <div style="{{ navOff }}"><div style="width:20px; height:20px; background:#E8E8E8; border-radius:4px;"></div><span>Muro</span></div>
+          <div style="{{ navOn }}"><div style="width:20px; height:20px; background:#D4D4D4; border-radius:4px;"></div><span>Registrar</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div style="{{ arrow }}"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#909090" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+
+    <!-- ══ 05 ÉXITO ══ -->
+    <div style="{{ screenCol }}">
+      <div style="{{ metaBox }}">
+        <div style="{{ numBadge }}">05</div>
+        <div style="{{ screenTitle }}">Registro exitoso</div>
+        <div style="{{ actionNote }}">Acción: Confirmar y volver al directorio mientras se revisa el registro</div>
+        <div style="{{ flowNote }}">→ 01 (volver al directorio)</div>
+      </div>
+      <div style="{{ phone }}">
+        <div style="{{ sb }}"><span>9:41</span><span style="font-size:11px; color:#909090;">▲▲▲ WiFi ▌▌</span></div>
+        <div style="{{ hdr }}">
+          <div style="display:flex; align-items:center; gap:10px;">
+            <div style="width:36px; height:36px; background:#D4D4D4; border-radius:8px; flex-shrink:0;"></div>
+            <div style="font-size:16px; font-weight:700; color:#1A1A1A;">Registro enviado</div>
+          </div>
+        </div>
+        <div style="flex:1; overflow:hidden; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:24px; gap:16px; text-align:center;">
+          <!-- Success icon -->
+          <div style="width:72px; height:72px; border-radius:50%; background:#D4D4D4; border:3px solid #909090; display:flex; align-items:center; justify-content:center;">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#404040" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          </div>
+          <div style="font-size:26px; font-weight:700; color:#1A1A1A;">¡Listo!</div>
+          <div style="font-size:15px; color:#6B6B6B; line-height:1.6;">Tu negocio fue enviado para revisión. Lo publicaremos en el directorio muy pronto.</div>
+          <div style="{{ card }}; width:100%; text-align:left;">
+            <div style="font-size:12px; font-weight:600; color:#909090; text-transform:uppercase; letter-spacing:0.07em; margin-bottom:4px;">¿Qué sigue?</div>
+            <div style="font-size:13px; color:#6B6B6B; line-height:1.5;">El equipo revisará tu información en 24–48 h. Te contactarán si necesitan confirmar algo.</div>
+          </div>
+          <div style="flex:1;"></div>
+          <div style="display:flex; align-items:center; justify-content:center; height:52px; background:#404040; border-radius:10px; width:100%; flex-shrink:0;">
+            <span style="font-size:15px; font-weight:700; color:#FFFFFF;">Volver al directorio</span>
+          </div>
+        </div>
+        <div style="{{ nav }}">
+          <div style="{{ navOff }}"><div style="width:20px; height:20px; background:#E8E8E8; border-radius:4px;"></div><span>Directorio</span></div>
+          <div style="{{ navOff }}"><div style="width:20px; height:20px; background:#E8E8E8; border-radius:4px;"></div><span>Muro</span></div>
+          <div style="{{ navOn }}"><div style="width:20px; height:20px; background:#D4D4D4; border-radius:4px;"></div><span>Registrar</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div style="{{ arrow }}"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#909090" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+
+    <!-- ══ 06 MURO ══ -->
+    <div style="{{ screenCol }}">
+      <div style="{{ metaBox }}">
+        <div style="{{ numBadge }}">06</div>
+        <div style="{{ screenTitle }}">Muro de Apoyo · Busco/Ofrezco</div>
+        <div style="{{ actionNote }}">Acción: Explorar publicaciones por tab y contactar por WhatsApp</div>
+        <div style="{{ flowNote }}">→ 07 (publicar via FAB) · → WhatsApp</div>
+      </div>
+      <div style="{{ phone }}">
+        <div style="{{ sb }}"><span>9:41</span><span style="font-size:11px; color:#909090;">▲▲▲ WiFi ▌▌</span></div>
+        <div style="{{ hdr }}">
+          <div style="font-size:17px; font-weight:700; color:#1A1A1A;">Muro de Apoyo</div>
+        </div>
+        <!-- Tabs -->
+        <div style="display:flex; border-bottom:2px solid #E0E0E0; flex-shrink:0;">
+          <div style="flex:1; padding:12px; text-align:center; font-size:14px; font-weight:700; color:#1A1A1A; border-bottom:2px solid #404040; margin-bottom:-2px;">🙏 Busco</div>
+          <div style="flex:1; padding:12px; text-align:center; font-size:14px; font-weight:400; color:#909090;">🤝 Ofrezco</div>
+        </div>
+        <div style="flex:1; overflow:hidden; padding:10px 14px; display:flex; flex-direction:column; gap:8px; position:relative;">
+          <!-- Post card 1 -->
+          <div style="{{ card }}">
+            <div style="display:flex; align-items:center; justify-content:space-between; gap:8px;">
+              <div style="display:flex; align-items:center; gap:6px;">
+                <span style="display:inline-flex; padding:2px 7px; border-radius:3px; font-size:10px; font-weight:700; background:#E0E0E0; color:#404040; letter-spacing:0.05em;">BUSCO</span>
+                <span style="font-size:13px; font-weight:600; color:#1A1A1A;">Familia Rodríguez</span>
+              </div>
+              <span style="font-size:11px; color:#ACACAC; flex-shrink:0;">Hace 2 h</span>
+            </div>
+            <div style="font-size:13px; color:#404040; line-height:1.45;">Buscamos colchonetas o camas para 4 personas. Quedamos sin muebles.</div>
+            <div style="display:flex; align-items:center; justify-content:space-between;">
+              <span style="font-size:11px; color:#909090;">📍 Chipre</span>
+              <div style="display:flex; align-items:center; gap:5px; background:#404040; color:#FFFFFF; border-radius:6px; padding:5px 10px; font-size:12px; font-weight:600; cursor:pointer;">
+                <div style="width:12px; height:12px; background:#D4D4D4; border-radius:50%;"></div>Contactar
+              </div>
+            </div>
+          </div>
+          <!-- Post card 2 -->
+          <div style="{{ card }}">
+            <div style="display:flex; align-items:center; justify-content:space-between; gap:8px;">
+              <div style="display:flex; align-items:center; gap:6px;">
+                <span style="display:inline-flex; padding:2px 7px; border-radius:3px; font-size:10px; font-weight:700; background:#E0E0E0; color:#404040; letter-spacing:0.05em;">BUSCO</span>
+                <span style="font-size:13px; font-weight:600; color:#1A1A1A;">Doña Carmen</span>
+              </div>
+              <span style="font-size:11px; color:#ACACAC; flex-shrink:0;">Hace 5 h</span>
+            </div>
+            <div style="font-size:13px; color:#404040; line-height:1.45;">Busco estufa o horno en buen estado para retomar mi negocio de empanadas.</div>
+            <div style="display:flex; align-items:center; justify-content:space-between;">
+              <span style="font-size:11px; color:#909090;">📍 San José</span>
+              <div style="display:flex; align-items:center; gap:5px; background:#404040; color:#FFFFFF; border-radius:6px; padding:5px 10px; font-size:12px; font-weight:600; cursor:pointer;">
+                <div style="width:12px; height:12px; background:#D4D4D4; border-radius:50%;"></div>Contactar
+              </div>
+            </div>
+          </div>
+          <!-- Post card 3 -->
+          <div style="{{ card }}">
+            <div style="display:flex; align-items:center; justify-content:space-between; gap:8px;">
+              <div style="display:flex; align-items:center; gap:6px;">
+                <span style="display:inline-flex; padding:2px 7px; border-radius:3px; font-size:10px; font-weight:700; background:#E0E0E0; color:#404040; letter-spacing:0.05em;">BUSCO</span>
+                <span style="font-size:13px; font-weight:600; color:#1A1A1A;">Luis Gómez</span>
+              </div>
+              <span style="font-size:11px; color:#ACACAC; flex-shrink:0;">Hace 1 día</span>
+            </div>
+            <div style="font-size:13px; color:#404040; line-height:1.45;">Busco electricista para revisar instalación dañada. Puedo pagar en cuotas.</div>
+            <div style="display:flex; align-items:center; justify-content:space-between;">
+              <span style="font-size:11px; color:#909090;">📍 Villamaría</span>
+              <div style="display:flex; align-items:center; gap:5px; background:#404040; color:#FFFFFF; border-radius:6px; padding:5px 10px; font-size:12px; font-weight:600; cursor:pointer;">
+                <div style="width:12px; height:12px; background:#D4D4D4; border-radius:50%;"></div>Contactar
+              </div>
+            </div>
+          </div>
+          <!-- FAB -->
+          <div style="position:absolute; bottom:12px; right:14px; width:52px; height:52px; background:#404040; border-radius:26px; display:flex; align-items:center; justify-content:center; box-shadow:0 3px 12px rgba(0,0,0,0.25);">
+            <span style="color:#FFFFFF; font-size:26px; line-height:1;">+</span>
+          </div>
+        </div>
+        <div style="{{ nav }}">
+          <div style="{{ navOff }}"><div style="width:20px; height:20px; background:#E8E8E8; border-radius:4px;"></div><span>Directorio</span></div>
+          <div style="{{ navOn }}"><div style="width:20px; height:20px; background:#D4D4D4; border-radius:4px;"></div><span>Muro</span></div>
+          <div style="{{ navOff }}"><div style="width:20px; height:20px; background:#E8E8E8; border-radius:4px;"></div><span>Registrar</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div style="{{ arrow }}"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#909090" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+
+    <!-- ══ 07 PUBLICAR MURO ══ -->
+    <div style="{{ screenCol }}">
+      <div style="{{ metaBox }}">
+        <div style="{{ numBadge }}">07</div>
+        <div style="{{ screenTitle }}">Publicar en el Muro</div>
+        <div style="{{ actionNote }}">Acción: Elegir tipo, completar campos y publicar en el muro</div>
+        <div style="{{ flowNote }}">→ 06 (tras publicar, va al muro con tab activo)</div>
+      </div>
+      <div style="{{ phone }}">
+        <div style="{{ sb }}"><span>9:41</span><span style="font-size:11px; color:#909090;">▲▲▲ WiFi ▌▌</span></div>
+        <div style="{{ hdr }}">
+          <div style="display:flex; align-items:center; gap:10px;">
+            <div style="width:36px; height:36px; background:#D4D4D4; border-radius:8px; flex-shrink:0;"></div>
+            <div style="font-size:16px; font-weight:700; color:#1A1A1A;">Nueva publicación</div>
+          </div>
+        </div>
+        <div style="flex:1; overflow:hidden; padding:12px 14px; display:flex; flex-direction:column; gap:10px;">
+          <!-- Type toggle -->
+          <div>
+            <div style="{{ lbl }}">¿Qué quieres publicar? *</div>
+            <div style="display:flex; gap:8px;">
+              <div style="flex:1; height:48px; background:#404040; border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; color:#FFFFFF; cursor:pointer;">🙏 Busco algo</div>
+              <div style="flex:1; height:48px; background:transparent; border:1.5px solid #CACACA; border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:500; color:#6B6B6B; cursor:pointer;">🤝 Ofrezco algo</div>
+            </div>
+          </div>
+          <div>
+            <div style="{{ lbl }}">Tu nombre o grupo</div>
+            <div style="{{ inp }}"></div>
+          </div>
+          <div>
+            <div style="{{ lbl }}">Zona o barrio</div>
+            <div style="{{ sel }}"><span style="font-size:14px; color:#ACACAC;">Selecciona tu zona...</span><div style="width:14px; height:14px; background:#D4D4D4; border-radius:3px;"></div></div>
+          </div>
+          <div>
+            <div style="{{ lbl }}">Cuéntanos más *</div>
+            <div style="background:#F3F3F3; border:1.5px solid #CACACA; border-radius:8px; height:72px; padding:10px 12px; font-size:13px; color:#ACACAC;">Describe qué necesitas o qué ofreces...</div>
+          </div>
+          <div>
+            <div style="{{ lbl }}">Tu teléfono WhatsApp *</div>
+            <div style="{{ inp }}; display:flex; align-items:center; gap:8px;"><span style="font-size:14px; color:#909090;">+57</span></div>
+          </div>
+          <!-- ⚠ AVISO DE NO PAGOS ← APARECE AQUÍ -->
+          <div style="{{ disc }}">
+            <span style="font-size:14px; flex-shrink:0;">⚠</span>
+            <span><strong>Esta plataforma no procesa pagos;</strong> el contacto es directo por WhatsApp.</span>
+          </div>
+          <div style="display:flex; align-items:center; justify-content:center; height:52px; background:#404040; border-radius:10px; flex-shrink:0;">
+            <span style="font-size:15px; font-weight:700; color:#FFFFFF;">Publicar en el Muro</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="{{ arrow }}"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#909090" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+
+    <!-- ══ 08 NAVEGACIÓN INFERIOR ══ -->
+    <div style="{{ screenCol }}">
+      <div style="{{ metaBox }}">
+        <div style="{{ numBadge }}">08</div>
+        <div style="{{ screenTitle }}">Navegación inferior</div>
+        <div style="{{ actionNote }}">Componente persistente en pantallas 1–7 del flujo público</div>
+        <div style="{{ flowNote }}">Conecta: 01 ↔ 06 ↔ 04</div>
+      </div>
+      <!-- Shorter frame, component reference -->
+      <div style="width:390px; background:#FFFFFF; border:2px solid #ACACAC; border-radius:24px; overflow:hidden; box-shadow:0 4px 24px rgba(0,0,0,0.1); flex-shrink:0;">
+        <div style="background:#F3F3F3; padding:14px 16px; border-bottom:1px solid #E0E0E0;">
+          <div style="font-size:12px; font-weight:700; color:#1A1A1A; margin-bottom:2px;">Componente: bottom-nav-bar</div>
+          <div style="font-size:11px; color:#6B6B6B;">Altura 68px · touch target ≥48px · 3 destinos</div>
+        </div>
+        <!-- State 1: Directorio active -->
+        <div style="padding:10px 14px; border-bottom:1px solid #E8E8E8;">
+          <div style="font-size:10px; font-weight:600; color:#909090; text-transform:uppercase; letter-spacing:0.07em; margin-bottom:8px;">Estado activo: Directorio</div>
+          <div style="height:68px; background:#F8F8F8; border:1px solid #E0E0E0; border-radius:8px; display:flex;">
+            <div style="{{ navOn }}"><div style="width:20px; height:20px; background:#D4D4D4; border-radius:4px;"></div><span>Directorio</span></div>
+            <div style="{{ navOff }}"><div style="width:20px; height:20px; background:#E8E8E8; border-radius:4px;"></div><span>Muro</span></div>
+            <div style="{{ navOff }}"><div style="width:20px; height:20px; background:#E8E8E8; border-radius:4px;"></div><span>Registrar</span></div>
+          </div>
+        </div>
+        <!-- State 2: Muro active -->
+        <div style="padding:10px 14px; border-bottom:1px solid #E8E8E8;">
+          <div style="font-size:10px; font-weight:600; color:#909090; text-transform:uppercase; letter-spacing:0.07em; margin-bottom:8px;">Estado activo: Muro</div>
+          <div style="height:68px; background:#F8F8F8; border:1px solid #E0E0E0; border-radius:8px; display:flex;">
+            <div style="{{ navOff }}"><div style="width:20px; height:20px; background:#E8E8E8; border-radius:4px;"></div><span>Directorio</span></div>
+            <div style="{{ navOn }}"><div style="width:20px; height:20px; background:#D4D4D4; border-radius:4px;"></div><span>Muro</span></div>
+            <div style="{{ navOff }}"><div style="width:20px; height:20px; background:#E8E8E8; border-radius:4px;"></div><span>Registrar</span></div>
+          </div>
+        </div>
+        <!-- State 3: Registrar active -->
+        <div style="padding:10px 14px;">
+          <div style="font-size:10px; font-weight:600; color:#909090; text-transform:uppercase; letter-spacing:0.07em; margin-bottom:8px;">Estado activo: Registrar</div>
+          <div style="height:68px; background:#F8F8F8; border:1px solid #E0E0E0; border-radius:8px; display:flex;">
+            <div style="{{ navOff }}"><div style="width:20px; height:20px; background:#E8E8E8; border-radius:4px;"></div><span>Directorio</span></div>
+            <div style="{{ navOff }}"><div style="width:20px; height:20px; background:#E8E8E8; border-radius:4px;"></div><span>Muro</span></div>
+            <div style="{{ navOn }}"><div style="width:20px; height:20px; background:#D4D4D4; border-radius:4px;"></div><span>Registrar</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ════ SECCIÓN PRIVADA ════ -->
+    <div style="display:flex; flex-direction:column; align-items:center; justify-content:flex-start; padding-top:56px; margin-left:24px; margin-right:12px; flex-shrink:0; border-left:2px dashed #ACACAC; padding-left:20px;">
+      <div style="writing-mode:vertical-lr; transform:rotate(180deg); font-size:11px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:#FFFFFF; background:#6B6B6B; padding:12px 5px; border-radius:4px; white-space:nowrap;">Flujo Privado · 9–12</div>
+    </div>
+
+    <!-- ══ 09 LOGIN ══ -->
+    <div style="{{ screenCol }}">
+      <div style="{{ metaBox }}">
+        <div style="{{ numBadge }}">09</div>
+        <div style="{{ screenTitle }}">Login de moderación</div>
+        <div style="{{ actionNote }}">Acción: Autenticarse con credenciales del equipo desarrollador</div>
+        <div style="{{ flowNote }}">→ 10 (cola de moderación)</div>
+      </div>
+      <div style="{{ phone }}">
+        <div style="{{ sb }}"><span>9:41</span><span style="font-size:11px; color:#909090;">▲▲▲ WiFi ▌▌</span></div>
+        <div style="flex:1; overflow:hidden; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:32px 24px; gap:16px;">
+          <!-- Logo / shield icon -->
+          <div style="width:64px; height:64px; background:#D4D4D4; border-radius:16px; border:2px solid #ACACAC; display:flex; align-items:center; justify-content:center;">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#6B6B6B" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+          </div>
+          <div style="text-align:center;">
+            <div style="font-size:20px; font-weight:700; color:#1A1A1A; margin-bottom:4px;">Panel de Moderación</div>
+            <div style="font-size:13px; color:#6B6B6B;">Acceso restringido · solo equipo autorizado</div>
+          </div>
+          <div style="width:100%; display:flex; flex-direction:column; gap:10px; margin-top:8px;">
+            <div>
+              <div style="{{ lbl }}">Correo electrónico</div>
+              <div style="{{ inp }}; font-size:14px; color:#ACACAC; display:flex; align-items:center;">admin@directorio.co</div>
+            </div>
+            <div>
+              <div style="{{ lbl }}">Contraseña</div>
+              <div style="{{ inp }}; display:flex; align-items:center; justify-content:space-between;">
+                <span style="font-size:16px; color:#1A1A1A; letter-spacing:4px;">••••••••</span>
+                <div style="width:18px; height:18px; background:#D4D4D4; border-radius:4px; flex-shrink:0;"></div>
+              </div>
+            </div>
+            <div style="display:flex; align-items:center; justify-content:center; height:52px; background:#404040; border-radius:10px; flex-shrink:0; margin-top:4px;">
+              <span style="font-size:15px; font-weight:700; color:#FFFFFF;">Ingresar</span>
+            </div>
+          </div>
+          <div style="font-size:12px; color:#909090; text-align:center; line-height:1.5; margin-top:8px;">¿Olvidaste tu contraseña?<br>Contacta al administrador del sistema.</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="{{ arrow }}"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#909090" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+
+    <!-- ══ 10 COLA DE MODERACIÓN ══ -->
+    <div style="{{ screenCol }}">
+      <div style="{{ metaBox }}">
+        <div style="{{ numBadge }}">10</div>
+        <div style="{{ screenTitle }}">Cola de moderación</div>
+        <div style="{{ actionNote }}">Acción: Revisar cada envío y aprobar o rechazar con nota</div>
+        <div style="{{ flowNote }}">→ 11 (al tocar acción) · → 12 (historial)</div>
+      </div>
+      <div style="{{ phone }}">
+        <div style="{{ sb }}"><span>9:41</span><span style="font-size:11px; color:#909090;">▲▲▲ WiFi ▌▌</span></div>
+        <div style="{{ hdr }}">
+          <div>
+            <div style="font-size:16px; font-weight:700; color:#1A1A1A;">Cola de moderación</div>
+            <div style="font-size:12px; color:#909090;">3 publicaciones pendientes</div>
+          </div>
+          <div style="width:36px; height:36px; background:#D4D4D4; border-radius:8px; flex-shrink:0;"></div>
+        </div>
+        <div style="flex:1; overflow:hidden; padding:10px 14px; display:flex; flex-direction:column; gap:8px;">
+          <!-- Mod card 1 -->
+          <div style="{{ card }}">
+            <div style="display:flex; align-items:center; gap:6px;">
+              <span style="display:inline-flex; padding:2px 7px; border-radius:3px; font-size:10px; font-weight:700; background:#D4D4D4; color:#404040; letter-spacing:0.05em;">NEGOCIO</span>
+              <span style="font-size:14px; font-weight:600; color:#1A1A1A;">Carpintería El Roble</span>
+            </div>
+            <div style="font-size:12px; color:#909090;">📍 La Enea</div>
+            <div style="font-size:13px; color:#6B6B6B; line-height:1.4;">Muebles y reparaciones de madera a medida. Tel: 310 199 9888</div>
+            <div style="display:flex; gap:8px;">
+              <div style="flex:1; height:44px; background:#404040; border-radius:7px; display:flex; align-items:center; justify-content:center; gap:5px; cursor:pointer;">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span style="font-size:13px; font-weight:600; color:#FFFFFF;">Aprobar</span>
+              </div>
+              <div style="flex:1; height:44px; background:transparent; border:1.5px solid #CACACA; border-radius:7px; display:flex; align-items:center; justify-content:center; gap:5px; cursor:pointer;">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#6B6B6B" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                <span style="font-size:13px; font-weight:500; color:#6B6B6B;">Rechazar</span>
+              </div>
+            </div>
+          </div>
+          <!-- Mod card 2 -->
+          <div style="{{ card }}">
+            <div style="display:flex; align-items:center; gap:6px;">
+              <span style="display:inline-flex; padding:2px 7px; border-radius:3px; font-size:10px; font-weight:700; background:#909090; color:#FFFFFF; letter-spacing:0.05em;">MURO</span>
+              <span style="font-size:14px; font-weight:600; color:#1A1A1A;">Publicación de Anónimo</span>
+            </div>
+            <div style="font-size:12px; color:#909090;">📍 San José</div>
+            <div style="font-size:13px; color:#6B6B6B; line-height:1.4;">Vendo materiales de construcción recuperados del derrumbe.</div>
+            <div style="display:flex; gap:8px;">
+              <div style="flex:1; height:44px; background:#404040; border-radius:7px; display:flex; align-items:center; justify-content:center; gap:5px; cursor:pointer;">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span style="font-size:13px; font-weight:600; color:#FFFFFF;">Aprobar</span>
+              </div>
+              <div style="flex:1; height:44px; background:transparent; border:1.5px solid #CACACA; border-radius:7px; display:flex; align-items:center; justify-content:center; gap:5px; cursor:pointer;">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#6B6B6B" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                <span style="font-size:13px; font-weight:500; color:#6B6B6B;">Rechazar</span>
+              </div>
+            </div>
+          </div>
+          <!-- Mod card 3 -->
+          <div style="{{ card }}">
+            <div style="display:flex; align-items:center; gap:6px;">
+              <span style="display:inline-flex; padding:2px 7px; border-radius:3px; font-size:10px; font-weight:700; background:#D4D4D4; color:#404040; letter-spacing:0.05em;">NEGOCIO</span>
+              <span style="font-size:14px; font-weight:600; color:#1A1A1A;">Eléctricos Villamaría</span>
+            </div>
+            <div style="font-size:12px; color:#909090;">📍 Villamaría</div>
+            <div style="font-size:13px; color:#6B6B6B; line-height:1.4;">Instalaciones y reparaciones eléctricas residenciales.</div>
+            <div style="display:flex; gap:8px;">
+              <div style="flex:1; height:44px; background:#404040; border-radius:7px; display:flex; align-items:center; justify-content:center; cursor:pointer;"><span style="font-size:13px; font-weight:600; color:#FFFFFF;">Aprobar</span></div>
+              <div style="flex:1; height:44px; background:transparent; border:1.5px solid #CACACA; border-radius:7px; display:flex; align-items:center; justify-content:center; cursor:pointer;"><span style="font-size:13px; color:#6B6B6B;">Rechazar</span></div>
+            </div>
+          </div>
+          <div style="text-align:center; font-size:13px; color:#909090; text-decoration:underline; cursor:pointer; margin-top:4px;">Ver historial de acciones →</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="{{ arrow }}"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#909090" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+
+    <!-- ══ 11 MODAL ACCIÓN ══ -->
+    <div style="{{ screenCol }}">
+      <div style="{{ metaBox }}">
+        <div style="{{ numBadge }}">11</div>
+        <div style="{{ screenTitle }}">Modal · nota obligatoria</div>
+        <div style="{{ actionNote }}">Acción: Escribir el motivo y confirmar la decisión (aprobar o rechazar)</div>
+        <div style="{{ flowNote }}">→ 10 (tras confirmar, vuelve a la cola)</div>
+      </div>
+      <div style="{{ phoneRel }}">
+        <!-- Content dimmed behind -->
+        <div style="{{ sb }}"><span>9:41</span><span style="font-size:11px; color:#909090;">▲▲▲ WiFi ▌▌</span></div>
+        <div style="{{ hdr }}; opacity:0.35;">
+          <div style="font-size:16px; font-weight:700; color:#1A1A1A;">Cola de moderación</div>
+        </div>
+        <div style="flex:1; overflow:hidden; padding:10px 14px; opacity:0.25;">
+          <div style="{{ card }}; margin-bottom:8px;"><div style="height:60px; background:#D4D4D4; border-radius:6px;"></div></div>
+          <div style="{{ card }}"><div style="height:60px; background:#D4D4D4; border-radius:6px;"></div></div>
+        </div>
+        <!-- Overlay -->
+        <div style="position:absolute; inset:0; background:rgba(0,0,0,0.5); border-radius:34px; z-index:10; display:flex; align-items:center; padding:20px;">
+          <!-- Modal card -->
+          <div style="background:#FFFFFF; border-radius:16px; width:100%; padding:22px; display:flex; flex-direction:column; gap:14px; box-shadow:0 8px 32px rgba(0,0,0,0.3);">
+            <div style="font-size:17px; font-weight:700; color:#1A1A1A;">Confirmar acción</div>
+            <div style="height:1px; background:#E0E0E0;"></div>
+            <div>
+              <div style="font-size:12px; color:#909090; margin-bottom:4px;">Vas a RECHAZAR:</div>
+              <div style="font-size:15px; font-weight:600; color:#1A1A1A; background:#F3F3F3; border-radius:8px; padding:10px 12px;">"Publicación de Anónimo" · San José</div>
+            </div>
+            <div>
+              <div style="{{ lbl }}; margin-bottom:4px;">Motivo o nota * <span style="color:#D4D4D4; font-size:10px;">(obligatorio)</span></div>
+              <div style="background:#F3F3F3; border:1.5px solid #CACACA; border-radius:8px; height:80px; padding:10px 12px; font-size:13px; color:#ACACAC;">Escribe el motivo de la decisión para el historial de auditoría...</div>
+            </div>
+            <div style="display:flex; gap:8px;">
+              <div style="flex:1; height:48px; background:transparent; border:1.5px solid #CACACA; border-radius:9px; display:flex; align-items:center; justify-content:center; cursor:pointer;"><span style="font-size:14px; font-weight:500; color:#6B6B6B;">Cancelar</span></div>
+              <div style="flex:2; height:48px; background:#404040; border-radius:9px; display:flex; align-items:center; justify-content:center; cursor:pointer;"><span style="font-size:14px; font-weight:700; color:#FFFFFF;">Confirmar y guardar</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="{{ arrow }}"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#909090" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+
+    <!-- ══ 12 HISTORIAL ══ -->
+    <div style="{{ screenCol }}">
+      <div style="{{ metaBox }}">
+        <div style="{{ numBadge }}">12</div>
+        <div style="{{ screenTitle }}">Historial de acciones</div>
+        <div style="{{ actionNote }}">Acción: Auditar decisiones pasadas filtradas por estado</div>
+        <div style="{{ flowNote }}">← 10 (volver a la cola)</div>
+      </div>
+      <div style="{{ phone }}">
+        <div style="{{ sb }}"><span>9:41</span><span style="font-size:11px; color:#909090;">▲▲▲ WiFi ▌▌</span></div>
+        <div style="{{ hdr }}">
+          <div style="display:flex; align-items:center; gap:10px;">
+            <div style="width:36px; height:36px; background:#D4D4D4; border-radius:8px; flex-shrink:0;"></div>
+            <div style="font-size:16px; font-weight:700; color:#1A1A1A;">Historial de acciones</div>
+          </div>
+        </div>
+        <!-- Segmented filter -->
+        <div style="padding:10px 14px 0; flex-shrink:0;">
+          <div style="display:flex; background:#F3F3F3; border:1px solid #E0E0E0; border-radius:10px; padding:3px; gap:3px;">
+            <div style="flex:1; height:36px; background:#404040; border-radius:7px; display:flex; align-items:center; justify-content:center;"><span style="font-size:12px; font-weight:700; color:#FFFFFF;">Todo</span></div>
+            <div style="flex:1; height:36px; display:flex; align-items:center; justify-content:center;"><span style="font-size:12px; color:#6B6B6B;">Aprobado</span></div>
+            <div style="flex:1; height:36px; display:flex; align-items:center; justify-content:center;"><span style="font-size:12px; color:#6B6B6B;">Rechazado</span></div>
+          </div>
+        </div>
+        <div style="flex:1; overflow:hidden; padding:10px 14px; display:flex; flex-direction:column; gap:8px;">
+          <!-- History item 1 -->
+          <div style="{{ card }}">
+            <div style="display:flex; align-items:center; justify-content:space-between; gap:8px;">
+              <span style="display:inline-flex; padding:2px 8px; border-radius:3px; font-size:10px; font-weight:700; background:#404040; color:#FFFFFF; letter-spacing:0.05em;">APROBADO</span>
+              <span style="font-size:11px; color:#ACACAC;">12 ago · 10:34</span>
+            </div>
+            <div style="font-size:13px; font-weight:600; color:#1A1A1A;">Panadería La Esperanza</div>
+            <div style="font-size:11px; color:#909090;">Moderador: admin@directorio.co</div>
+            <div style="font-size:12px; color:#6B6B6B; font-style:italic; background:#F8F8F8; border-radius:6px; padding:6px 8px;">"Negocio verificado, teléfono confirmado y activo."</div>
+          </div>
+          <!-- History item 2 -->
+          <div style="{{ card }}">
+            <div style="display:flex; align-items:center; justify-content:space-between; gap:8px;">
+              <span style="display:inline-flex; padding:2px 8px; border-radius:3px; font-size:10px; font-weight:700; background:#E0E0E0; color:#6B6B6B; letter-spacing:0.05em;">RECHAZADO</span>
+              <span style="font-size:11px; color:#ACACAC;">12 ago · 09:15</span>
+            </div>
+            <div style="font-size:13px; font-weight:600; color:#1A1A1A;">Publicación de Anónimo</div>
+            <div style="font-size:11px; color:#909090;">Moderador: admin@directorio.co</div>
+            <div style="font-size:12px; color:#6B6B6B; font-style:italic; background:#F8F8F8; border-radius:6px; padding:6px 8px;">"Contenido no relacionado con el directorio solidario."</div>
+          </div>
+          <!-- History item 3 -->
+          <div style="{{ card }}">
+            <div style="display:flex; align-items:center; justify-content:space-between; gap:8px;">
+              <span style="display:inline-flex; padding:2px 8px; border-radius:3px; font-size:10px; font-weight:700; background:#404040; color:#FFFFFF; letter-spacing:0.05em;">APROBADO</span>
+              <span style="font-size:11px; color:#ACACAC;">11 ago · 16:48</span>
+            </div>
+            <div style="font-size:13px; font-weight:600; color:#1A1A1A;">Mecánica Automotriz Andes</div>
+            <div style="font-size:11px; color:#909090;">Moderador: admin@directorio.co</div>
+            <div style="font-size:12px; color:#6B6B6B; font-style:italic; background:#F8F8F8; border-radius:6px; padding:6px 8px;">"Todo en regla, número de WhatsApp activo."</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right padding -->
+    <div style="width:48px; flex-shrink:0;"></div>
+
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;: {&quot;width&quot;: 1400, &quot;height&quot;: 1000}}">
+class Component extends DCLogic {
+  renderVals() {
+    const phone = { width:'390px', height:'780px', background:'#FFFFFF', border:'2px solid #ACACAC', borderRadius:'36px', overflow:'hidden', display:'flex', flexDirection:'column', boxShadow:'0 4px 24px rgba(0,0,0,0.1)', flexShrink:'0' };
+    const sb = { height:'40px', background:'#F5F5F5', borderBottom:'1px solid #E0E0E0', display:'flex', alignItems:'center', justifyContent:'space-between', padding:'0 22px', fontSize:'13px', fontWeight:'600', color:'#1A1A1A', flexShrink:'0' };
+    const hdr = { padding:'10px 14px', background:'#F5F5F5', borderBottom:'1px solid #E0E0E0', display:'flex', alignItems:'center', justifyContent:'space-between', gap:'10px', flexShrink:'0', minHeight:'52px' };
+    const card = { background:'#F3F3F3', border:'1px solid #E0E0E0', borderRadius:'10px', padding:'12px', display:'flex', flexDirection:'column', gap:'8px', flexShrink:'0' };
+    const disc = { background:'#F5F5F5', border:'1.5px dashed #909090', borderRadius:'8px', padding:'9px 11px', fontSize:'12px', color:'#1A1A1A', lineHeight:'1.5', display:'flex', gap:'8px', alignItems:'flex-start', flexShrink:'0' };
+    const inp = { background:'#F3F3F3', border:'1.5px solid #CACACA', borderRadius:'8px', padding:'11px 13px', fontSize:'14px', color:'#1A1A1A', minHeight:'44px', display:'flex', alignItems:'center' };
+    const sel = { background:'#F3F3F3', border:'1.5px solid #CACACA', borderRadius:'8px', padding:'11px 13px', fontSize:'14px', display:'flex', alignItems:'center', justifyContent:'space-between', minHeight:'44px' };
+    const lbl = { display:'block', fontSize:'12px', fontWeight:'600', color:'#6B6B6B', marginBottom:'5px' };
+    const nav = { height:'68px', background:'#F5F5F5', borderTop:'2px solid #E0E0E0', display:'flex', flexShrink:'0' };
+    const navOn = { flex:'1', display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', gap:'3px', background:'none', border:'none', cursor:'pointer', fontSize:'10px', fontWeight:'700', color:'#1A1A1A', borderTop:'2px solid #404040', paddingTop:'2px' };
+    const navOff = { flex:'1', display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', gap:'3px', background:'none', border:'none', cursor:'pointer', fontSize:'10px', fontWeight:'400', color:'#909090', borderTop:'2px solid transparent', paddingTop:'2px' };
+    const chipOn = { display:'inline-flex', alignItems:'center', padding:'6px 12px', borderRadius:'9999px', fontSize:'12px', fontWeight:'700', background:'#E0E0E0', color:'#1A1A1A', border:'1.5px solid #404040', whiteSpace:'nowrap', cursor:'pointer' };
+    const chipOff = { display:'inline-flex', alignItems:'center', padding:'6px 12px', borderRadius:'9999px', fontSize:'12px', fontWeight:'400', background:'transparent', color:'#6B6B6B', border:'1.5px solid #CACACA', whiteSpace:'nowrap', cursor:'pointer' };
+    const screenCol = { display:'flex', flexDirection:'column', alignItems:'center', gap:'16px', flexShrink:'0' };
+    const metaBox = { width:'390px', textAlign:'center', display:'flex', flexDirection:'column', alignItems:'center', gap:'4px' };
+    const numBadge = { width:'30px', height:'30px', borderRadius:'50%', background:'#404040', color:'#FFFFFF', display:'flex', alignItems:'center', justifyContent:'center', fontSize:'13px', fontWeight:'700' };
+    const screenTitle = { fontSize:'15px', fontWeight:'700', color:'#1A1A1A' };
+    const actionNote = { fontSize:'12px', color:'#6B6B6B', lineHeight:'1.4', maxWidth:'360px' };
+    const flowNote = { fontSize:'11px', color:'#ACACAC', fontStyle:'italic' };
+    const arrow = { display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'flex-start', paddingTop:'108px', flexShrink:'0', width:'40px' };
+    const phoneRel = { ...phone, position: 'relative' };
+    return { phone, phoneRel, sb, hdr, card, disc, inp, sel, lbl, nav, navOn, navOff, chipOn, chipOff, screenCol, metaBox, numBadge, screenTitle, actionNote, flowNote, arrow };
+  }
+}
+</script>
+</body>
+</html>

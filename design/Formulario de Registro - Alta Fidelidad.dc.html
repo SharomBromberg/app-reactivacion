@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+<template id="__bundler_thumbnail" data-bg-color="#2A1C10">
+  <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+    <rect width="1200" height="800" fill="#2A1C10"/>
+    <!-- Phone A -->
+    <rect x="100" y="60" width="240" height="460" rx="28" fill="#1A1814"/>
+    <rect x="108" y="68" width="224" height="444" rx="22" fill="#F2EDE4"/>
+    <rect x="108" y="68" width="224" height="52" rx="0" fill="#F2EDE4"/>
+    <rect x="128" y="84" width="120" height="9" rx="4" fill="#1A1310" opacity="0.7"/>
+    <rect x="128" y="140" width="184" height="9" rx="4" fill="#6A5A4F" opacity="0.5"/>
+    <rect x="128" y="160" width="184" height="36" rx="8" fill="#FFFFFF" stroke="#E0D8CF" stroke-width="1"/>
+    <rect x="128" y="210" width="184" height="36" rx="8" fill="#FFFFFF" stroke="#E0D8CF" stroke-width="1"/>
+    <rect x="128" y="260" width="184" height="36" rx="8" fill="#FFFFFF" stroke="#E0D8CF" stroke-width="1"/>
+    <rect x="128" y="330" width="184" height="40" rx="10" fill="#6D3A18"/>
+    <!-- Phone B -->
+    <rect x="400" y="60" width="240" height="460" rx="28" fill="#1A1814"/>
+    <rect x="408" y="68" width="224" height="444" rx="22" fill="#F2EDE4"/>
+    <rect x="418" y="88" width="20" height="20" rx="4" fill="#ECE6DD"/>
+    <rect x="446" y="92" width="100" height="10" rx="4" fill="#1A1310" opacity="0.6"/>
+    <!-- Progress dots -->
+    <circle cx="510" cy="130" r="10" fill="#6D3A18"/>
+    <rect x="520" y="127" width="40" height="6" rx="3" fill="#ECE6DD"/>
+    <circle cx="568" cy="130" r="10" fill="#ECE6DD" stroke="#CACACA" stroke-width="1"/>
+    <rect x="578" y="127" width="40" height="6" rx="3" fill="#ECE6DD"/>
+    <circle cx="626" cy="130" r="10" fill="#ECE6DD" stroke="#CACACA" stroke-width="1"/>
+    <rect x="418" y="155" width="184" height="9" rx="4" fill="#6A5A4F" opacity="0.5"/>
+    <rect x="418" y="175" width="184" height="36" rx="8" fill="#FFFFFF" stroke="#E0D8CF" stroke-width="1"/>
+    <rect x="418" y="225" width="184" height="36" rx="8" fill="#FFFFFF" stroke="#E0D8CF" stroke-width="1"/>
+    <rect x="418" y="295" width="184" height="40" rx="10" fill="#6D3A18"/>
+    <!-- Recommendation card -->
+    <rect x="680" y="160" width="260" height="180" rx="12" fill="rgba(255,255,255,0.07)" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+    <circle cx="710" cy="195" r="16" fill="#F5E6D6"/>
+    <rect x="736" y="186" width="130" height="9" rx="4" fill="rgba(255,255,255,0.8)"/>
+    <rect x="736" y="202" width="100" height="7" rx="3" fill="rgba(255,255,255,0.4)"/>
+    <rect x="696" y="230" width="224" height="7" rx="3" fill="rgba(255,255,255,0.3)"/>
+    <rect x="696" y="247" width="190" height="7" rx="3" fill="rgba(255,255,255,0.3)"/>
+    <rect x="696" y="264" width="210" height="7" rx="3" fill="rgba(255,255,255,0.3)"/>
+    <text x="600" y="560" text-anchor="middle" font-family="system-ui" font-size="26" font-weight="700" fill="rgba(255,255,255,0.5)">Formulario de Registro</text>
+  </svg>
+</template>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/nocturne-e8c6b891-378e-4d6f-9cc8-5194f3483bad/styles.css">
+  <script src="_ds/nocturne-e8c6b891-378e-4d6f-9cc8-5194f3483bad/_ds_bundle.js"></script>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; }
+    .noscroll { overflow-y: auto; scrollbar-width: none; -ms-overflow-style: none; }
+    .noscroll::-webkit-scrollbar { display: none; }
+    @keyframes spin { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+    @keyframes fadeUp { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:translateY(0)} }
+    .spin { animation: spin 0.75s linear infinite; display:inline-flex; }
+    .fade-up { animation: fadeUp 0.25s ease; }
+    input, select, textarea, button { font-family: inherit; }
+    a { text-decoration: none; color: inherit; }
+  </style>
+</helmet>
+
+<div style="{{ rootStyle }}">
+
+  <!-- ── Canvas header ── -->
+  <div style="background:rgba(0,0,0,0.2); backdrop-filter:blur(8px); padding:13px 40px; display:flex; align-items:center; justify-content:space-between; gap:16px; position:sticky; top:0; z-index:200;">
+    <div>
+      <div style="font-size:15px; font-weight:700; color:#FFFFFF;">Formulario de Registro · Alta Fidelidad</div>
+      <div style="font-size:12px; color:rgba(255,255,255,0.6); margin-top:1px;">Validación en vivo · Versión A (página única) y B (3 pasos) · Paleta B aprobada</div>
+    </div>
+    <button onClick="{{ resetForms }}" style="padding:6px 14px; border-radius:6px; font-size:12px; font-weight:500; background:rgba(255,255,255,0.1); color:rgba(255,255,255,0.8); border:1px solid rgba(255,255,255,0.2); cursor:pointer; flex-shrink:0;">↺ Reiniciar</button>
+  </div>
+
+  <!-- ══ DOS TELÉFONOS ══ -->
+  <div style="display:flex; justify-content:center; gap:40px; padding:40px 40px 40px; flex-wrap:wrap; align-items:flex-start;">
+
+    <!-- ─── VERSIÓN A: PÁGINA ÚNICA ─── -->
+    <div style="display:flex; flex-direction:column; align-items:center; gap:14px;">
+      <div style="font-size:11px; font-weight:700; color:rgba(255,255,255,0.7); letter-spacing:0.1em; text-transform:uppercase;">A · Página única</div>
+      <div style="{{ phoneStyle }}">
+        <div style="{{ notchStyle }}"></div>
+        <div style="{{ sbStyle }}"><span style="font-size:15px; font-weight:600; color:var(--color-text);">9:41</span><span style="font-size:11px; color:var(--color-text-secondary);">▲▲▲ WiFi ▌▌</span></div>
+        <div style="{{ hdrStyle }}">
+          <div style="{{ backBtnStyle }}">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+          </div>
+          <div style="font-size:16px; font-weight:700; color:var(--color-text);">Registrar mi negocio</div>
+        </div>
+
+        <!-- SUCCESS A -->
+        <sc-if value="{{ aSuccess }}" hint-placeholder-val="{{ false }}">
+          <div class="fade-up" style="flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:32px 24px; gap:16px; text-align:center; background:var(--color-bg);">
+            <div style="width:76px; height:76px; border-radius:50%; background:var(--color-primary-dim); border:2px solid var(--color-primary); display:flex; align-items:center; justify-content:center;">
+              <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            </div>
+            <div style="font-size:22px; font-weight:700; color:var(--color-text); line-height:1.2;">¡Recibimos tu negocio!</div>
+            <div style="font-size:15px; color:var(--color-text-secondary); line-height:1.65;">Tu negocio ya está en revisión y aparecerá en el directorio muy pronto. El equipo lo revisa en 24 a 48 horas.</div>
+            <div style="width:100%; display:flex; flex-direction:column; gap:10px; margin-top:8px;">
+              <button onClick="{{ resetForms }}" style="width:100%; height:52px; background:var(--color-primary); color:var(--color-text-on-primary); border:none; border-radius:12px; font-size:16px; font-weight:700; cursor:pointer;">Ver el directorio</button>
+              <a href="{{ waShareUrl }}" target="_blank" style="{{ waShareBtnStyle }}">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"></path></svg>
+                Compartir por WhatsApp
+              </a>
+              <div style="font-size:11px; color:var(--color-text-secondary); line-height:1.5; text-align:left; background:var(--color-surface); border-radius:8px; padding:10px 12px; border:1px solid var(--color-border);">
+                <strong>Mensaje listo:</strong> "Registré mi negocio en el Directorio Solidario de Manizales. Si tienes uno afectado por el sismo, regístralo gratis…"
+              </div>
+            </div>
+          </div>
+        </sc-if>
+
+        <!-- FORM A -->
+        <sc-if value="{{ aShowForm }}" hint-placeholder-val="{{ true }}">
+          <div class="noscroll" style="flex:1; overflow-y:auto; background:var(--color-bg);">
+            <div style="padding:14px 16px 24px; display:flex; flex-direction:column; gap:14px;">
+              <!-- Intro -->
+              <div style="background:var(--color-surface); border-radius:10px; padding:12px 14px; border:1px solid var(--color-border);">
+                <div style="font-size:13px; color:var(--color-text); line-height:1.6; margin-bottom:4px;">Tu negocio aparecerá gratis en el directorio. Los clientes te contactarán directo por WhatsApp.</div>
+                <div style="font-size:12px; color:var(--color-text-secondary); line-height:1.5;">No pedimos datos bancarios, contraseñas ni documentos.</div>
+              </div>
+              <!-- Nombre -->
+              <div>
+                <label style="{{ lblStyle }}">Nombre del negocio *</label>
+                <input type="text" placeholder="Ej: Panadería La Esperanza" value="{{ aNombre }}" onChange="{{ setANombre }}" onBlur="{{ blurANombre }}" style="{{ aNombreStyle }}" />
+                <sc-if value="{{ aNombreErr }}" hint-placeholder-val="{{ false }}">
+                  <div style="{{ errStyle }}"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>{{ aNombreErr }}</div>
+                </sc-if>
+              </div>
+              <!-- Zona -->
+              <div>
+                <label style="{{ lblStyle }}">Barrio o zona *</label>
+                <div style="position:relative;">
+                  <select value="{{ aZona }}" onChange="{{ setAZona }}" onBlur="{{ blurAZona }}" style="{{ aZonaStyle }}">
+                    <option value="">Selecciona tu barrio...</option>
+                    <option value="chipre">Chipre</option>
+                    <option value="la-enea">La Enea</option>
+                    <option value="palermo">Palermo</option>
+                    <option value="san-jose">San José</option>
+                    <option value="villamaria">Villamaría</option>
+                    <option value="otro">Otro barrio</option>
+                  </select>
+                  <svg style="position:absolute; right:13px; top:50%; transform:translateY(-50%); pointer-events:none;" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-text-secondary)" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
+                <sc-if value="{{ aZonaErr }}" hint-placeholder-val="{{ false }}">
+                  <div style="{{ errStyle }}"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>{{ aZonaErr }}</div>
+                </sc-if>
+              </div>
+              <!-- Sector -->
+              <div>
+                <label style="{{ lblStyle }}">Tipo de negocio *</label>
+                <div style="position:relative;">
+                  <select value="{{ aSector }}" onChange="{{ setASector }}" onBlur="{{ blurASector }}" style="{{ aSectorStyle }}">
+                    <option value="">Selecciona el tipo...</option>
+                    <option value="alimentos">Alimentos y bebidas</option>
+                    <option value="ferreteria">Ferretería y construcción</option>
+                    <option value="confeccion">Confección y costura</option>
+                    <option value="mecanica">Mecánica y autos</option>
+                    <option value="papeleria">Papelería y copias</option>
+                    <option value="carpinteria">Carpintería y muebles</option>
+                    <option value="electricidad">Electricidad</option>
+                    <option value="salud">Salud y bienestar</option>
+                    <option value="otro">Otro tipo</option>
+                  </select>
+                  <svg style="position:absolute; right:13px; top:50%; transform:translateY(-50%); pointer-events:none;" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-text-secondary)" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
+                <sc-if value="{{ aSectorErr }}" hint-placeholder-val="{{ false }}">
+                  <div style="{{ errStyle }}"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>{{ aSectorErr }}</div>
+                </sc-if>
+              </div>
+              <!-- Afectacion -->
+              <div>
+                <label style="{{ lblStyle }}">¿Cómo te afectó el sismo? *</label>
+                <div style="position:relative;">
+                  <select value="{{ aAfectacion }}" onChange="{{ setAAfectacion }}" onBlur="{{ blurAAfectacion }}" style="{{ aAfectacionStyle }}">
+                    <option value="">Selecciona una opción...</option>
+                    <option value="leve">Leve — seguimos operando con normalidad</option>
+                    <option value="moderado">Moderado — operamos con algunos daños</option>
+                    <option value="grave">Grave — daños serios, necesitamos apoyo</option>
+                    <option value="cerrado">Cerrado temporalmente</option>
+                  </select>
+                  <svg style="position:absolute; right:13px; top:50%; transform:translateY(-50%); pointer-events:none;" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-text-secondary)" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
+                <sc-if value="{{ aAfectacionErr }}" hint-placeholder-val="{{ false }}">
+                  <div style="{{ errStyle }}"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>{{ aAfectacionErr }}</div>
+                </sc-if>
+              </div>
+              <!-- Telefono -->
+              <div>
+                <label style="{{ lblStyle }}">Número de WhatsApp *</label>
+                <div style="{{ aTelefonoWrapperStyle }}">
+                  <div style="{{ prefixStyle }}">+57</div>
+                  <input type="tel" inputMode="numeric" placeholder="300 123 4567" value="{{ aTelefono }}" onChange="{{ setATelefono }}" onBlur="{{ blurATelefono }}" style="{{ telInputStyle }}" />
+                </div>
+                <sc-if value="{{ aTelefonoErr }}" hint-placeholder-val="{{ false }}">
+                  <div style="{{ errStyle }}"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>{{ aTelefonoErr }}</div>
+                </sc-if>
+              </div>
+              <!-- Descripcion -->
+              <div>
+                <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom:5px;">
+                  <label style="{{ lblStyle }}; margin-bottom:0;">Descripción breve <span style="font-weight:400; color:var(--color-text-secondary);">(opcional)</span></label>
+                  <span style="{{ aDescCounterStyle }}">{{ aDescCounter }}</span>
+                </div>
+                <textarea placeholder="Ej: Pan artesanal, arepas y pandebonos. Abiertos todos los días." value="{{ aDesc }}" onChange="{{ setADesc }}" maxLength="300" rows="3" style="{{ aDescStyle }}"></textarea>
+                <sc-if value="{{ aDescErr }}" hint-placeholder-val="{{ false }}">
+                  <div style="{{ errStyle }}"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>{{ aDescErr }}</div>
+                </sc-if>
+              </div>
+              <!-- Submit -->
+              <button onClick="{{ submitA }}" style="{{ aSubmitStyle }}" disabled="{{ aSubmitting }}">
+                <sc-if value="{{ aSubmitting }}" hint-placeholder-val="{{ false }}">
+                  <svg class="spin" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10" stroke-opacity="0.25"></circle><path d="M12 2a10 10 0 0 1 10 10"></path></svg>
+                  Publicando...
+                </sc-if>
+                <sc-if value="{{ aNotSubmitting }}" hint-placeholder-val="{{ true }}">
+                  Publicar mi negocio
+                </sc-if>
+              </button>
+            </div>
+          </div>
+        </sc-if>
+
+        <div style="{{ homeStyle }}"><div style="{{ homeBarStyle }}"></div></div>
+      </div>
+    </div>
+
+    <!-- ─── VERSIÓN B: 3 PASOS ─── -->
+    <div style="display:flex; flex-direction:column; align-items:center; gap:14px;">
+      <div style="font-size:11px; font-weight:700; color:rgba(255,255,255,0.7); letter-spacing:0.1em; text-transform:uppercase;">B · 3 pasos ★ recomendado</div>
+      <div style="{{ phoneStyle }}">
+        <div style="{{ notchStyle }}"></div>
+        <div style="{{ sbStyle }}"><span style="font-size:15px; font-weight:600; color:var(--color-text);">9:41</span><span style="font-size:11px; color:var(--color-text-secondary);">▲▲▲ WiFi ▌▌</span></div>
+        <!-- Header con título dinámico por paso -->
+        <div style="{{ hdrStyle }}">
+          <div style="{{ backBtnStyle }}">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+          </div>
+          <div style="flex:1;">
+            <div style="font-size:15px; font-weight:700; color:var(--color-text);">{{ bStepTitle }}</div>
+          </div>
+          <div style="font-size:12px; color:var(--color-text-secondary); font-weight:500; flex-shrink:0;">{{ bStepLabel }}</div>
+        </div>
+
+        <!-- SUCCESS B -->
+        <sc-if value="{{ bSuccess }}" hint-placeholder-val="{{ false }}">
+          <div class="fade-up" style="flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:32px 24px; gap:16px; text-align:center; background:var(--color-bg);">
+            <div style="width:76px; height:76px; border-radius:50%; background:var(--color-primary-dim); border:2px solid var(--color-primary); display:flex; align-items:center; justify-content:center;">
+              <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            </div>
+            <div style="font-size:22px; font-weight:700; color:var(--color-text); line-height:1.2;">¡Recibimos tu negocio!</div>
+            <div style="font-size:15px; color:var(--color-text-secondary); line-height:1.65;">Tu negocio ya está en revisión y aparecerá en el directorio muy pronto. El equipo lo revisa en 24 a 48 horas.</div>
+            <div style="width:100%; display:flex; flex-direction:column; gap:10px; margin-top:8px;">
+              <button onClick="{{ resetForms }}" style="width:100%; height:52px; background:var(--color-primary); color:var(--color-text-on-primary); border:none; border-radius:12px; font-size:16px; font-weight:700; cursor:pointer;">Ver el directorio</button>
+              <a href="{{ waShareUrl }}" target="_blank" style="{{ waShareBtnStyle }}">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"></path></svg>
+                Compartir por WhatsApp
+              </a>
+              <div style="font-size:11px; color:var(--color-text-secondary); line-height:1.5; text-align:left; background:var(--color-surface); border-radius:8px; padding:10px 12px; border:1px solid var(--color-border);">
+                <strong>Mensaje listo:</strong> "Registré mi negocio en el Directorio Solidario de Manizales. Si tienes uno afectado por el sismo, regístralo gratis…"
+              </div>
+            </div>
+          </div>
+        </sc-if>
+
+        <!-- PROGRESS DOTS -->
+        <sc-if value="{{ bShowProgress }}" hint-placeholder-val="{{ true }}">
+          <div style="padding:10px 0 8px; display:flex; align-items:center; justify-content:center; gap:0; background:var(--color-bg); border-bottom:1px solid var(--color-divider); flex-shrink:0;">
+            <div style="{{ bDot1Style }}">
+              <sc-if value="{{ bStep1Done }}" hint-placeholder-val="{{ false }}">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              </sc-if>
+              <sc-if value="{{ bStep1Active }}" hint-placeholder-val="{{ true }}">1</sc-if>
+            </div>
+            <div style="{{ bLine1Style }}"></div>
+            <div style="{{ bDot2Style }}">
+              <sc-if value="{{ bStep2Done }}" hint-placeholder-val="{{ false }}">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              </sc-if>
+              <sc-if value="{{ bStep2Active }}" hint-placeholder-val="{{ false }}">2</sc-if>
+              <sc-if value="{{ bStep2Upcoming }}" hint-placeholder-val="{{ false }}">2</sc-if>
+            </div>
+            <div style="{{ bLine2Style }}"></div>
+            <div style="{{ bDot3Style }}">
+              <sc-if value="{{ bStep3Done }}" hint-placeholder-val="{{ false }}">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              </sc-if>
+              <sc-if value="{{ bStep3Upcoming }}" hint-placeholder-val="{{ false }}">3</sc-if>
+              <sc-if value="{{ bStep3Active }}" hint-placeholder-val="{{ false }}">3</sc-if>
+            </div>
+          </div>
+        </sc-if>
+
+        <!-- STEP 1 -->
+        <sc-if value="{{ bShowStep1 }}" hint-placeholder-val="{{ true }}">
+          <div class="noscroll fade-up" style="flex:1; overflow-y:auto; background:var(--color-bg);">
+            <div style="padding:16px 16px 24px; display:flex; flex-direction:column; gap:14px;">
+              <div style="background:var(--color-surface); border-radius:10px; padding:11px 13px; border:1px solid var(--color-border);">
+                <div style="font-size:12px; color:var(--color-text); line-height:1.6;">Tu negocio aparecerá gratis. Solo tomamos nombre, zona y WhatsApp — sin datos bancarios.</div>
+              </div>
+              <div>
+                <label style="{{ lblStyle }}">Nombre del negocio *</label>
+                <input type="text" placeholder="Ej: Panadería La Esperanza" value="{{ bNombre }}" onChange="{{ setBNombre }}" onBlur="{{ blurBNombre }}" style="{{ bNombreStyle }}" />
+                <sc-if value="{{ bNombreErr }}" hint-placeholder-val="{{ false }}">
+                  <div style="{{ errStyle }}"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>{{ bNombreErr }}</div>
+                </sc-if>
+              </div>
+              <div>
+                <label style="{{ lblStyle }}">Barrio o zona *</label>
+                <div style="position:relative;">
+                  <select value="{{ bZona }}" onChange="{{ setBZona }}" onBlur="{{ blurBZona }}" style="{{ bZonaStyle }}">
+                    <option value="">Selecciona tu barrio...</option>
+                    <option value="chipre">Chipre</option>
+                    <option value="la-enea">La Enea</option>
+                    <option value="palermo">Palermo</option>
+                    <option value="san-jose">San José</option>
+                    <option value="villamaria">Villamaría</option>
+                    <option value="otro">Otro barrio</option>
+                  </select>
+                  <svg style="position:absolute; right:13px; top:50%; transform:translateY(-50%); pointer-events:none;" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-text-secondary)" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
+                <sc-if value="{{ bZonaErr }}" hint-placeholder-val="{{ false }}">
+                  <div style="{{ errStyle }}"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>{{ bZonaErr }}</div>
+                </sc-if>
+              </div>
+              <div>
+                <label style="{{ lblStyle }}">Tipo de negocio *</label>
+                <div style="position:relative;">
+                  <select value="{{ bSector }}" onChange="{{ setBSector }}" onBlur="{{ blurBSector }}" style="{{ bSectorStyle }}">
+                    <option value="">Selecciona el tipo...</option>
+                    <option value="alimentos">Alimentos y bebidas</option>
+                    <option value="ferreteria">Ferretería y construcción</option>
+                    <option value="confeccion">Confección y costura</option>
+                    <option value="mecanica">Mecánica y autos</option>
+                    <option value="papeleria">Papelería y copias</option>
+                    <option value="carpinteria">Carpintería y muebles</option>
+                    <option value="electricidad">Electricidad</option>
+                    <option value="salud">Salud y bienestar</option>
+                    <option value="otro">Otro tipo</option>
+                  </select>
+                  <svg style="position:absolute; right:13px; top:50%; transform:translateY(-50%); pointer-events:none;" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-text-secondary)" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
+                <sc-if value="{{ bSectorErr }}" hint-placeholder-val="{{ false }}">
+                  <div style="{{ errStyle }}"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>{{ bSectorErr }}</div>
+                </sc-if>
+              </div>
+              <button onClick="{{ bNext }}" style="{{ bPrimaryBtnStyle }}">Continuar →</button>
+            </div>
+          </div>
+        </sc-if>
+
+        <!-- STEP 2 -->
+        <sc-if value="{{ bShowStep2 }}" hint-placeholder-val="{{ false }}">
+          <div class="noscroll fade-up" style="flex:1; overflow-y:auto; background:var(--color-bg);">
+            <div style="padding:16px 16px 24px; display:flex; flex-direction:column; gap:14px;">
+              <div>
+                <label style="{{ lblStyle }}">¿Cómo te afectó el sismo? *</label>
+                <div style="position:relative;">
+                  <select value="{{ bAfectacion }}" onChange="{{ setBAfectacion }}" onBlur="{{ blurBAfectacion }}" style="{{ bAfectacionStyle }}">
+                    <option value="">Selecciona una opción...</option>
+                    <option value="leve">Leve — seguimos operando con normalidad</option>
+                    <option value="moderado">Moderado — operamos con algunos daños</option>
+                    <option value="grave">Grave — daños serios, necesitamos apoyo</option>
+                    <option value="cerrado">Cerrado temporalmente</option>
+                  </select>
+                  <svg style="position:absolute; right:13px; top:50%; transform:translateY(-50%); pointer-events:none;" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-text-secondary)" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
+                <sc-if value="{{ bAfectacionErr }}" hint-placeholder-val="{{ false }}">
+                  <div style="{{ errStyle }}"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>{{ bAfectacionErr }}</div>
+                </sc-if>
+              </div>
+              <div>
+                <label style="{{ lblStyle }}">Número de WhatsApp *</label>
+                <div style="{{ bTelefonoWrapperStyle }}">
+                  <div style="{{ prefixStyle }}">+57</div>
+                  <input type="tel" inputMode="numeric" placeholder="300 123 4567" value="{{ bTelefono }}" onChange="{{ setBTelefono }}" onBlur="{{ blurBTelefono }}" style="{{ telInputStyle }}" />
+                </div>
+                <sc-if value="{{ bTelefonoErr }}" hint-placeholder-val="{{ false }}">
+                  <div style="{{ errStyle }}"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>{{ bTelefonoErr }}</div>
+                </sc-if>
+              </div>
+              <div style="display:flex; gap:10px; margin-top:4px;">
+                <button onClick="{{ bPrev }}" style="{{ bBackBtnStyle }}">← Atrás</button>
+                <button onClick="{{ bNext }}" style="{{ bPrimaryBtnStyle }}; flex:2;">Continuar →</button>
+              </div>
+            </div>
+          </div>
+        </sc-if>
+
+        <!-- STEP 3 -->
+        <sc-if value="{{ bShowStep3 }}" hint-placeholder-val="{{ false }}">
+          <div class="noscroll fade-up" style="flex:1; overflow-y:auto; background:var(--color-bg);">
+            <div style="padding:16px 16px 24px; display:flex; flex-direction:column; gap:14px;">
+              <div>
+                <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom:5px;">
+                  <label style="{{ lblStyle }}; margin-bottom:0;">Descripción breve <span style="font-weight:400; color:var(--color-text-secondary);">(opcional)</span></label>
+                  <span style="{{ bDescCounterStyle }}">{{ bDescCounter }}</span>
+                </div>
+                <textarea placeholder="Ej: Pan artesanal, arepas y pandebonos. Abiertos todos los días." value="{{ bDesc }}" onChange="{{ setBDesc }}" maxLength="300" rows="3" style="{{ bDescStyle }}"></textarea>
+              </div>
+              <!-- Review summary -->
+              <div>
+                <div style="font-size:11px; font-weight:700; color:var(--color-text-secondary); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px;">Así quedará tu negocio:</div>
+                <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:10px; padding:14px; display:flex; flex-direction:column; gap:8px;">
+                  <div style="font-size:15px; font-weight:700; color:var(--color-text);">{{ bNombre }}</div>
+                  <div style="display:flex; gap:6px; flex-wrap:wrap;">
+                    <span style="{{ reviewTagStyle }}">{{ bZonaLabel }}</span>
+                    <span style="{{ reviewTagStyle }}">{{ bSectorLabel }}</span>
+                    <sc-if value="{{ bAfectacion }}" hint-placeholder-val="{{ false }}">
+                      <span style="{{ afectacionTagStyle }}">{{ bAfectacionLabel }}</span>
+                    </sc-if>
+                  </div>
+                  <div style="font-size:13px; color:var(--color-text-secondary); display:flex; align-items:center; gap:5px;">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.62 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.09 6.09l1.07-1.07a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                    +57 {{ bTelefono }}
+                  </div>
+                </div>
+              </div>
+              <div style="display:flex; gap:10px; margin-top:4px;">
+                <button onClick="{{ bPrev }}" style="{{ bBackBtnStyle }}">← Atrás</button>
+                <button onClick="{{ submitB }}" style="{{ bSubmitStyle }}; flex:2;" disabled="{{ bSubmitting }}">
+                  <sc-if value="{{ bSubmitting }}" hint-placeholder-val="{{ false }}">
+                    <svg class="spin" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10" stroke-opacity="0.25"></circle><path d="M12 2a10 10 0 0 1 10 10"></path></svg>
+                    Publicando...
+                  </sc-if>
+                  <sc-if value="{{ bNotSubmitting }}" hint-placeholder-val="{{ true }}">
+                    Publicar mi negocio ✓
+                  </sc-if>
+                </button>
+              </div>
+            </div>
+          </div>
+        </sc-if>
+
+        <div style="{{ homeStyle }}"><div style="{{ homeBarStyle }}"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ RECOMENDACIÓN ══ -->
+  <div style="max-width:860px; margin:0 auto 64px; padding:0 40px;">
+    <div style="background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.15); border-radius:16px; padding:24px 28px; display:flex; gap:20px; align-items:flex-start;">
+      <div style="width:44px; height:44px; border-radius:50%; background:#F5E6D6; display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:2px;">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#6D3A18" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+      </div>
+      <div>
+        <div style="font-size:16px; font-weight:700; color:#FFFFFF; margin-bottom:8px;">Recomendada: Versión B (3 pasos) para usuarios poco digitales</div>
+        <div style="font-size:14px; color:rgba(255,255,255,0.75); line-height:1.7; display:flex; flex-direction:column; gap:6px;">
+          <div><strong style="color:#FFFFFF;">1. Una tarea a la vez.</strong> Con señal inestable o interrupciones frecuentes (post-sismo), el formulario puede cerrarse accidentalmente. Los pasos cortos pierden menos trabajo.</div>
+          <div><strong style="color:#FFFFFF;">2. Progreso visible reduce el abandono.</strong> "Paso 2 de 3" motiva a terminar; ver 6 campos juntos puede intimidar a quienes no están familiarizados con formularios digitales.</div>
+          <div><strong style="color:#FFFFFF;">3. Errores agrupados por contexto.</strong> El error de WhatsApp aparece en el mismo paso que el campo, no mezclado con el error del nombre del negocio.</div>
+        </div>
+        <div style="margin-top:10px; font-size:13px; color:rgba(255,255,255,0.5);">La versión A (página única) es más eficiente para usuarios con experiencia digital y conexión estable.</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;: {&quot;width&quot;: 1000, &quot;height&quot;: 960}}">
+class Component extends DCLogic {
+  _emptyData = () => ({ nombre:'', zona:'', sector:'', afectacion:'', telefono:'', descripcion:'' });
+
+  state = {
+    aData: { nombre:'', zona:'', sector:'', afectacion:'', telefono:'', descripcion:'' },
+    aErrors: {}, aSubmitting: false, aSuccess: false,
+    bData: { nombre:'', zona:'', sector:'', afectacion:'', telefono:'', descripcion:'' },
+    bErrors: {}, bSubmitting: false, bSuccess: false, bStep: 1,
+  };
+
+  componentDidUpdate(_, prev) {
+    if (this.state.aSubmitting && !prev.aSubmitting) {
+      setTimeout(() => this.setState({ aSubmitting:false, aSuccess:true }), 1600);
+    }
+    if (this.state.bSubmitting && !prev.bSubmitting) {
+      setTimeout(() => this.setState({ bSubmitting:false, bSuccess:true }), 1600);
+    }
+  }
+
+  _validate(field, value) {
+    const v = (value || '').trim();
+    if (field === 'nombre') {
+      if (!v) return 'Escribe el nombre de tu negocio.';
+      if (v.length < 3) return 'El nombre debe tener al menos 3 letras.';
+      return null;
+    }
+    if (field === 'zona') return v ? null : 'Selecciona el barrio o zona de tu negocio.';
+    if (field === 'sector') return v ? null : 'Selecciona el tipo de negocio.';
+    if (field === 'afectacion') return v ? null : 'Cuéntanos cómo te afectó el sismo para priorizarte.';
+    if (field === 'telefono') {
+      const d = (value || '').replace(/\D/g, '');
+      if (!d) return 'Escribe tu número de WhatsApp.';
+      if (d.length < 10) return `Faltan ${10 - d.length} dígito${10 - d.length !== 1 ? 's' : ''}. Ejemplo: 300 123 4567.`;
+      if (d.length > 10) return 'El número tiene demasiados dígitos. Deben ser exactamente 10.';
+      if (!d.startsWith('3')) return 'Los celulares colombianos empiezan por 3. Ejemplo: 310 123 4567.';
+      return null;
+    }
+    if (field === 'descripcion') {
+      return (value || '').length > 300 ? 'Máximo 300 caracteres.' : null;
+    }
+    return null;
+  }
+
+  _validateFields(data, fields) {
+    const errs = {};
+    fields.forEach(f => { const e = this._validate(f, data[f]); if (e) errs[f] = e; });
+    return errs;
+  }
+
+  _setF(v, field) {
+    return (e) => {
+      const val = e.target.value;
+      const dk = `${v}Data`, ek = `${v}Errors`;
+      this.setState(prev => ({
+        [dk]: { ...prev[dk], [field]: val },
+        [ek]: { ...prev[ek], [field]: prev[ek][field] ? this._validate(field, val) : null }
+      }));
+    };
+  }
+
+  _blurF(v, field) {
+    return () => {
+      const val = this.state[`${v}Data`][field];
+      const err = this._validate(field, val);
+      if (err) this.setState(prev => ({ [`${v}Errors`]: { ...prev[`${v}Errors`], [field]: err } }));
+    };
+  }
+
+  _inputStyle(hasError) {
+    return { width:'100%', background:'var(--color-surface)', border:`1.5px solid ${hasError ? 'var(--color-error)' : 'var(--color-border)'}`, borderRadius:'10px', padding:'12px 14px', fontSize:'16px', color:'var(--color-text)', outline:'none', appearance:'none' };
+  }
+
+  _selectStyle(hasError) {
+    return { ...this._inputStyle(hasError), paddingRight:'36px', cursor:'pointer' };
+  }
+
+  _telWrapper(hasError) {
+    return { display:'flex', background:'var(--color-surface)', border:`1.5px solid ${hasError ? 'var(--color-error)' : 'var(--color-border)'}`, borderRadius:'10px', overflow:'hidden', height:'48px' };
+  }
+
+  renderVals() {
+    const s = this.state;
+    const ae = s.aErrors, be = s.bErrors;
+
+    const ZONA_LABELS = { chipre:'Chipre', 'la-enea':'La Enea', palermo:'Palermo', 'san-jose':'San José', villamaria:'Villamaría', otro:'Otro barrio', '':'—' };
+    const SECTOR_LABELS = { alimentos:'Alimentos', ferreteria:'Ferretería', confeccion:'Confección', mecanica:'Mecánica', papeleria:'Papelería', carpinteria:'Carpintería', electricidad:'Electricidad', salud:'Salud', otro:'Otro', '':'—' };
+    const AFECT_LABELS = { leve:'Leve', moderado:'Moderado', grave:'Grave', cerrado:'Cerrado temporalmente', '':'' };
+
+    const bStep = s.bStep;
+    const bShowProgress = !s.bSuccess;
+
+    const makeDot = (n) => {
+      const done = bStep > n, active = bStep === n;
+      return { width:'28px', height:'28px', borderRadius:'50%', display:'flex', alignItems:'center', justifyContent:'center', fontSize:'12px', fontWeight:'700', flexShrink:'0', background: (done || active) ? 'var(--color-primary)' : 'transparent', color: (done || active) ? '#FFFFFF' : 'var(--color-text-secondary)', border: (done || active) ? 'none' : '2px solid var(--color-border)' };
+    };
+    const makeLine = (afterStep) => ({ height:'2px', width:'52px', flexShrink:'0', background: bStep > afterStep ? 'var(--color-primary)' : 'var(--color-border)' });
+
+    const STEP_TITLES = { 1:'Tu negocio', 2:'Tu situación', 3:'Para terminar' };
+    const STEP_LABELS = { 1:'Paso 1 de 3', 2:'Paso 2 de 3', 3:'Paso 3 de 3' };
+
+    const aDescLen = s.aData.descripcion.length;
+    const bDescLen = s.bData.descripcion.length;
+
+    const descCounterStyle = (len) => ({ fontSize:'12px', color: len >= 280 ? 'var(--color-warning)' : 'var(--color-text-secondary)', fontWeight: len >= 280 ? '600' : '400' });
+
+    const textareaStyle = (hasError) => ({ width:'100%', background:'var(--color-surface)', border:`1.5px solid ${hasError ? 'var(--color-error)' : 'var(--color-border)'}`, borderRadius:'10px', padding:'12px 14px', fontSize:'15px', color:'var(--color-text)', outline:'none', resize:'none', lineHeight:'1.55' });
+
+    const rootStyle = {
+      '--color-bg':'#F2EDE4','--color-surface':'#FFFFFF','--color-surface-raised':'#ECE6DD',
+      '--color-primary':'#6D3A18','--color-primary-pressed':'#572E12','--color-primary-dim':'#F5E6D6',
+      '--color-secondary':'#245839','--color-text':'#1A1310','--color-text-secondary':'#6A5A4F',
+      '--color-text-on-primary':'#FFFFFF','--color-success':'#1C5935',
+      '--color-error':'#8A1E1E','--color-warning':'#754808',
+      '--color-whatsapp':'#0B7130','--color-border':'rgba(26,19,16,0.14)','--color-divider':'rgba(26,19,16,0.07)',
+      background:'linear-gradient(160deg,#3D2C1E 0%,#2A1C10 60%,#1A1410 100%)',
+      fontFamily:"'Roboto',system-ui,-apple-system,sans-serif", minHeight:'100vh', color:'#1A1310',
+    };
+
+    const phoneStyle = { width:'390px', height:'780px', background:'var(--color-bg)', borderRadius:'44px', overflow:'hidden', display:'flex', flexDirection:'column', boxShadow:'0 0 0 10px #1A1814, 0 40px 80px rgba(0,0,0,0.45)', flexShrink:'0', position:'relative' };
+    const notchStyle = { position:'absolute', top:'10px', left:'50%', transform:'translateX(-50%)', width:'90px', height:'6px', background:'#1A1814', borderRadius:'3px', zIndex:'10' };
+    const sbStyle = { height:'44px', background:'var(--color-bg)', display:'flex', alignItems:'flex-end', justifyContent:'space-between', padding:'0 24px 8px', flexShrink:'0' };
+    const hdrStyle = { height:'52px', background:'var(--color-surface)', borderBottom:'1px solid var(--color-border)', display:'flex', alignItems:'center', gap:'10px', padding:'0 14px', flexShrink:'0' };
+    const backBtnStyle = { width:'36px', height:'36px', borderRadius:'8px', background:'var(--color-bg)', border:'1px solid var(--color-border)', display:'flex', alignItems:'center', justifyContent:'center', cursor:'pointer', flexShrink:'0', color:'var(--color-text)' };
+    const homeStyle = { height:'22px', background:'var(--color-surface)', display:'flex', alignItems:'center', justifyContent:'center', flexShrink:'0' };
+    const homeBarStyle = { width:'100px', height:'4px', background:'rgba(26,19,16,0.18)', borderRadius:'2px' };
+    const lblStyle = { display:'block', fontSize:'13px', fontWeight:'600', color:'var(--color-text-secondary)', marginBottom:'5px' };
+    const errStyle = { fontSize:'12px', color:'var(--color-error)', marginTop:'5px', lineHeight:'1.45', display:'flex', alignItems:'flex-start', gap:'5px' };
+    const prefixStyle = { padding:'0 12px', borderRight:'1px solid var(--color-border)', display:'flex', alignItems:'center', fontSize:'15px', color:'var(--color-text-secondary)', background:'var(--color-bg)', flexShrink:'0', fontWeight:'500' };
+    const telInputStyle = { flex:'1', border:'none', background:'transparent', padding:'0 14px', fontSize:'16px', color:'var(--color-text)', outline:'none' };
+    const bPrimaryBtnStyle = { width:'100%', height:'52px', background:'var(--color-primary)', color:'var(--color-text-on-primary)', border:'none', borderRadius:'12px', fontSize:'16px', fontWeight:'700', cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center', gap:'8px' };
+    const bBackBtnStyle = { flex:'1', height:'52px', background:'transparent', color:'var(--color-primary)', border:'1.5px solid var(--color-primary)', borderRadius:'12px', fontSize:'15px', fontWeight:'600', cursor:'pointer' };
+    const waShareBtnStyle = { display:'flex', alignItems:'center', justifyContent:'center', gap:'8px', width:'100%', height:'52px', background:'var(--color-whatsapp)', color:'#FFFFFF', border:'none', borderRadius:'12px', fontSize:'15px', fontWeight:'700', cursor:'pointer', textDecoration:'none' };
+    const reviewTagStyle = { display:'inline-flex', padding:'4px 10px', borderRadius:'6px', fontSize:'12px', fontWeight:'500', background:'var(--color-surface-raised)', color:'var(--color-text-secondary)' };
+    const afectacionTagStyle = { display:'inline-flex', padding:'4px 10px', borderRadius:'6px', fontSize:'12px', fontWeight:'600', background:'#FEF0E0', color:'#754808' };
+
+    const shareMsg = `Hola! Registré mi negocio en el Directorio Solidario de Manizales, una herramienta gratuita para emprendedores afectados por el sismo. Si tienes un negocio o conoces uno que siga activo, regístralo gratis. ¡La comunidad se apoya!`;
+
+    return {
+      rootStyle, phoneStyle, notchStyle, sbStyle, hdrStyle, backBtnStyle, homeStyle, homeBarStyle,
+      lblStyle, errStyle, prefixStyle, telInputStyle, bPrimaryBtnStyle, bBackBtnStyle,
+      waShareBtnStyle, reviewTagStyle, afectacionTagStyle,
+
+      resetForms: () => this.setState({ aData:this._emptyData(), aErrors:{}, aSubmitting:false, aSuccess:false, bData:this._emptyData(), bErrors:{}, bSubmitting:false, bSuccess:false, bStep:1 }),
+      waShareUrl: `https://wa.me/?text=${encodeURIComponent(shareMsg)}`,
+
+      // Version A
+      aSuccess: s.aSuccess, aShowForm: !s.aSuccess,
+      aSubmitting: s.aSubmitting, aNotSubmitting: !s.aSubmitting,
+      aSubmitStyle: { ...bPrimaryBtnStyle, width:'100%', opacity: s.aSubmitting ? '0.7' : '1', cursor: s.aSubmitting ? 'not-allowed' : 'pointer' },
+      aNombre: s.aData.nombre, aZona: s.aData.zona, aSector: s.aData.sector,
+      aAfectacion: s.aData.afectacion, aTelefono: s.aData.telefono, aDesc: s.aData.descripcion,
+      aDescCounter: `${aDescLen}/300`, aDescCounterStyle: descCounterStyle(aDescLen),
+      aNombreErr: ae.nombre||null, aZonaErr: ae.zona||null, aSectorErr: ae.sector||null,
+      aAfectacionErr: ae.afectacion||null, aTelefonoErr: ae.telefono||null, aDescErr: ae.descripcion||null,
+      aNombreStyle: this._inputStyle(!!ae.nombre),
+      aZonaStyle: this._selectStyle(!!ae.zona), aSectorStyle: this._selectStyle(!!ae.sector),
+      aAfectacionStyle: this._selectStyle(!!ae.afectacion),
+      aTelefonoWrapperStyle: this._telWrapper(!!ae.telefono),
+      aDescStyle: textareaStyle(!!ae.descripcion),
+      setANombre: this._setF('a','nombre'), blurANombre: this._blurF('a','nombre'),
+      setAZona: this._setF('a','zona'), blurAZona: this._blurF('a','zona'),
+      setASector: this._setF('a','sector'), blurASector: this._blurF('a','sector'),
+      setAAfectacion: this._setF('a','afectacion'), blurAAfectacion: this._blurF('a','afectacion'),
+      setATelefono: this._setF('a','telefono'), blurATelefono: this._blurF('a','telefono'),
+      setADesc: this._setF('a','descripcion'), blurADesc: this._blurF('a','descripcion'),
+      submitA: () => {
+        const errs = this._validateFields(s.aData, ['nombre','zona','sector','afectacion','telefono']);
+        if (Object.keys(errs).length) { this.setState({ aErrors: errs }); return; }
+        this.setState({ aSubmitting:true });
+      },
+
+      // Version B
+      bSuccess: s.bSuccess, bShowProgress,
+      bShowStep1: !s.bSuccess && bStep === 1,
+      bShowStep2: !s.bSuccess && bStep === 2,
+      bShowStep3: !s.bSuccess && bStep === 3,
+      bStep: bStep, bStepTitle: STEP_TITLES[bStep]||'', bStepLabel: STEP_LABELS[bStep]||'',
+      bSubmitting: s.bSubmitting, bNotSubmitting: !s.bSubmitting,
+      bSubmitStyle: { ...bPrimaryBtnStyle, opacity: s.bSubmitting ? '0.7' : '1', cursor: s.bSubmitting ? 'not-allowed' : 'pointer' },
+      bDot1Style: makeDot(1), bDot2Style: makeDot(2), bDot3Style: makeDot(3),
+      bLine1Style: makeLine(1), bLine2Style: makeLine(2),
+      bStep1Done: bStep > 1, bStep1Active: bStep === 1,
+      bStep2Done: bStep > 2, bStep2Active: bStep === 2, bStep2Upcoming: bStep < 2,
+      bStep3Done: false, bStep3Active: bStep === 3, bStep3Upcoming: bStep < 3,
+      bNombre: s.bData.nombre, bZona: s.bData.zona, bSector: s.bData.sector,
+      bAfectacion: s.bData.afectacion, bTelefono: s.bData.telefono, bDesc: s.bData.descripcion,
+      bDescCounter: `${bDescLen}/300`, bDescCounterStyle: descCounterStyle(bDescLen),
+      bNombreErr: be.nombre||null, bZonaErr: be.zona||null, bSectorErr: be.sector||null,
+      bAfectacionErr: be.afectacion||null, bTelefonoErr: be.telefono||null,
+      bNombreStyle: this._inputStyle(!!be.nombre),
+      bZonaStyle: this._selectStyle(!!be.zona), bSectorStyle: this._selectStyle(!!be.sector),
+      bAfectacionStyle: this._selectStyle(!!be.afectacion),
+      bTelefonoWrapperStyle: this._telWrapper(!!be.telefono),
+      bDescStyle: textareaStyle(false),
+      bZonaLabel: ZONA_LABELS[s.bData.zona]||s.bData.zona,
+      bSectorLabel: SECTOR_LABELS[s.bData.sector]||s.bData.sector,
+      bAfectacionLabel: AFECT_LABELS[s.bData.afectacion]||'',
+      setBNombre: this._setF('b','nombre'), blurBNombre: this._blurF('b','nombre'),
+      setBZona: this._setF('b','zona'), blurBZona: this._blurF('b','zona'),
+      setBSector: this._setF('b','sector'), blurBSector: this._blurF('b','sector'),
+      setBAfectacion: this._setF('b','afectacion'), blurBAfectacion: this._blurF('b','afectacion'),
+      setBTelefono: this._setF('b','telefono'), blurBTelefono: this._blurF('b','telefono'),
+      setBDesc: this._setF('b','descripcion'),
+      bNext: () => {
+        const step = s.bStep;
+        const fields = step === 1 ? ['nombre','zona','sector'] : step === 2 ? ['afectacion','telefono'] : [];
+        const errs = this._validateFields(s.bData, fields);
+        if (Object.keys(errs).length) { this.setState(p => ({ bErrors:{ ...p.bErrors, ...errs } })); return; }
+        this.setState({ bStep: step + 1 });
+      },
+      bPrev: () => this.setState(p => ({ bStep: p.bStep - 1 })),
+      submitB: () => {
+        const errs = this._validateFields(s.bData, ['nombre','zona','sector','afectacion','telefono']);
+        if (Object.keys(errs).length) { this.setState({ bErrors: errs }); return; }
+        this.setState({ bSubmitting:true });
+      },
+    };
+  }
+}
+</script>
+</body>
+</html>

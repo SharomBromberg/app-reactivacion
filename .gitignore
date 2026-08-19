@@ -1,0 +1,44 @@
+# Node
+node_modules/
+dist/
+build/
+coverage/
+*.log
+npm-debug.log*
+pnpm-debug.log*
+.pnpm-store/
+
+# Env
+.env
+.env.local
+.env.*.local
+!.env.example
+
+# Expo
+.expo/
+.expo-shared/
+apps/mobile/android/
+apps/mobile/ios/
+apps/mobile/web-build/
+*.orig.*
+
+# Prisma
+apps/api/generated/
+*.db
+*.db-journal
+
+# TypeScript
+*.tsbuildinfo
+
+# IDE
+.vscode/*
+!.vscode/extensions.json
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Cache
+.turbo/
+.cache/

@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+<template id="__bundler_thumbnail" data-bg-color="#2A1C10">
+  <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+    <!-- Canvas bg -->
+    <rect width="1200" height="800" fill="#2A1C10"/>
+    <!-- Phone frame left -->
+    <rect x="120" y="60" width="260" height="480" rx="28" fill="#1A1814"/>
+    <rect x="128" y="68" width="244" height="464" rx="22" fill="#F2EDE4"/>
+    <!-- Header bar left -->
+    <rect x="128" y="68" width="244" height="52" rx="0" fill="#F2EDE4"/>
+    <rect x="148" y="84" width="120" height="10" rx="4" fill="#1A1310" opacity="0.7"/>
+    <rect x="148" y="100" width="80" height="7" rx="3" fill="#6A5A4F" opacity="0.5"/>
+    <!-- Cards left -->
+    <rect x="140" y="132" width="220" height="72" rx="10" fill="#FFFFFF" stroke="#E0D8CF" stroke-width="1"/>
+    <circle cx="168" cy="168" r="18" fill="#F5E6D6"/>
+    <rect x="196" y="156" width="100" height="9" rx="4" fill="#1A1310" opacity="0.7"/>
+    <rect x="196" y="170" width="70" height="7" rx="3" fill="#6A5A4F" opacity="0.4"/>
+    <rect x="148" y="188" width="200" height="7" rx="3" fill="#6A5A4F" opacity="0.3"/>
+    <rect x="140" y="214" width="220" height="72" rx="10" fill="#FFFFFF" stroke="#E0D8CF" stroke-width="1"/>
+    <circle cx="168" cy="250" r="18" fill="#ECE6DD"/>
+    <rect x="196" y="238" width="90" height="9" rx="4" fill="#1A1310" opacity="0.7"/>
+    <rect x="196" y="252" width="65" height="7" rx="3" fill="#6A5A4F" opacity="0.4"/>
+    <!-- Phone frame right -->
+    <rect x="420" y="60" width="260" height="480" rx="28" fill="#1A1814"/>
+    <rect x="428" y="68" width="244" height="464" rx="22" fill="#FFFFFF"/>
+    <!-- Detail header -->
+    <rect x="428" y="68" width="244" height="52" rx="0" fill="#FFFFFF"/>
+    <circle cx="460" cy="94" r="14" fill="#F2EDE4"/>
+    <rect x="484" y="88" width="120" height="10" rx="4" fill="#1A1310" opacity="0.7"/>
+    <!-- Iniciales circle -->
+    <circle cx="550" cy="170" r="28" fill="#F5E6D6"/>
+    <text x="550" y="176" text-anchor="middle" font-size="16" font-weight="700" fill="#6D3A18" font-family="system-ui">PL</text>
+    <rect x="480" y="205" width="140" height="12" rx="5" fill="#1A1310" opacity="0.6"/>
+    <rect x="500" y="223" width="100" height="8" rx="3" fill="#6A5A4F" opacity="0.4"/>
+    <!-- WA button -->
+    <rect x="440" y="370" width="220" height="44" rx="10" fill="#0B7130"/>
+    <rect x="460" y="384" width="120" height="9" rx="4" fill="white" opacity="0.9"/>
+    <!-- Title text -->
+    <text x="600" y="590" text-anchor="middle" font-size="22" font-weight="700" fill="rgba(255,255,255,0.6)" font-family="system-ui">Directorio Solidario · Manizales</text>
+  </svg>
+</template>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/nocturne-e8c6b891-378e-4d6f-9cc8-5194f3483bad/styles.css">
+  <script src="_ds/nocturne-e8c6b891-378e-4d6f-9cc8-5194f3483bad/_ds_bundle.js"></script>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; }
+    @keyframes shimmer { 0%{background-position:-200% 0} 100%{background-position:200% 0} }
+    @keyframes fadeIn { from{opacity:0;transform:translateY(4px)} to{opacity:1;transform:translateY(0)} }
+    .skel { background:linear-gradient(90deg,#E8E1D6 25%,#F5F0EA 50%,#E8E1D6 75%); background-size:200% 100%; animation:shimmer 1.4s infinite; }
+    .chips { display:flex; gap:8px; overflow-x:auto; scrollbar-width:none; -ms-overflow-style:none; padding-bottom:2px; }
+    .chips::-webkit-scrollbar { display:none; }
+    .noscroll { overflow-y:auto; scrollbar-width:none; -ms-overflow-style:none; }
+    .noscroll::-webkit-scrollbar { display:none; }
+    .lc2 { display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+    .lc3 { display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+    .card-anim { animation: fadeIn 0.2s ease; }
+    input, button, a { font-family:inherit; }
+    a { text-decoration:none; color:inherit; }
+  </style>
+</helmet>
+
+<!-- Root: sets all CSS vars + canvas bg -->
+<div style="{{ rootStyle }}">
+
+  <!-- ── Canvas header ── -->
+  <div style="background:rgba(0,0,0,0.18); backdrop-filter:blur(8px); padding:14px 40px; display:flex; align-items:center; justify-content:space-between; gap:24px; flex-wrap:wrap; position:sticky; top:0; z-index:200;">
+    <div>
+      <div style="font-size:15px; font-weight:700; color:#FFFFFF;">Directorio Solidario Manizales · Alta Fidelidad</div>
+      <div style="font-size:12px; color:rgba(255,255,255,0.65); margin-top:1px;">Paleta B · Clic en tarjeta actualiza Detalle · Filtros y búsqueda funcionales</div>
+    </div>
+    <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+      <span style="font-size:12px; color:rgba(255,255,255,0.6); flex-shrink:0;">Simular:</span>
+      <sc-for list="{{ stateChips }}" as="chip" hint-placeholder-count="4">
+        <button onClick="{{ chip.onClick }}" style="{{ chip.style }}">{{ chip.label }}</button>
+      </sc-for>
+    </div>
+  </div>
+
+  <!-- ══ MOBILE: dos teléfonos lado a lado ══ -->
+  <div style="display:flex; justify-content:center; gap:40px; padding:40px 40px 48px; flex-wrap:wrap; align-items:flex-start;">
+
+    <!-- ─ TELÉFONO 1: DIRECTORIO ─ -->
+    <div style="display:flex; flex-direction:column; align-items:center; gap:14px;">
+      <div style="font-size:11px; font-weight:700; color:rgba(255,255,255,0.7); letter-spacing:0.1em; text-transform:uppercase;">01 · Directorio</div>
+      <div style="{{ phoneStyle }}">
+        <!-- Notch -->
+        <div style="position:absolute; top:10px; left:50%; transform:translateX(-50%); width:90px; height:6px; background:#1A1814; border-radius:3px; z-index:10;"></div>
+        <!-- Status bar -->
+        <div style="height:44px; background:var(--color-bg); display:flex; align-items:flex-end; justify-content:space-between; padding:0 24px 8px; flex-shrink:0;">
+          <span style="font-size:15px; font-weight:600; color:var(--color-text);">9:41</span>
+          <span style="font-size:11px; color:var(--color-text-secondary);">▲▲▲ WiFi ▌▌</span>
+        </div>
+        <!-- App header -->
+        <div style="padding:10px 16px 12px; background:var(--color-bg); border-bottom:1px solid var(--color-divider); flex-shrink:0;">
+          <div style="font-size:19px; font-weight:700; color:var(--color-text); line-height:1.1;">Directorio Solidario</div>
+          <div style="font-size:12px; color:var(--color-text-secondary); margin-top:1px;">Negocios de Manizales que siguen activos</div>
+        </div>
+        <!-- Offline banner -->
+        <sc-if value="{{ showBanner }}" hint-placeholder-val="{{ false }}">
+          <div style="background:#FEF0E0; border-bottom:1px solid #E8C888; padding:9px 16px; display:flex; align-items:center; justify-content:space-between; gap:8px; flex-shrink:0;">
+            <span style="font-size:13px; color:#754808; font-weight:500;">⚠ Sin conexión · Mostrando datos guardados</span>
+            <button style="font-size:12px; color:#6D3A18; font-weight:600; background:none; border:none; cursor:pointer; flex-shrink:0; padding:0;">Reintentar</button>
+          </div>
+        </sc-if>
+        <!-- Scrollable content -->
+        <div class="noscroll" style="flex:1; overflow-y:auto; display:flex; flex-direction:column;">
+          <!-- Search -->
+          <div style="padding:10px 16px 0;">
+            <div style="position:relative; display:flex; align-items:center;">
+              <svg style="position:absolute; left:12px; pointer-events:none;" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-text-secondary)" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+              <input type="search" placeholder="Buscar negocio, barrio o sector..." value="{{ searchQuery }}" onChange="{{ setSearch }}" style="width:100%; background:var(--color-surface); border:1.5px solid var(--color-border); border-radius:10px; padding:11px 12px 11px 36px; font-size:15px; color:var(--color-text); outline:none;" />
+            </div>
+          </div>
+          <!-- Zone chips -->
+          <div style="padding:10px 16px 0;">
+            <div style="font-size:10px; font-weight:700; color:var(--color-text-secondary); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:7px;">Zona</div>
+            <div class="chips">
+              <sc-for list="{{ zoneChips }}" as="chip" hint-placeholder-count="5">
+                <button onClick="{{ chip.onClick }}" style="{{ chip.style }}">{{ chip.label }}</button>
+              </sc-for>
+            </div>
+          </div>
+          <!-- Sector chips -->
+          <div style="padding:8px 16px 0;">
+            <div style="font-size:10px; font-weight:700; color:var(--color-text-secondary); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:7px;">Sector</div>
+            <div class="chips">
+              <sc-for list="{{ sectorChips }}" as="chip" hint-placeholder-count="5">
+                <button onClick="{{ chip.onClick }}" style="{{ chip.style }}">{{ chip.label }}</button>
+              </sc-for>
+            </div>
+          </div>
+          <!-- Count -->
+          <div style="padding:10px 16px 6px; font-size:12px; color:var(--color-text-secondary);">{{ businessCount }} negocios encontrados</div>
+          <!-- Cards / states -->
+          <div style="padding:0 16px 24px; display:flex; flex-direction:column; gap:10px; flex:1;">
+
+            <!-- NORMAL / OFFLINE: real cards -->
+            <sc-if value="{{ showCards }}" hint-placeholder-val="{{ true }}">
+              <sc-for list="{{ cards }}" as="biz" hint-placeholder-count="3">
+                <div onClick="{{ biz.onClick }}" style="{{ biz.cardStyle }}" class="card-anim">
+                  <div style="display:flex; align-items:flex-start; gap:12px;">
+                    <div style="{{ biz.circleStyle }}">{{ biz.iniciales }}</div>
+                    <div style="flex:1; min-width:0;">
+                      <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:6px; margin-bottom:3px;">
+                        <div style="font-size:15px; font-weight:700; color:var(--color-text); line-height:1.2; flex:1; min-width:0;">{{ biz.nombre }}</div>
+                        <sc-if value="{{ biz.hasBadge }}" hint-placeholder-val="{{ false }}">
+                          <span style="{{ biz.badgeStyle }}">{{ biz.badgeLabel }}</span>
+                        </sc-if>
+                      </div>
+                      <div style="font-size:12px; color:var(--color-text-secondary);">{{ biz.zona }} · {{ biz.sector }}</div>
+                    </div>
+                  </div>
+                  <div class="lc2" style="font-size:13px; color:var(--color-text-secondary); line-height:1.5;">{{ biz.descripcion }}</div>
+                  <a href="{{ biz.waUrl }}" onClick="{{ biz.waClick }}" target="_blank" style="{{ waCardBtnStyle }}">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"></path></svg>
+                    Contactar por WhatsApp
+                  </a>
+                </div>
+              </sc-for>
+            </sc-if>
+
+            <!-- LOADING: skeletons -->
+            <sc-if value="{{ showLoading }}" hint-placeholder-val="{{ false }}">
+              <sc-for list="{{ skeletons }}" as="sk" hint-placeholder-count="3">
+                <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:12px; padding:14px; display:flex; flex-direction:column; gap:10px;">
+                  <div style="display:flex; align-items:center; gap:12px;">
+                    <div class="skel" style="width:48px; height:48px; border-radius:50%; flex-shrink:0;"></div>
+                    <div style="flex:1; display:flex; flex-direction:column; gap:6px;">
+                      <div class="skel" style="height:13px; border-radius:4px; width:65%;"></div>
+                      <div class="skel" style="height:10px; border-radius:4px; width:40%;"></div>
+                    </div>
+                  </div>
+                  <div class="skel" style="height:10px; border-radius:4px;"></div>
+                  <div class="skel" style="height:10px; border-radius:4px; width:80%;"></div>
+                  <div class="skel" style="height:44px; border-radius:10px;"></div>
+                </div>
+              </sc-for>
+            </sc-if>
+
+            <!-- EMPTY: zona sin negocios aún -->
+            <sc-if value="{{ showEmpty }}" hint-placeholder-val="{{ false }}">
+              <div style="display:flex; flex-direction:column; align-items:center; text-align:center; padding:32px 16px; gap:12px;">
+                <div style="width:64px; height:64px; border-radius:16px; background:var(--color-surface); border:1.5px solid var(--color-border); display:flex; align-items:center; justify-content:center;">
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--color-text-secondary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                </div>
+                <div style="font-size:16px; font-weight:700; color:var(--color-text);">Aún no hay negocios en esta zona.</div>
+                <div style="font-size:13px; color:var(--color-text-secondary); line-height:1.6;">¿Conoces uno? Regístralo y ayuda a la comunidad a recuperarse.</div>
+                <button style="height:48px; padding:0 24px; background:var(--color-primary); color:var(--color-text-on-primary); border:none; border-radius:10px; font-size:14px; font-weight:600; cursor:pointer; margin-top:4px;">Registrar un negocio</button>
+              </div>
+            </sc-if>
+
+            <!-- NO RESULTS: filtros sin resultado -->
+            <sc-if value="{{ showNoResults }}" hint-placeholder-val="{{ false }}">
+              <div style="display:flex; flex-direction:column; align-items:center; text-align:center; padding:32px 16px; gap:12px;">
+                <div style="width:64px; height:64px; border-radius:16px; background:var(--color-surface); border:1.5px solid var(--color-border); display:flex; align-items:center; justify-content:center;">
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--color-text-secondary)" stroke-width="1.5" stroke-linecap="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                </div>
+                <div style="font-size:16px; font-weight:700; color:var(--color-text);">Sin resultados</div>
+                <div style="font-size:13px; color:var(--color-text-secondary); line-height:1.6;">Intenta con otra zona o tipo de negocio.</div>
+                <button onClick="{{ resetFilters }}" style="height:48px; padding:0 24px; background:transparent; color:var(--color-primary); border:1.5px solid var(--color-primary); border-radius:10px; font-size:14px; font-weight:600; cursor:pointer;">Ver todos los negocios</button>
+              </div>
+            </sc-if>
+
+          </div>
+        </div>
+        <!-- Bottom nav -->
+        <div style="height:68px; background:var(--color-surface); border-top:1px solid var(--color-border); display:flex; flex-shrink:0;">
+          <div style="{{ navDirStyle }}">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"></rect><rect x="14" y="3" width="7" height="7" rx="1"></rect><rect x="3" y="14" width="7" height="7" rx="1"></rect><rect x="14" y="14" width="7" height="7" rx="1"></rect></svg>
+            <span>Directorio</span>
+          </div>
+          <div style="{{ navOffStyle }}">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+            <span>Apoyo</span>
+          </div>
+          <div style="{{ navOffStyle }}">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>
+            <span>Registrar</span>
+          </div>
+        </div>
+        <!-- Home indicator -->
+        <div style="height:22px; background:var(--color-surface); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+          <div style="width:100px; height:4px; background:rgba(26,19,16,0.18); border-radius:2px;"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─ TELÉFONO 2: DETALLE ─ -->
+    <div style="display:flex; flex-direction:column; align-items:center; gap:14px;">
+      <div style="font-size:11px; font-weight:700; color:rgba(255,255,255,0.7); letter-spacing:0.1em; text-transform:uppercase;">03 · Detalle de negocio</div>
+      <div style="{{ phoneStyle }}">
+        <!-- Notch -->
+        <div style="position:absolute; top:10px; left:50%; transform:translateX(-50%); width:90px; height:6px; background:#1A1814; border-radius:3px; z-index:10;"></div>
+        <!-- Status bar -->
+        <div style="height:44px; background:var(--color-surface); display:flex; align-items:flex-end; justify-content:space-between; padding:0 24px 8px; flex-shrink:0;">
+          <span style="font-size:15px; font-weight:600; color:var(--color-text);">9:41</span>
+          <span style="font-size:11px; color:var(--color-text-secondary);">▲▲▲ WiFi ▌▌</span>
+        </div>
+        <!-- Header: back + name -->
+        <div style="height:52px; background:var(--color-surface); border-bottom:1px solid var(--color-border); display:flex; align-items:center; gap:10px; padding:0 14px; flex-shrink:0;">
+          <div style="width:38px; height:38px; border-radius:8px; background:var(--color-bg); border:1px solid var(--color-border); display:flex; align-items:center; justify-content:center; cursor:pointer; flex-shrink:0;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-text)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+          </div>
+          <div style="font-size:15px; font-weight:700; color:var(--color-text); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; flex:1;">{{ selectedNombre }}</div>
+        </div>
+        <!-- Scrollable content -->
+        <div class="noscroll" style="flex:1; overflow-y:auto; background:var(--color-bg);">
+          <!-- Hero section -->
+          <div style="background:var(--color-surface); padding:20px 16px 18px; display:flex; flex-direction:column; align-items:center; text-align:center; gap:8px; border-bottom:1px solid var(--color-border);">
+            <div style="{{ selectedCircleStyle }}">{{ selectedIniciales }}</div>
+            <sc-if value="{{ detailHasBadge }}" hint-placeholder-val="{{ false }}">
+              <span style="{{ detailBadgeStyle }}">{{ detailBadgeLabel }}</span>
+            </sc-if>
+            <div style="font-size:22px; font-weight:700; color:var(--color-text); line-height:1.2;">{{ selectedNombre }}</div>
+            <div style="display:flex; align-items:center; gap:5px; font-size:13px; color:var(--color-text-secondary);">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+              {{ selectedZona }}, Manizales · {{ selectedSector }}
+            </div>
+          </div>
+          <!-- Description -->
+          <div style="padding:16px; background:var(--color-surface); margin-top:8px;">
+            <div style="font-size:11px; font-weight:700; color:var(--color-text-secondary); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px;">Sobre el negocio</div>
+            <div style="font-size:15px; color:var(--color-text); line-height:1.65;">{{ selectedDesc }}</div>
+          </div>
+          <!-- Products -->
+          <div style="margin-top:8px; background:var(--color-surface); padding:16px;">
+            <div style="font-size:11px; font-weight:700; color:var(--color-text-secondary); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:12px;">Productos y servicios</div>
+            <div style="display:flex; flex-direction:column; gap:0;">
+              <sc-for list="{{ productos }}" as="prod" hint-placeholder-count="3">
+                <div style="padding:10px 0; border-bottom:1px solid var(--color-divider); display:flex; justify-content:space-between; align-items:baseline; gap:10px;">
+                  <div style="flex:1; min-width:0;">
+                    <div style="font-size:14px; font-weight:600; color:var(--color-text); margin-bottom:2px;">{{ prod.nombre }}</div>
+                    <div style="font-size:12px; color:var(--color-text-secondary); line-height:1.4;">{{ prod.desc }}</div>
+                  </div>
+                  <div style="font-size:13px; font-weight:600; color:var(--color-primary); flex-shrink:0; white-space:nowrap;">{{ prod.precio }}</div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+          <!-- Spacer for fixed bottom bar -->
+          <div style="height:172px;"></div>
+        </div>
+        <!-- Fixed bottom bar -->
+        <div style="position:absolute; bottom:22px; left:0; right:0; background:var(--color-surface); border-top:1px solid var(--color-border); padding:12px 16px 14px; display:flex; flex-direction:column; gap:8px; z-index:10;">
+          <!-- Disclaimer -->
+          <div style="display:flex; align-items:flex-start; gap:6px; background:var(--color-bg); border:1.5px dashed rgba(26,19,16,0.25); border-radius:8px; padding:8px 10px;">
+            <span style="font-size:13px; flex-shrink:0; margin-top:1px;">⚠</span>
+            <span style="font-size:11px; color:var(--color-text-secondary); line-height:1.5;"><strong style="color:var(--color-text);">Esta plataforma no procesa pagos;</strong> el contacto es directo por WhatsApp.</span>
+          </div>
+          <!-- WA button -->
+          <a href="{{ waUrlDetail }}" target="_blank" style="display:flex; align-items:center; justify-content:center; gap:10px; height:52px; background:var(--color-whatsapp); color:#FFFFFF; border-radius:12px; font-size:16px; font-weight:700; text-decoration:none; cursor:pointer; flex-shrink:0;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"></path></svg>
+            Contactar por WhatsApp
+          </a>
+          <!-- Message preview + report link -->
+          <div style="display:flex; align-items:center; justify-content:space-between; gap:8px;">
+            <div class="lc2" style="font-size:10px; color:var(--color-text-secondary); line-height:1.4; flex:1;">Mensaje: {{ waMessage }}</div>
+            <a href="{{ waReport }}" target="_blank" style="font-size:10px; color:var(--color-primary); text-decoration:underline; cursor:pointer; white-space:nowrap; flex-shrink:0;">Reportar problema</a>
+          </div>
+        </div>
+        <!-- Home indicator -->
+        <div style="position:absolute; bottom:0; left:0; right:0; height:22px; background:var(--color-surface); display:flex; align-items:center; justify-content:center; z-index:11;">
+          <div style="width:100px; height:4px; background:rgba(26,19,16,0.18); border-radius:2px;"></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ══ DESKTOP ══ -->
+  <div style="padding:0 40px 64px;">
+    <div style="text-align:center; margin-bottom:16px;">
+      <div style="font-size:11px; font-weight:700; color:rgba(255,255,255,0.7); letter-spacing:0.1em; text-transform:uppercase;">Versión escritorio · 720 px máx. · Dos paneles</div>
+    </div>
+    <div style="max-width:720px; margin:0 auto; background:var(--color-surface); border-radius:16px; overflow:hidden; box-shadow:0 12px 48px rgba(0,0,0,0.35);">
+      <!-- Desktop header -->
+      <div style="height:56px; background:var(--color-primary); display:flex; align-items:center; justify-content:space-between; padding:0 24px;">
+        <div style="display:flex; align-items:center; gap:10px;">
+          <div style="width:28px; height:28px; border-radius:50%; background:var(--color-primary-dim); display:flex; align-items:center; justify-content:center;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+          </div>
+          <span style="font-size:15px; font-weight:700; color:var(--color-text-on-primary);">Directorio Solidario · Manizales</span>
+        </div>
+        <div style="display:flex; gap:20px;">
+          <span style="font-size:13px; color:rgba(255,255,255,0.9); font-weight:600; border-bottom:2px solid rgba(255,255,255,0.8); padding-bottom:2px; cursor:pointer;">Directorio</span>
+          <span style="font-size:13px; color:rgba(255,255,255,0.65); cursor:pointer;">Apoyo</span>
+          <span style="font-size:13px; color:rgba(255,255,255,0.65); cursor:pointer;">Registrar</span>
+        </div>
+      </div>
+      <!-- Two panel grid -->
+      <div style="display:grid; grid-template-columns:268px 1fr; height:620px;">
+
+        <!-- Left: directory list -->
+        <div class="noscroll" style="overflow-y:auto; background:var(--color-bg); border-right:1px solid var(--color-border); display:flex; flex-direction:column;">
+          <div style="padding:12px;">
+            <div style="position:relative; display:flex; align-items:center;">
+              <svg style="position:absolute; left:10px; pointer-events:none;" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--color-text-secondary)" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+              <input type="search" placeholder="Buscar..." value="{{ searchQuery }}" onChange="{{ setSearch }}" style="width:100%; background:var(--color-surface); border:1px solid var(--color-border); border-radius:8px; padding:9px 10px 9px 30px; font-size:13px; color:var(--color-text); outline:none;" />
+            </div>
+          </div>
+          <div style="padding:0 12px 8px;">
+            <div class="chips">
+              <sc-for list="{{ zoneChipsSmall }}" as="chip" hint-placeholder-count="4">
+                <button onClick="{{ chip.onClick }}" style="{{ chip.style }}">{{ chip.label }}</button>
+              </sc-for>
+            </div>
+          </div>
+          <div style="padding:2px 12px 8px; font-size:11px; color:var(--color-text-secondary);">{{ businessCount }} negocios</div>
+          <div style="padding:0 10px 16px; display:flex; flex-direction:column; gap:6px; flex:1;">
+            <sc-if value="{{ showCards }}" hint-placeholder-val="{{ true }}">
+              <sc-for list="{{ cards }}" as="biz" hint-placeholder-count="4">
+                <div onClick="{{ biz.onClick }}" style="{{ biz.desktopCardStyle }}">
+                  <div style="{{ biz.circleSmStyle }}">{{ biz.iniciales }}</div>
+                  <div style="flex:1; min-width:0;">
+                    <div style="font-size:13px; font-weight:700; color:var(--color-text); line-height:1.2; margin-bottom:2px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">{{ biz.nombre }}</div>
+                    <div style="font-size:11px; color:var(--color-text-secondary);">{{ biz.zona }} · {{ biz.sector }}</div>
+                  </div>
+                </div>
+              </sc-for>
+            </sc-if>
+            <sc-if value="{{ showEmpty }}" hint-placeholder-val="{{ false }}">
+              <div style="text-align:center; padding:32px 8px; color:var(--color-text-secondary); font-size:13px; line-height:1.6;">Aún no hay negocios en esta zona.</div>
+            </sc-if>
+            <sc-if value="{{ showLoading }}" hint-placeholder-val="{{ false }}">
+              <sc-for list="{{ skeletons }}" as="sk" hint-placeholder-count="4">
+                <div style="display:flex; gap:8px; padding:8px; background:var(--color-surface); border-radius:8px; align-items:center;">
+                  <div class="skel" style="width:36px; height:36px; border-radius:50%; flex-shrink:0;"></div>
+                  <div style="flex:1; display:flex; flex-direction:column; gap:5px;">
+                    <div class="skel" style="height:11px; border-radius:3px; width:70%;"></div>
+                    <div class="skel" style="height:9px; border-radius:3px; width:45%;"></div>
+                  </div>
+                </div>
+              </sc-for>
+            </sc-if>
+          </div>
+        </div>
+
+        <!-- Right: detail panel -->
+        <div class="noscroll" style="overflow-y:auto; background:var(--color-bg); display:flex; flex-direction:column;">
+          <!-- Business header -->
+          <div style="background:var(--color-surface); padding:24px; border-bottom:1px solid var(--color-border); display:flex; gap:16px; align-items:flex-start;">
+            <div style="{{ selectedCircleStyle }}">{{ selectedIniciales }}</div>
+            <div style="flex:1;">
+              <sc-if value="{{ detailHasBadge }}" hint-placeholder-val="{{ false }}">
+                <span style="{{ detailBadgeStyle }}">{{ detailBadgeLabel }}</span>
+              </sc-if>
+              <div style="font-size:20px; font-weight:700; color:var(--color-text); line-height:1.2; margin-top:4px;">{{ selectedNombre }}</div>
+              <div style="display:flex; align-items:center; gap:5px; font-size:13px; color:var(--color-text-secondary); margin-top:5px;">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                {{ selectedZona }}, Manizales · {{ selectedSector }}
+              </div>
+            </div>
+          </div>
+          <!-- Content -->
+          <div style="padding:20px 24px; flex:1;">
+            <div style="font-size:14px; color:var(--color-text); line-height:1.65; margin-bottom:20px;">{{ selectedDesc }}</div>
+            <div style="font-size:11px; font-weight:700; color:var(--color-text-secondary); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:12px;">Productos y servicios</div>
+            <div style="display:flex; flex-direction:column; gap:0; margin-bottom:24px;">
+              <sc-for list="{{ productos }}" as="prod" hint-placeholder-count="3">
+                <div style="padding:10px 0; border-bottom:1px solid var(--color-divider); display:flex; justify-content:space-between; align-items:baseline; gap:16px;">
+                  <div style="flex:1;">
+                    <div style="font-size:14px; font-weight:600; color:var(--color-text); margin-bottom:2px;">{{ prod.nombre }}</div>
+                    <div style="font-size:12px; color:var(--color-text-secondary);">{{ prod.desc }}</div>
+                  </div>
+                  <div style="font-size:13px; font-weight:700; color:var(--color-primary); flex-shrink:0;">{{ prod.precio }}</div>
+                </div>
+              </sc-for>
+            </div>
+            <!-- Disclaimer + CTA -->
+            <div style="background:var(--color-surface); border-radius:12px; padding:16px; display:flex; flex-direction:column; gap:12px; border:1px solid var(--color-border);">
+              <div style="display:flex; gap:8px; align-items:flex-start; background:var(--color-bg); border-radius:8px; padding:10px; border:1.5px dashed rgba(26,19,16,0.2);">
+                <span style="font-size:14px; flex-shrink:0;">⚠</span>
+                <span style="font-size:12px; color:var(--color-text-secondary); line-height:1.5;"><strong style="color:var(--color-text);">Esta plataforma no procesa pagos;</strong> el contacto es directo por WhatsApp.</span>
+              </div>
+              <a href="{{ waUrlDetail }}" target="_blank" style="display:flex; align-items:center; justify-content:center; gap:10px; height:52px; background:var(--color-whatsapp); color:#FFFFFF; border-radius:10px; font-size:16px; font-weight:700; text-decoration:none; cursor:pointer;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"></path></svg>
+                Contactar por WhatsApp
+              </a>
+              <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:12px;">
+                <div class="lc2" style="font-size:11px; color:var(--color-text-secondary); line-height:1.4; flex:1;">Mensaje: {{ waMessage }}</div>
+                <a href="{{ waReport }}" target="_blank" style="font-size:11px; color:var(--color-primary); text-decoration:underline; cursor:pointer; flex-shrink:0; white-space:nowrap;">Reportar un problema</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;: {&quot;width&quot;: 1000, &quot;height&quot;: 960}}">
+class Component extends DCLogic {
+  _businesses = [
+    { id:1, iniciales:'PL', nombre:'Panadería La Esperanza', sector:'Alimentos', sectorId:'alimentos', zona:'Chipre', zonaId:'chipre', afectacion:'alta', descripcion:'Pan artesanal, arepas y pandebonos hechos a diario. Servicio a domicilio disponible en el barrio. Descuento solidario para familias damnificadas del sismo.', telefono:'3101234567', productos:[{nombre:'Pan de bono',desc:'Docena artesanal, recién horneada',precio:'$8.000'},{nombre:'Arepa de choclo',desc:'Unidad con queso, caliente',precio:'$2.500'},{nombre:'Pan tajado',desc:'Bolsa de 500 g',precio:'$5.000'},{nombre:'Domicilio',desc:'Entrega en barrio Chipre',precio:'Consultar'}] },
+    { id:2, iniciales:'FV', nombre:'Ferretería El Volcán', sector:'Ferretería', sectorId:'ferretería', zona:'Palermo', zonaId:'palermo', afectacion:'media', descripcion:'Materiales de construcción, herramientas eléctricas y plomería. Precios solidarios para reconstrucción y reparaciones urgentes post-sismo.', telefono:'3209876543', productos:[{nombre:'Cemento gris',desc:'Bolsa 50 kg',precio:'$28.000'},{nombre:'Varilla corrugada',desc:'Metro lineal 3/8"',precio:'$4.500'},{nombre:'Bloque de arcilla',desc:'Unidad estándar',precio:'$1.200'},{nombre:'Herramientas en préstamo',desc:'Pica, pala, nivel (con depósito)',precio:'Consultar'}] },
+    { id:3, iniciales:'CM', nombre:'Costura y Arreglos María', sector:'Confección', sectorId:'confección', zona:'San José', zonaId:'san-jose', afectacion:'alta', descripcion:'Arreglos de ropa, uniformes escolares y cortinas. Domicilio disponible para barrios cercanos. Atención prioritaria a familias con niños en edad escolar.', telefono:'3158765432', productos:[{nombre:'Arreglos de ropa',desc:'Cremalleras, dobladillos, parches',precio:'Desde $5.000'},{nombre:'Uniformes escolares',desc:'Confección a medida',precio:'Consultar'},{nombre:'Cortinas y telas',desc:'Por metro, para muebles o paredes',precio:'Desde $8.000/m'}] },
+    { id:4, iniciales:'MA', nombre:'Mecánica Automotriz Andes', sector:'Mecánica', sectorId:'mecánica', zona:'La Enea', zonaId:'la-enea', afectacion:'baja', descripcion:'Revisión general de vehículos, frenos y cambio de aceite. Precios solidarios para vehículos de trabajo afectados por el sismo.', telefono:'3001122334', productos:[{nombre:'Cambio de aceite',desc:'Aceite + filtro incluido',precio:'$45.000'},{nombre:'Revisión de frenos',desc:'Diagnóstico y ajuste',precio:'$25.000'},{nombre:'Diagnóstico completo',desc:'Eléctrico y mecánico',precio:'$30.000'}] },
+    { id:5, iniciales:'TN', nombre:'Tienda Naturista Chipre', sector:'Alimentos', sectorId:'alimentos', zona:'Chipre', zonaId:'chipre', afectacion:'media', descripcion:'Abarrotes básicos, productos naturales, semillas y suplementos. Abiertos todos los días incluido domingo. Fiado con responsabilidad para vecinos conocidos.', telefono:'3125678901', productos:[{nombre:'Abarrotes básicos',desc:'Arroz, lentejas, aceite, sal',precio:'Varios'},{nombre:'Semillas y frutos secos',desc:'Bolsa de 250 g',precio:'Desde $4.000'},{nombre:'Agua purificada',desc:'Botellón 20 L con entrega',precio:'$8.000'},{nombre:'Remedios naturales',desc:'Plantas medicinales y tinturas',precio:'Consultar'}] },
+    { id:6, iniciales:'PC', nombre:'Papelería y Copias Palermo', sector:'Papelería', sectorId:'papelería', zona:'Palermo', zonaId:'palermo', afectacion:'baja', descripcion:'Impresiones, fotocopias, útiles escolares y enmicado. Precios justos y atención rápida. Documentos de emergencia a precio solidario.', telefono:'3174321098', productos:[{nombre:'Fotocopia',desc:'Blanco y negro, carta u oficio',precio:'$100'},{nombre:'Impresión a color',desc:'Carta o media carta',precio:'$500'},{nombre:'Enmicado',desc:'Carné o carta',precio:'$1.000–$2.500'},{nombre:'Útiles escolares',desc:'Cuadernos, lápices, colores',precio:'Varios'}] },
+  ];
+
+  state = { selectedId:1, searchQuery:'', filterZone:'todos', filterSector:'todos', simulateState:'normal' };
+
+  _SECTOR_BG = { alimentos:'#F5E6D6', 'ferretería':'#ECE6DD', 'confección':'#E8DDD0', 'mecánica':'#E0DDD8', papelería:'#EDE8E0', default:'#F0EBE2' };
+  _SECTOR_CLR = { alimentos:'#6D3A18', 'ferretería':'#4A3828', 'confección':'#5C3428', 'mecánica':'#3C3530', papelería:'#3C4024', default:'#5A4838' };
+
+  _circleStyle(sectorId, size) {
+    const bg = this._SECTOR_BG[sectorId] || this._SECTOR_BG.default;
+    const cl = this._SECTOR_CLR[sectorId] || this._SECTOR_CLR.default;
+    return { width:`${size}px`, height:`${size}px`, borderRadius:'50%', background:bg, color:cl, display:'flex', alignItems:'center', justifyContent:'center', fontSize:`${Math.round(size*0.33)}px`, fontWeight:'700', flexShrink:'0', letterSpacing:'0.02em' };
+  }
+
+  _chipStyle(active, sm) {
+    const p = sm ? '5px 10px' : '7px 14px';
+    const fs = sm ? '12px' : '13px';
+    return active
+      ? { display:'inline-flex', alignItems:'center', padding:p, borderRadius:'9999px', fontSize:fs, fontWeight:'600', background:'var(--color-primary-dim)', color:'var(--color-primary)', border:'1.5px solid var(--color-primary)', whiteSpace:'nowrap', cursor:'pointer', flexShrink:'0' }
+      : { display:'inline-flex', alignItems:'center', padding:p, borderRadius:'9999px', fontSize:fs, fontWeight:'400', background:'transparent', color:'var(--color-text-secondary)', border:'1px solid var(--color-border)', whiteSpace:'nowrap', cursor:'pointer', flexShrink:'0' };
+  }
+
+  _stateChipStyle(active) {
+    return active
+      ? { display:'inline-flex', alignItems:'center', padding:'5px 12px', borderRadius:'6px', fontSize:'12px', fontWeight:'600', background:'rgba(255,255,255,0.95)', color:'#1A1310', cursor:'pointer', border:'1px solid transparent', flexShrink:'0' }
+      : { display:'inline-flex', alignItems:'center', padding:'5px 12px', borderRadius:'6px', fontSize:'12px', fontWeight:'400', background:'transparent', color:'rgba(255,255,255,0.7)', cursor:'pointer', border:'1px solid rgba(255,255,255,0.2)', flexShrink:'0' };
+  }
+
+  _afectacionBadge(nivel) {
+    if (nivel === 'alta') return { label:'Muy afectado', style:{ display:'inline-flex', padding:'3px 8px', borderRadius:'4px', fontSize:'10px', fontWeight:'600', background:'#FEF0E0', color:'#754808', border:'1px solid #E8C888', whiteSpace:'nowrap', flexShrink:'0' } };
+    if (nivel === 'media') return { label:'Afectado', style:{ display:'inline-flex', padding:'3px 8px', borderRadius:'4px', fontSize:'10px', fontWeight:'500', background:'#F0ECE8', color:'#6A5A4F', border:'1px solid rgba(26,19,16,0.12)', whiteSpace:'nowrap', flexShrink:'0' } };
+    return null;
+  }
+
+  _makeWaUrl(biz) {
+    const msg = `Hola ${biz.nombre}, vi su negocio en el Directorio Solidario de Manizales. Me gustaría consultar sobre sus productos o servicios.`;
+    return `https://wa.me/57${biz.telefono}?text=${encodeURIComponent(msg)}`;
+  }
+
+  renderVals() {
+    const s = this.state;
+    const filtered = this._businesses.filter(b => {
+      const q = s.searchQuery.toLowerCase();
+      const mZ = s.filterZone === 'todos' || b.zonaId === s.filterZone;
+      const mS = s.filterSector === 'todos' || b.sectorId === s.filterSector;
+      const mQ = !q || b.nombre.toLowerCase().includes(q) || b.sector.toLowerCase().includes(q) || b.zona.toLowerCase().includes(q) || b.descripcion.toLowerCase().includes(q);
+      return mZ && mS && mQ;
+    });
+
+    const sim = s.simulateState;
+    const isFiltered = s.searchQuery !== '' || s.filterZone !== 'todos' || s.filterSector !== 'todos';
+    const showBanner = sim === 'offline';
+    const showCards = (sim === 'normal' || sim === 'offline') && filtered.length > 0;
+    const showLoading = sim === 'loading';
+    const showEmpty = sim === 'empty' || (sim === 'normal' && filtered.length === 0 && !isFiltered);
+    const showNoResults = sim === 'normal' && filtered.length === 0 && isFiltered;
+
+    const sel = this._businesses.find(b => b.id === s.selectedId) || this._businesses[0];
+    const selBadge = this._afectacionBadge(sel.afectacion);
+
+    // Zone chips
+    const zones = [{id:'todos',label:'Todos'},{id:'chipre',label:'Chipre'},{id:'la-enea',label:'La Enea'},{id:'palermo',label:'Palermo'},{id:'san-jose',label:'San José'},{id:'villamaria',label:'Villamaría'}];
+    const zoneChips = zones.map(z => ({ ...z, style:this._chipStyle(s.filterZone===z.id,false), onClick:()=>this.setState({filterZone:z.id}) }));
+    const zoneChipsSmall = zones.map(z => ({ ...z, style:this._chipStyle(s.filterZone===z.id,true), onClick:()=>this.setState({filterZone:z.id}) }));
+
+    // Sector chips
+    const sectors = [{id:'todos',label:'Todos'},{id:'alimentos',label:'Alimentos'},{id:'ferretería',label:'Ferretería'},{id:'confección',label:'Confección'},{id:'mecánica',label:'Mecánica'},{id:'papelería',label:'Papelería'}];
+    const sectorChips = sectors.map(sc => ({ ...sc, style:this._chipStyle(s.filterSector===sc.id,false), onClick:()=>this.setState({filterSector:sc.id}) }));
+
+    // State chips
+    const stateLabels = {normal:'Normal',loading:'Cargando',empty:'Sin negocios',offline:'Sin conexión'};
+    const stateChips = ['normal','loading','empty','offline'].map(st => ({ id:st, label:stateLabels[st], style:this._stateChipStyle(s.simulateState===st), onClick:()=>this.setState({simulateState:st}) }));
+
+    // Business cards
+    const isSelectedCard = (id) => id === s.selectedId;
+    const cards = filtered.map(b => {
+      const badge = this._afectacionBadge(b.afectacion);
+      const sel2 = isSelectedCard(b.id);
+      return {
+        ...b,
+        badge, hasBadge: badge !== null,
+        badgeLabel: badge ? badge.label : '',
+        badgeStyle: badge ? badge.style : {},
+        waUrl: this._makeWaUrl(b),
+        waClick: (e) => { e.stopPropagation(); },
+        onClick: () => this.setState({ selectedId:b.id }),
+        circleStyle: this._circleStyle(b.sectorId, 48),
+        circleSmStyle: this._circleStyle(b.sectorId, 36),
+        cardStyle: { background: sel2 ? 'var(--color-primary-dim)' : 'var(--color-surface)', border: sel2 ? '1.5px solid var(--color-primary)' : '1px solid var(--color-border)', borderRadius:'12px', padding:'14px', display:'flex', flexDirection:'column', gap:'10px', cursor:'pointer', flexShrink:'0', transition:'border-color 0.15s' },
+        desktopCardStyle: { display:'flex', alignItems:'center', gap:'10px', padding:'10px', background: sel2 ? 'var(--color-primary-dim)' : 'var(--color-surface)', borderRadius:'8px', cursor:'pointer', border: sel2 ? '1px solid var(--color-primary)' : '1px solid transparent', transition:'all 0.15s', flexShrink:'0' },
+      };
+    });
+
+    const waUrlDetail = this._makeWaUrl(sel);
+    const waMessage = `"Hola ${sel.nombre}, vi su negocio en el Directorio Solidario de Manizales. Me gustaría consultar."`;
+    const waReport = `https://wa.me/573009999999?text=${encodeURIComponent('Quiero reportar un problema en el Directorio Solidario de Manizales.')}`;
+
+    const navBase = { flex:'1', display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', gap:'3px', background:'none', border:'none', cursor:'pointer', fontSize:'10px', paddingTop:'2px' };
+    const navDirStyle = { ...navBase, color:'var(--color-primary)', fontWeight:'600', borderTop:'2px solid var(--color-primary)' };
+    const navOffStyle = { ...navBase, color:'var(--color-text-secondary)', fontWeight:'400', borderTop:'2px solid transparent' };
+
+    const phoneStyle = { width:'390px', height:'780px', background:'var(--color-bg)', borderRadius:'44px', overflow:'hidden', display:'flex', flexDirection:'column', boxShadow:'0 0 0 10px #1A1814, 0 40px 80px rgba(0,0,0,0.45)', flexShrink:'0', position:'relative' };
+
+    const waCardBtnStyle = { display:'flex', alignItems:'center', justifyContent:'center', gap:'8px', height:'44px', background:'var(--color-whatsapp)', color:'#FFFFFF', border:'none', borderRadius:'10px', fontSize:'14px', fontWeight:'700', cursor:'pointer', textDecoration:'none', flexShrink:'0' };
+
+    const rootStyle = {
+      '--color-bg':'#F2EDE4','--color-surface':'#FFFFFF','--color-surface-raised':'#ECE6DD',
+      '--color-primary':'#6D3A18','--color-primary-pressed':'#572E12','--color-primary-dim':'#F5E6D6',
+      '--color-secondary':'#245839','--color-text':'#1A1310','--color-text-secondary':'#6A5A4F',
+      '--color-text-on-primary':'#FFFFFF','--color-success':'#1C5935','--color-error':'#8A1E1E',
+      '--color-warning':'#754808','--color-whatsapp':'#0B7130','--color-whatsapp-pressed':'#095826',
+      '--color-border':'rgba(26,19,16,0.14)','--color-divider':'rgba(26,19,16,0.07)',
+      background:'linear-gradient(160deg,#3D2C1E 0%,#2A1C10 60%,#1A1410 100%)',
+      fontFamily:"'Roboto',system-ui,-apple-system,sans-serif",
+      minHeight:'100vh', color:'#1A1310',
+    };
+
+    return {
+      rootStyle, phoneStyle, waCardBtnStyle,
+      navDirStyle, navOffStyle,
+      stateChips,
+      showBanner, showCards, showLoading, showEmpty, showNoResults,
+      searchQuery: s.searchQuery,
+      setSearch: (e) => this.setState({ searchQuery:e.target.value }),
+      zoneChips, zoneChipsSmall, sectorChips,
+      businessCount: filtered.length,
+      cards, skeletons:[{id:1},{id:2},{id:3}],
+      resetFilters: () => this.setState({ filterZone:'todos', filterSector:'todos', searchQuery:'' }),
+      // Detail
+      selectedNombre: sel.nombre,
+      selectedSector: sel.sector,
+      selectedZona: sel.zona,
+      selectedDesc: sel.descripcion,
+      selectedIniciales: sel.iniciales,
+      selectedCircleStyle: this._circleStyle(sel.sectorId, 64),
+      detailHasBadge: selBadge !== null,
+      detailBadgeLabel: selBadge ? selBadge.label : '',
+      detailBadgeStyle: selBadge ? selBadge.style : {},
+      productos: sel.productos,
+      waUrlDetail, waMessage, waReport,
+    };
+  }
+}
+</script>
+</body>
+</html>

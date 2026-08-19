@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/nocturne-e8c6b891-378e-4d6f-9cc8-5194f3483bad/styles.css">
+  <script src="_ds/nocturne-e8c6b891-378e-4d6f-9cc8-5194f3483bad/_ds_bundle.js"></script>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; }
+    .noscroll { overflow-y: auto; scrollbar-width: none; -ms-overflow-style: none; }
+    .noscroll::-webkit-scrollbar { display: none; }
+    .chips-h { display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; }
+    .chips-h::-webkit-scrollbar { display: none; }
+    @keyframes spin { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+    .spin { animation: spin 0.75s linear infinite; display: inline-flex; }
+    input, textarea, button { font-family: inherit; }
+    a { text-decoration: none; color: inherit; }
+  </style>
+</helmet>
+
+<div style="{{ rootStyle }}">
+
+  <!-- Canvas header -->
+  <div style="background:rgba(0,0,0,0.2); backdrop-filter:blur(8px); padding:12px 40px; display:flex; align-items:center; justify-content:space-between; position:sticky; top:0; z-index:200;">
+    <div>
+      <div style="font-size:15px; font-weight:700; color:#FFFFFF;">Panel de Moderación · Alta Fidelidad</div>
+      <div style="font-size:12px; color:rgba(255,255,255,0.6);">Contraseña demo: <strong style="color:rgba(255,255,255,0.85);">demo2025</strong> · Herramienta interna de trabajo · Mismos tokens Paleta B</div>
+    </div>
+  </div>
+
+  <!-- ══ PHONE + DESKTOP SIDE BY SIDE ══ -->
+  <div style="display:flex; justify-content:center; gap:40px; padding:36px 40px 56px; flex-wrap:wrap; align-items:flex-start;">
+
+    <!-- ─── TELÉFONO (MÓVIL) ─── -->
+    <div style="display:flex; flex-direction:column; align-items:center; gap:14px;">
+      <div style="font-size:11px; font-weight:700; color:rgba(255,255,255,0.7); letter-spacing:0.1em; text-transform:uppercase;">Móvil</div>
+      <div style="{{ phoneStyle }}">
+        <div style="{{ notchStyle }}"></div>
+        <div style="{{ sbStyle }}"><span style="font-size:15px; font-weight:600; color:var(--color-text);">9:41</span><span style="font-size:11px; color:var(--color-text-secondary);">▲▲▲ WiFi ▌▌</span></div>
+
+        <!-- MÓVIL: LOGIN -->
+        <sc-if value="{{ showLogin }}" hint-placeholder-val="{{ false }}">
+          <div style="flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:24px; background:var(--color-bg);">
+            <div style="width:100%; max-width:340px; display:flex; flex-direction:column; gap:16px;">
+              <div style="text-align:center; margin-bottom:4px;">
+                <div style="font-size:13px; font-weight:700; color:var(--color-text-secondary); text-transform:uppercase; letter-spacing:0.1em; margin-bottom:4px;">Panel de Moderación</div>
+                <div style="font-size:22px; font-weight:700; color:var(--color-text);">Acceso interno</div>
+                <div style="font-size:12px; color:var(--color-text-secondary); margin-top:4px;">Solo para el equipo autorizado</div>
+              </div>
+              <div>
+                <label style="{{ lblStyle }}">Correo electrónico</label>
+                <input type="email" placeholder="admin@directorio.co" value="{{ loginEmail }}" onChange="{{ setLoginEmail }}" style="{{ loginInputStyle }}" />
+              </div>
+              <div>
+                <label style="{{ lblStyle }}">Contraseña</label>
+                <input type="password" placeholder="••••••••" value="{{ loginPassword }}" onChange="{{ setLoginPassword }}" style="{{ loginInputStyle }}" />
+              </div>
+              <sc-if value="{{ loginError }}" hint-placeholder-val="{{ false }}">
+                <div style="font-size:12px; color:var(--color-error); background:#F5D8D8; border-radius:7px; padding:9px 12px; line-height:1.45;">{{ loginError }}</div>
+              </sc-if>
+              <button onClick="{{ submitLogin }}" style="{{ loginBtnStyle }}" disabled="{{ loginSubmitting }}">
+                <sc-if value="{{ loginSubmitting }}" hint-placeholder-val="{{ false }}">
+                  <svg class="spin" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10" stroke-opacity="0.25"></circle><path d="M12 2a10 10 0 0 1 10 10"></path></svg>
+                  Entrando...
+                </sc-if>
+                <sc-if value="{{ loginNotSubmitting }}" hint-placeholder-val="{{ true }}">Entrar</sc-if>
+              </button>
+              <div style="font-size:11px; color:var(--color-text-secondary); text-align:center;">Sin registro disponible. Contacta al administrador.</div>
+            </div>
+          </div>
+        </sc-if>
+
+        <!-- MÓVIL: COLA -->
+        <sc-if value="{{ mobileShowQueue }}" hint-placeholder-val="{{ true }}">
+          <div style="flex:1; display:flex; flex-direction:column; overflow:hidden;">
+            <!-- Header -->
+            <div style="padding:10px 12px 8px; background:var(--color-primary); display:flex; align-items:center; justify-content:space-between; flex-shrink:0;">
+              <div style="font-size:14px; font-weight:700; color:white;">Panel de Moderación</div>
+              <div style="display:flex; align-items:center; gap:8px;">
+                <button onClick="{{ goToHistory }}" style="background:rgba(255,255,255,0.15); border:none; color:white; padding:5px 9px; border-radius:6px; font-size:11px; cursor:pointer;">Historial</button>
+                <button onClick="{{ logout }}" style="background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.2); color:rgba(255,255,255,0.8); padding:5px 9px; border-radius:6px; font-size:11px; cursor:pointer;">Salir</button>
+              </div>
+            </div>
+            <!-- Tabs -->
+            <div class="chips-h" style="background:var(--color-surface); border-bottom:1px solid var(--color-border); padding:0 2px; flex-shrink:0;">
+              <button onClick="{{ setTabNegocios }}" style="{{ tabNegociosStyle }}">Negocios<sc-if value="{{ pendingNegocios }}" hint-placeholder-val="{{ false }}"><span style="{{ badgePendStyle }}">{{ pendingNegocios }}</span></sc-if></button>
+              <button onClick="{{ setTabProductos }}" style="{{ tabProductosStyle }}">Productos<sc-if value="{{ pendingProductos }}" hint-placeholder-val="{{ false }}"><span style="{{ badgePendStyle }}">{{ pendingProductos }}</span></sc-if></button>
+              <button onClick="{{ setTabApoyo }}" style="{{ tabApoyoStyle }}">Apoyo<sc-if value="{{ pendingApoyo }}" hint-placeholder-val="{{ false }}"><span style="{{ badgePendStyle }}">{{ pendingApoyo }}</span></sc-if></button>
+            </div>
+            <!-- Search -->
+            <div style="padding:8px 10px; background:var(--color-bg); flex-shrink:0;">
+              <div style="position:relative; display:flex; align-items:center;">
+                <svg style="position:absolute; left:9px; pointer-events:none;" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--color-text-secondary)" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                <input type="search" placeholder="Buscar nombre o teléfono..." value="{{ searchQuery }}" onChange="{{ setSearch }}" style="width:100%; background:var(--color-surface); border:1px solid var(--color-border); border-radius:7px; padding:7px 10px 7px 27px; font-size:13px; color:var(--color-text); outline:none;" />
+              </div>
+            </div>
+            <!-- Status filter -->
+            <div class="chips-h" style="padding:0 10px 8px; background:var(--color-bg); flex-shrink:0;">
+              <button onClick="{{ setFilterTodos }}" style="{{ filterTodosStyle }}">Todos</button>
+              <button onClick="{{ setFilterPendiente }}" style="{{ filterPendienteStyle }}">Pendiente</button>
+              <button onClick="{{ setFilterVisible }}" style="{{ filterVisibleStyle }}">Visible</button>
+              <button onClick="{{ setFilterOculto }}" style="{{ filterOcultoStyle }}">Oculto</button>
+              <button onClick="{{ setFilterBaneado }}" style="{{ filterBaneadoStyle }}">Baneado</button>
+            </div>
+            <!-- Microtexto -->
+            <div style="padding:5px 10px; background:#FEF7F0; border-bottom:1px solid #E8DDD0; font-size:10px; color:#6A5A4F; display:flex; align-items:center; gap:5px; flex-shrink:0;">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#6D3A18" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+              Sin sobreprecio en crisis · Sin engaños · Sin amenazas. Ocultar o Banear si detectas alguno.
+            </div>
+            <!-- List -->
+            <div class="noscroll" style="flex:1; overflow-y:auto; display:flex; flex-direction:column; background:var(--color-bg);">
+              <sc-if value="{{ showEmptyList }}" hint-placeholder-val="{{ false }}">
+                <div style="text-align:center; padding:40px 16px; color:var(--color-text-secondary); font-size:13px;">No hay elementos con estos filtros.</div>
+              </sc-if>
+              <sc-for list="{{ itemsForList }}" as="item" hint-placeholder-count="4">
+                <div onClick="{{ item.onClick }}" style="{{ item.cardStyle }}">
+                  <div style="display:flex; align-items:center; gap:5px; justify-content:space-between; margin-bottom:2px;">
+                    <div style="display:flex; align-items:center; gap:5px; flex:1; min-width:0;">
+                      <span style="{{ item.tipoStyle }}">{{ item.tipoLabel }}</span>
+                      <span style="{{ item.statusStyle }}">{{ item.statusLabel }}</span>
+                      <span style="font-size:12px; font-weight:600; color:var(--color-text); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; flex:1;">{{ item.nombre }}</span>
+                    </div>
+                    <span style="font-size:10px; color:var(--color-text-secondary); flex-shrink:0;">{{ item.fechaStr }}</span>
+                  </div>
+                  <div style="font-size:11px; color:var(--color-text-secondary);">
+                    <sc-if value="{{ item.barrio }}" hint-placeholder-val="{{ false }}">📍 {{ item.barrio }} · </sc-if>
+                    <sc-if value="{{ item.autor }}" hint-placeholder-val="{{ false }}">{{ item.autor }} · </sc-if>
+                    {{ item.telefono }}
+                  </div>
+                  <div style="font-size:11px; color:var(--color-text); line-height:1.35; overflow:hidden; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; margin-top:2px;">{{ item.descripcion }}</div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </sc-if>
+
+        <!-- MÓVIL: DETALLE -->
+        <sc-if value="{{ mobileShowDetail }}" hint-placeholder-val="{{ false }}">
+          <div style="flex:1; display:flex; flex-direction:column; overflow:hidden;">
+            <div style="padding:10px 12px; background:var(--color-surface); border-bottom:1px solid var(--color-border); display:flex; align-items:center; gap:10px; flex-shrink:0;">
+              <button onClick="{{ goToQueue }}" style="{{ backBtnStyle }}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
+              <div style="font-size:14px; font-weight:700; color:var(--color-text); flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">{{ selectedItem.nombre }}</div>
+            </div>
+            <div class="noscroll" style="flex:1; overflow-y:auto; padding:12px; background:var(--color-bg); display:flex; flex-direction:column; gap:10px;">
+              <div style="display:flex; gap:5px; flex-wrap:wrap;">
+                <span style="{{ selectedTipoStyle }}">{{ selectedTipoLabel }}</span>
+                <span style="{{ selectedStatusStyle }}">{{ selectedStatusLabel }}</span>
+              </div>
+              <div style="background:var(--color-surface); border-radius:10px; border:1px solid var(--color-border); padding:12px; display:flex; flex-direction:column; gap:6px;">
+                <div style="font-size:16px; font-weight:700; color:var(--color-text);">{{ selectedItem.nombre }}</div>
+                <div style="font-size:12px; color:var(--color-text-secondary); display:flex; flex-direction:column; gap:3px;">
+                  <sc-if value="{{ selectedItem.barrio }}" hint-placeholder-val="{{ false }}"><div>📍 {{ selectedItem.barrio }}</div></sc-if>
+                  <sc-if value="{{ selectedItem.autor }}" hint-placeholder-val="{{ false }}"><div>👤 {{ selectedItem.autor }}</div></sc-if>
+                  <sc-if value="{{ selectedItem.sector }}" hint-placeholder-val="{{ false }}"><div>🏪 {{ selectedItem.sector }}</div></sc-if>
+                  <div>📞 {{ selectedItem.telefono }}</div>
+                  <div>🕐 {{ selectedItem.fechaStr }}</div>
+                </div>
+              </div>
+              <div style="background:var(--color-surface); border-radius:10px; border:1px solid var(--color-border); padding:12px;">
+                <div style="font-size:10px; font-weight:700; color:var(--color-text-secondary); text-transform:uppercase; letter-spacing:0.07em; margin-bottom:6px;">Descripción / contenido</div>
+                <div style="font-size:13px; color:var(--color-text); line-height:1.6;">{{ selectedItem.descripcion }}</div>
+              </div>
+              <!-- Actions -->
+              <div style="display:flex; gap:7px; padding-bottom:4px;">
+                <sc-for list="{{ selectedActions }}" as="action" hint-placeholder-count="2">
+                  <button onClick="{{ action.onClick }}" style="{{ action.style }}">{{ action.label }}</button>
+                </sc-for>
+              </div>
+              <sc-if value="{{ selectedIsBanned }}" hint-placeholder-val="{{ false }}">
+                <div style="font-size:11px; color:var(--color-text-secondary); text-align:center; padding:8px; background:var(--color-surface); border-radius:7px; border:1px solid var(--color-border);">Este contenido está baneado. No se puede modificar.</div>
+              </sc-if>
+            </div>
+          </div>
+        </sc-if>
+
+        <!-- MÓVIL: HISTORIAL -->
+        <sc-if value="{{ mobileShowHistory }}" hint-placeholder-val="{{ false }}">
+          <div style="flex:1; display:flex; flex-direction:column; overflow:hidden;">
+            <div style="padding:10px 12px; background:var(--color-surface); border-bottom:1px solid var(--color-border); display:flex; align-items:center; gap:10px; flex-shrink:0;">
+              <button onClick="{{ goToQueue }}" style="{{ backBtnStyle }}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
+              <div style="font-size:14px; font-weight:700; color:var(--color-text);">Historial de acciones</div>
+            </div>
+            <div class="noscroll" style="flex:1; overflow-y:auto; background:var(--color-bg);">
+              <sc-for list="{{ historyItems }}" as="h" hint-placeholder-count="5">
+                <div style="padding:10px 12px; border-bottom:1px solid var(--color-divider); display:flex; flex-direction:column; gap:3px;">
+                  <div style="display:flex; align-items:center; justify-content:space-between; gap:6px;">
+                    <div style="display:flex; align-items:center; gap:5px; min-width:0;">
+                      <span style="{{ h.actionStyle }}">{{ h.actionLabel }}</span>
+                      <span style="font-size:12px; font-weight:600; color:var(--color-text); overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">{{ h.sobre }}</span>
+                    </div>
+                    <span style="font-size:10px; color:var(--color-text-secondary); flex-shrink:0;">{{ h.fecha }}</span>
+                  </div>
+                  <div style="font-size:10px; color:var(--color-text-secondary);">{{ h.moderator }}</div>
+                  <div style="font-size:11px; color:var(--color-text); font-style:italic; background:var(--color-surface); border-radius:5px; padding:5px 8px; line-height:1.4;">"{{ h.nota }}"</div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </sc-if>
+
+        <div style="{{ homeStyle }}"><div style="{{ homeBarStyle }}"></div></div>
+      </div>
+    </div>
+
+    <!-- ─── ESCRITORIO ─── -->
+    <div style="display:flex; flex-direction:column; align-items:center; gap:14px;">
+      <div style="font-size:11px; font-weight:700; color:rgba(255,255,255,0.7); letter-spacing:0.1em; text-transform:uppercase;">Escritorio · dos columnas</div>
+      <div style="{{ desktopStyle }}">
+
+        <!-- ESCRITORIO: LOGIN -->
+        <sc-if value="{{ showLogin }}" hint-placeholder-val="{{ false }}">
+          <div style="flex:1; display:flex; align-items:center; justify-content:center; background:var(--color-bg); padding:32px;">
+            <div style="width:340px; background:var(--color-surface); border-radius:12px; border:1px solid var(--color-border); padding:28px; display:flex; flex-direction:column; gap:16px;">
+              <div>
+                <div style="font-size:11px; font-weight:700; color:var(--color-text-secondary); text-transform:uppercase; letter-spacing:0.1em; margin-bottom:3px;">Panel de Moderación</div>
+                <div style="font-size:20px; font-weight:700; color:var(--color-text);">Acceso interno</div>
+                <div style="font-size:12px; color:var(--color-text-secondary); margin-top:2px;">Solo para el equipo autorizado del Directorio Solidario.</div>
+              </div>
+              <div>
+                <label style="{{ lblStyle }}">Correo electrónico</label>
+                <input type="email" placeholder="admin@directorio.co" value="{{ loginEmail }}" onChange="{{ setLoginEmail }}" style="{{ loginInputStyle }}" />
+              </div>
+              <div>
+                <label style="{{ lblStyle }}">Contraseña</label>
+                <input type="password" placeholder="••••••••" value="{{ loginPassword }}" onChange="{{ setLoginPassword }}" style="{{ loginInputStyle }}" />
+              </div>
+              <sc-if value="{{ loginError }}" hint-placeholder-val="{{ false }}">
+                <div style="font-size:12px; color:var(--color-error); background:#F5D8D8; border-radius:7px; padding:9px 12px; line-height:1.45;">{{ loginError }}</div>
+              </sc-if>
+              <button onClick="{{ submitLogin }}" style="{{ loginBtnStyle }}" disabled="{{ loginSubmitting }}">
+                <sc-if value="{{ loginSubmitting }}" hint-placeholder-val="{{ false }}">
+                  <svg class="spin" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10" stroke-opacity="0.25"></circle><path d="M12 2a10 10 0 0 1 10 10"></path></svg>
+                  Entrando...
+                </sc-if>
+                <sc-if value="{{ loginNotSubmitting }}" hint-placeholder-val="{{ true }}">Entrar</sc-if>
+              </button>
+              <div style="font-size:11px; color:var(--color-text-secondary); text-align:center; border-top:1px solid var(--color-border); padding-top:12px;">Sin registro disponible. Contacta al administrador.</div>
+            </div>
+          </div>
+        </sc-if>
+
+        <!-- ESCRITORIO: APP -->
+        <sc-if value="{{ showApp }}" hint-placeholder-val="{{ true }}">
+          <!-- Desktop header bar -->
+          <div style="height:44px; background:var(--color-primary); display:flex; align-items:center; padding:0 16px; gap:16px; flex-shrink:0;">
+            <span style="font-size:13px; font-weight:700; color:white; flex-shrink:0; border-right:1px solid rgba(255,255,255,0.2); padding-right:16px;">⚙ Moderación</span>
+            <!-- Tabs -->
+            <div class="chips-h" style="flex:1; gap:0;">
+              <button onClick="{{ setTabNegocios }}" style="{{ desktopTabNegStyle }}">Negocios<sc-if value="{{ pendingNegocios }}" hint-placeholder-val="{{ false }}"><span style="{{ badgePendStyle }}">{{ pendingNegocios }}</span></sc-if></button>
+              <button onClick="{{ setTabProductos }}" style="{{ desktopTabProdStyle }}">Productos<sc-if value="{{ pendingProductos }}" hint-placeholder-val="{{ false }}"><span style="{{ badgePendStyle }}">{{ pendingProductos }}</span></sc-if></button>
+              <button onClick="{{ setTabApoyo }}" style="{{ desktopTabApoyoStyle }}">Apoyo<sc-if value="{{ pendingApoyo }}" hint-placeholder-val="{{ false }}"><span style="{{ badgePendStyle }}">{{ pendingApoyo }}</span></sc-if></button>
+              <button onClick="{{ setTabHistorial }}" style="{{ desktopTabHistStyle }}">Historial</button>
+            </div>
+            <!-- Moderator + logout -->
+            <div style="display:flex; align-items:center; gap:8px; flex-shrink:0;">
+              <span style="font-size:11px; color:rgba(255,255,255,0.75);">{{ moderatorName }}</span>
+              <button onClick="{{ logout }}" style="font-size:11px; color:rgba(255,255,255,0.7); background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.2); border-radius:5px; padding:4px 8px; cursor:pointer;">Salir</button>
+            </div>
+          </div>
+
+          <!-- HISTORIAL (full width) -->
+          <sc-if value="{{ showHistoryDesktop }}" hint-placeholder-val="{{ false }}">
+            <div style="flex:1; display:flex; flex-direction:column; overflow:hidden;">
+              <!-- Search for history could go here, keeping simple -->
+              <div style="padding:10px 16px; background:var(--color-bg); border-bottom:1px solid var(--color-border); font-size:12px; font-weight:600; color:var(--color-text-secondary); flex-shrink:0;">Registro cronológico de acciones del equipo</div>
+              <div class="noscroll" style="flex:1; overflow-y:auto; background:var(--color-bg);">
+                <div style="display:grid; grid-template-columns:120px 180px 1fr 180px 110px; padding:6px 16px; border-bottom:1px solid var(--color-border); background:var(--color-surface-raised);">
+                  <span style="font-size:10px; font-weight:700; color:var(--color-text-secondary); text-transform:uppercase; letter-spacing:0.07em;">Acción</span>
+                  <span style="font-size:10px; font-weight:700; color:var(--color-text-secondary); text-transform:uppercase; letter-spacing:0.07em;">Sobre qué</span>
+                  <span style="font-size:10px; font-weight:700; color:var(--color-text-secondary); text-transform:uppercase; letter-spacing:0.07em;">Nota</span>
+                  <span style="font-size:10px; font-weight:700; color:var(--color-text-secondary); text-transform:uppercase; letter-spacing:0.07em;">Moderador</span>
+                  <span style="font-size:10px; font-weight:700; color:var(--color-text-secondary); text-transform:uppercase; letter-spacing:0.07em;">Fecha</span>
+                </div>
+                <sc-for list="{{ historyItems }}" as="h" hint-placeholder-count="5">
+                  <div style="display:grid; grid-template-columns:120px 180px 1fr 180px 110px; padding:8px 16px; border-bottom:1px solid var(--color-divider); align-items:start; gap:8px;">
+                    <div><span style="{{ h.actionStyle }}">{{ h.actionLabel }}</span></div>
+                    <div style="font-size:12px; font-weight:600; color:var(--color-text); line-height:1.3;">{{ h.sobre }}</div>
+                    <div style="font-size:11px; color:var(--color-text); font-style:italic; line-height:1.4;">"{{ h.nota }}"</div>
+                    <div style="font-size:11px; color:var(--color-text-secondary);">{{ h.moderator }}</div>
+                    <div style="font-size:11px; color:var(--color-text-secondary);">{{ h.fecha }}</div>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+          </sc-if>
+
+          <!-- COLA + DETALLE (dos columnas) -->
+          <sc-if value="{{ showQueueDesktop }}" hint-placeholder-val="{{ true }}">
+            <div style="flex:1; display:grid; grid-template-columns:260px 1fr; overflow:hidden;">
+
+              <!-- Left: lista -->
+              <div style="display:flex; flex-direction:column; border-right:1px solid var(--color-border); overflow:hidden; background:var(--color-bg);">
+                <!-- Search -->
+                <div style="padding:8px 10px; border-bottom:1px solid var(--color-divider); flex-shrink:0;">
+                  <div style="position:relative; display:flex; align-items:center;">
+                    <svg style="position:absolute; left:8px; pointer-events:none;" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--color-text-secondary)" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                    <input type="search" placeholder="Nombre o teléfono..." value="{{ searchQuery }}" onChange="{{ setSearch }}" style="width:100%; background:var(--color-surface); border:1px solid var(--color-border); border-radius:6px; padding:6px 8px 6px 24px; font-size:12px; color:var(--color-text); outline:none;" />
+                  </div>
+                </div>
+                <!-- Status filter -->
+                <div class="chips-h" style="padding:6px 10px; border-bottom:1px solid var(--color-divider); flex-shrink:0;">
+                  <button onClick="{{ setFilterTodos }}" style="{{ filterTodosStyle }}">Todos</button>
+                  <button onClick="{{ setFilterPendiente }}" style="{{ filterPendienteStyle }}">Pendiente</button>
+                  <button onClick="{{ setFilterVisible }}" style="{{ filterVisibleStyle }}">Visible</button>
+                  <button onClick="{{ setFilterOculto }}" style="{{ filterOcultoStyle }}">Oculto</button>
+                  <button onClick="{{ setFilterBaneado }}" style="{{ filterBaneadoStyle }}">Baneado</button>
+                </div>
+                <!-- Microtexto -->
+                <div style="padding:4px 10px; background:#FEF7F0; border-bottom:1px solid #E8DDD0; font-size:10px; color:#6A5A4F; flex-shrink:0;">
+                  🛡 Sin sobreprecio · sin engaños · sin amenazas.
+                </div>
+                <!-- Count -->
+                <div style="padding:5px 10px; font-size:10px; color:var(--color-text-secondary); flex-shrink:0;">{{ itemCount }} elemento{{ itemCountPlural }}</div>
+                <!-- List -->
+                <div class="noscroll" style="flex:1; overflow-y:auto;">
+                  <sc-if value="{{ showEmptyList }}" hint-placeholder-val="{{ false }}">
+                    <div style="text-align:center; padding:32px 12px; color:var(--color-text-secondary); font-size:12px;">Sin elementos con estos filtros.</div>
+                  </sc-if>
+                  <sc-for list="{{ itemsForList }}" as="item" hint-placeholder-count="5">
+                    <div onClick="{{ item.onClick }}" style="{{ item.cardStyle }}">
+                      <div style="display:flex; align-items:center; gap:4px; justify-content:space-between; margin-bottom:2px;">
+                        <div style="display:flex; align-items:center; gap:4px; flex:1; min-width:0;">
+                          <span style="{{ item.tipoStyle }}">{{ item.tipoLabel }}</span>
+                          <span style="{{ item.statusStyle }}">{{ item.statusLabel }}</span>
+                          <span style="font-size:12px; font-weight:600; color:var(--color-text); overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">{{ item.nombre }}</span>
+                        </div>
+                        <span style="font-size:10px; color:var(--color-text-secondary); flex-shrink:0; margin-left:4px;">{{ item.fechaStr }}</span>
+                      </div>
+                      <div style="font-size:10px; color:var(--color-text-secondary);">
+                        <sc-if value="{{ item.barrio }}" hint-placeholder-val="{{ false }}">{{ item.barrio }} · </sc-if>
+                        {{ item.telefono }}
+                      </div>
+                    </div>
+                  </sc-for>
+                </div>
+              </div>
+
+              <!-- Right: detalle -->
+              <div class="noscroll" style="overflow-y:auto; display:flex; flex-direction:column; background:var(--color-bg);">
+                <sc-if value="{{ selectedItem }}" hint-placeholder-val="{{ true }}">
+                  <!-- Detail header -->
+                  <div style="padding:14px 16px 10px; background:var(--color-surface); border-bottom:1px solid var(--color-border); flex-shrink:0;">
+                    <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:8px; margin-bottom:6px;">
+                      <div>
+                        <div style="display:flex; gap:5px; margin-bottom:6px; flex-wrap:wrap;">
+                          <span style="{{ selectedTipoStyle }}">{{ selectedTipoLabel }}</span>
+                          <span style="{{ selectedStatusStyle }}">{{ selectedStatusLabel }}</span>
+                        </div>
+                        <div style="font-size:17px; font-weight:700; color:var(--color-text); line-height:1.2;">{{ selectedItem.nombre }}</div>
+                      </div>
+                    </div>
+                    <div style="font-size:12px; color:var(--color-text-secondary); display:flex; flex-wrap:wrap; gap:8px; margin-top:4px;">
+                      <sc-if value="{{ selectedItem.barrio }}" hint-placeholder-val="{{ false }}"><span>📍 {{ selectedItem.barrio }}</span></sc-if>
+                      <sc-if value="{{ selectedItem.autor }}" hint-placeholder-val="{{ false }}"><span>👤 {{ selectedItem.autor }}</span></sc-if>
+                      <sc-if value="{{ selectedItem.sector }}" hint-placeholder-val="{{ false }}"><span>🏪 {{ selectedItem.sector }}</span></sc-if>
+                      <span>📞 {{ selectedItem.telefono }}</span>
+                      <span>🕐 {{ selectedItem.fechaStr }}</span>
+                    </div>
+                  </div>
+                  <!-- Description -->
+                  <div style="padding:14px 16px; background:var(--color-surface); margin-top:8px;">
+                    <div style="font-size:10px; font-weight:700; color:var(--color-text-secondary); text-transform:uppercase; letter-spacing:0.07em; margin-bottom:7px;">Descripción / contenido</div>
+                    <div style="font-size:14px; color:var(--color-text); line-height:1.65;">{{ selectedItem.descripcion }}</div>
+                  </div>
+                  <!-- Actions -->
+                  <div style="padding:14px 16px 0; background:var(--color-surface); margin-top:8px;">
+                    <div style="font-size:10px; font-weight:700; color:var(--color-text-secondary); text-transform:uppercase; letter-spacing:0.07em; margin-bottom:10px;">Acciones de moderación</div>
+                    <div style="display:flex; gap:8px; flex-wrap:wrap;">
+                      <sc-for list="{{ selectedActions }}" as="action" hint-placeholder-count="2">
+                        <button onClick="{{ action.onClick }}" style="{{ action.desktopStyle }}">{{ action.label }}</button>
+                      </sc-for>
+                    </div>
+                    <sc-if value="{{ selectedIsBanned }}" hint-placeholder-val="{{ false }}">
+                      <div style="font-size:12px; color:var(--color-text-secondary); margin-top:10px; padding:8px 10px; background:var(--color-bg); border-radius:7px; border:1px solid var(--color-border);">Este contenido está baneado. No se puede modificar.</div>
+                    </sc-if>
+                  </div>
+                  <!-- Norma reminder -->
+                  <div style="margin:12px 16px; padding:10px 12px; background:#FEF7F0; border-radius:8px; border:1px solid #E8DDD0; font-size:11px; color:#6A5A4F; line-height:1.55;">
+                    🛡 <strong>Normas de moderación:</strong> Ocultar contenido con sobreprecio, información falsa o amenazas. Banear cuando el comportamiento es sistemático o hay daño claro a la comunidad. Siempre deja una nota que justifique la decisión para el historial de auditoría.
+                  </div>
+                </sc-if>
+              </div>
+
+            </div>
+          </sc-if>
+        </sc-if>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ══ MODAL DE CONFIRMACIÓN (fixed overlay) ══ -->
+  <sc-if value="{{ modalOpen }}" hint-placeholder-val="{{ false }}">
+    <div style="position:fixed; inset:0; z-index:300; background:rgba(20,12,8,0.7); display:flex; align-items:center; justify-content:center; padding:24px;">
+      <div style="background:var(--color-surface); border-radius:14px; width:100%; max-width:440px; padding:24px; display:flex; flex-direction:column; gap:16px; box-shadow:0 24px 64px rgba(0,0,0,0.5);">
+        <div>
+          <div style="font-size:17px; font-weight:700; color:var(--color-text); margin-bottom:4px;">{{ modalTitle }}</div>
+          <div style="font-size:13px; color:var(--color-text-secondary);">Sobre: <strong style="color:var(--color-text);">{{ modalItemName }}</strong></div>
+        </div>
+        <div style="background:var(--color-bg); border-radius:8px; padding:10px 12px; border:1px solid var(--color-border);">
+          <div style="font-size:12px; color:var(--color-text); line-height:1.55;">{{ modalConsequence }}</div>
+        </div>
+        <div>
+          <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom:6px;">
+            <label style="{{ lblStyle }}; margin-bottom:0;">Nota obligatoria *</label>
+            <span style="{{ modalNoteCounterStyle }}">{{ modalNoteLen }}/10 mín.</span>
+          </div>
+          <textarea placeholder="Justifica la decisión para el historial de auditoría (mín. 10 caracteres)..." value="{{ modalNote }}" onChange="{{ setModalNote }}" rows="3" style="width:100%; background:var(--color-bg); border:1.5px solid var(--color-border); border-radius:8px; padding:10px 12px; font-size:14px; color:var(--color-text); outline:none; resize:none; line-height:1.5;"></textarea>
+        </div>
+        <div style="display:flex; gap:10px;">
+          <button onClick="{{ closeModal }}" style="flex:1; height:44px; background:transparent; color:var(--color-text-secondary); border:1px solid var(--color-border); border-radius:8px; font-size:14px; cursor:pointer;">Cancelar</button>
+          <button onClick="{{ confirmModal }}" style="{{ modalConfirmStyle }}" disabled="{{ modalConfirmDisabled }}">
+            {{ modalTitle }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;: {&quot;width&quot;: 1200, &quot;height&quot;: 900}}">
+class Component extends DCLogic {
+  _initialItems = [
+    { id:1, tipo:'negocio', nombre:'Carpintería El Roble', sector:'Carpintería', barrio:'La Enea', telefono:'3101999888', descripcion:'Muebles y reparaciones de madera a medida. Teléfono activo. Sin certificación mencionada.', fechaStr:'Hace 3 h', status:'pendiente', autor:null, tipoApoyo:null },
+    { id:2, tipo:'negocio', nombre:'Materiales Baratos YA!', sector:'Ferretería', barrio:'Centro', telefono:'3001112233', descripcion:'"Precio sismo x3 de lo normal. Aprovecha antes que se acaben." — Posible sobreprecio abusivo en crisis de emergencia. Requiere revisión urgente.', fechaStr:'Hace 4 h', status:'pendiente', autor:null, tipoApoyo:null },
+    { id:3, tipo:'negocio', nombre:'Servicio Mudanzas Exprés', sector:'Transporte', barrio:'Palermo', telefono:'3208889990', descripcion:'Transporte de muebles salvados del sismo. Tarifas no verificadas — pendiente confirmar precios antes de publicar.', fechaStr:'Hace 1 día', status:'oculto', autor:null, tipoApoyo:null },
+    { id:4, tipo:'negocio', nombre:'Tienda Naturista Chipre', sector:'Alimentos', barrio:'Chipre', telefono:'3125678901', descripcion:'Abarrotes básicos, productos naturales y semillas. Precios normales verificados. Abiertos todos los días.', fechaStr:'Hace 2 días', status:'visible', autor:null, tipoApoyo:null },
+    { id:5, tipo:'producto', nombre:'Cemento gris · Bolsa 50 kg', sector:null, barrio:null, telefono:'3209876543', descripcion:'Precio solicitado: $120.000. Precio de mercado: ~$28.000. Incremento del 329% sobre precio normal. Publicado por Ferretería El Volcán.', fechaStr:'Hace 2 h', status:'pendiente', autor:'Ferretería El Volcán', tipoApoyo:null },
+    { id:6, tipo:'producto', nombre:'Pan de bono · Docena artesanal', sector:null, barrio:null, telefono:'3101234567', descripcion:'Docena recién horneada. $8.000. Precio verificado como razonable para el tipo de producto.', fechaStr:'Hace 2 días', status:'visible', autor:'Panadería La Esperanza', tipoApoyo:null },
+    { id:7, tipo:'producto', nombre:'Agua purificada · Botellón 20 L', sector:null, barrio:null, telefono:'3125678901', descripcion:'$8.000 con entrega en el barrio. Precio normal confirmado. Publicado por Tienda Naturista Chipre.', fechaStr:'Hace 1 día', status:'pendiente', autor:'Tienda Naturista Chipre', tipoApoyo:null },
+    { id:8, tipo:'apoyo', nombre:'Colchonetas para 4 personas', sector:null, barrio:'Chipre', telefono:'3101112233', descripcion:'Buscamos colchonetas o camas sencillas para 4 personas. Quedamos sin muebles tras el sismo.', fechaStr:'Hace 2 h', status:'pendiente', autor:'Familia Rodríguez', tipoApoyo:'busco' },
+    { id:9, tipo:'apoyo', nombre:'Vendo escombros del derrumbe', sector:null, barrio:'San José', telefono:'3001234567', descripcion:'"VENDO materiales recuperados del derrumbe. Precio según demanda del sismo." — Posible especulación con materiales de desastre.', fechaStr:'Hace 4 h', status:'pendiente', autor:'Anónimo', tipoApoyo:'ofrezco' },
+    { id:10, tipo:'apoyo', nombre:'Electricista para instalación dañada', sector:null, barrio:'Villamaría', telefono:'3174455667', descripcion:'Busco electricista para revisar instalación dañada. Puedo pagar en cuotas pequeñas.', fechaStr:'Hace 1 día', status:'visible', autor:'Luis Gómez', tipoApoyo:'busco' },
+  ];
+
+  _initialHistory = [
+    { id:1, moderator:'admin@directorio.co', actionLabel:'Baneó', sobre:'Prestamista de Emergencia', nota:'Oferta de préstamos con intereses del 30% durante la crisis. Usura explícita. Baneo inmediato por daño a la comunidad.', fecha:'12 ago · 18:00' },
+    { id:2, moderator:'admin@directorio.co', actionLabel:'Ocultó', sobre:'Servicio Mudanzas Exprés', nota:'Tarifas sin verificar. Se solicita confirmación de precios antes de publicar.', fecha:'11 ago · 09:30' },
+    { id:3, moderator:'admin@directorio.co', actionLabel:'Publicó', sobre:'Tienda Naturista Chipre', nota:'Negocio verificado. Precios normales, productos básicos disponibles en el barrio.', fecha:'10 ago · 17:35' },
+    { id:4, moderator:'admin@directorio.co', actionLabel:'Publicó', sobre:'Pan de bono · Docena', nota:'Precio razonable. Negocio establecido en el barrio Chipre.', fecha:'10 ago · 17:30' },
+    { id:5, moderator:'admin@directorio.co', actionLabel:'Publicó', sobre:'Jorge Ávila – Herramientas', nota:'Oferta solidaria legítima. Sin lucro. Aprobado para publicar.', fecha:'10 ago · 16:00' },
+  ];
+
+  state = {
+    auth: false,
+    loginEmail: '', loginPassword: '', loginError: null, loginSubmitting: false,
+    activeTab: 'negocios', searchQuery: '', statusFilter: 'todos',
+    selectedId: 1,
+    mobileScreen: 'queue',
+    modalOpen: false, modalAction: null, modalTargetId: null, modalNote: '',
+    items: null, historyLog: null,
+  };
+
+  _items() { return this.state.items || this._initialItems; }
+  _history() { return this.state.historyLog || this._initialHistory; }
+
+  _statusLabel = { pendiente:'Pendiente', visible:'Visible', oculto:'Oculto', baneado:'Baneado' };
+
+  _statusStyle(s) {
+    const b = { display:'inline-flex', padding:'2px 7px', borderRadius:'4px', fontSize:'10px', fontWeight:'600', letterSpacing:'0.04em', whiteSpace:'nowrap' };
+    if (s === 'pendiente') return { ...b, background:'#FEF0E0', color:'#754808' };
+    if (s === 'visible') return { ...b, background:'#D8EDE0', color:'#1C5935' };
+    if (s === 'oculto') return { ...b, background:'#ECE6DD', color:'#6A5A4F' };
+    if (s === 'baneado') return { ...b, background:'#F5D8D8', color:'#8A1E1E' };
+    return b;
+  }
+
+  _tipoLabel(item) {
+    if (item.tipo === 'negocio') return 'NEGOCIO';
+    if (item.tipo === 'producto') return 'PRODUCTO';
+    if (item.tipo === 'apoyo') return item.tipoApoyo === 'busco' ? 'BUSCO' : 'OFREZCO';
+    return '';
+  }
+
+  _tipoStyle(item) {
+    const b = { display:'inline-flex', padding:'2px 7px', borderRadius:'4px', fontSize:'10px', fontWeight:'700', letterSpacing:'0.04em', whiteSpace:'nowrap' };
+    if (item.tipo === 'negocio') return { ...b, background:'#F5E6D6', color:'#6D3A18' };
+    if (item.tipo === 'producto') return { ...b, background:'#ECE6DD', color:'#4A3828' };
+    if (item.tipo === 'apoyo' && item.tipoApoyo === 'busco') return { ...b, background:'#E8E4F0', color:'#3C2878' };
+    return { ...b, background:'#D8EDE0', color:'#1C5935' };
+  }
+
+  _histActionStyle(label) {
+    const b = { display:'inline-flex', padding:'2px 7px', borderRadius:'4px', fontSize:'10px', fontWeight:'600', whiteSpace:'nowrap' };
+    if (label === 'Publicó' || label === 'Restauró') return { ...b, background:'#D8EDE0', color:'#1C5935' };
+    if (label === 'Ocultó') return { ...b, background:'#FEF0E0', color:'#754808' };
+    return { ...b, background:'#F5D8D8', color:'#8A1E1E' };
+  }
+
+  _makeActions(item) {
+    const open = (action) => () => this.setState({ modalOpen:true, modalAction:action, modalTargetId:item.id, modalNote:'' });
+    const acts = [];
+    const mobileBase = { flex:'1', height:'40px', border:'none', borderRadius:'8px', fontSize:'13px', fontWeight:'600', cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center' };
+    const desktopBase = { height:'36px', padding:'0 16px', border:'none', borderRadius:'7px', fontSize:'13px', fontWeight:'600', cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center' };
+    if (item.status === 'pendiente' || item.status === 'oculto') {
+      const label = item.status === 'oculto' ? 'Restaurar' : 'Publicar';
+      const action = item.status === 'oculto' ? 'restaurar' : 'publicar';
+      acts.push({ label, action, style:{ ...mobileBase, background:'#1C5935', color:'#FFFFFF' }, desktopStyle:{ ...desktopBase, background:'#1C5935', color:'#FFFFFF' }, onClick:open(action) });
+    }
+    if (item.status === 'pendiente' || item.status === 'visible') {
+      acts.push({ label:'Ocultar', action:'ocultar', style:{ ...mobileBase, background:'#754808', color:'#FFFFFF' }, desktopStyle:{ ...desktopBase, background:'#754808', color:'#FFFFFF' }, onClick:open('ocultar') });
+    }
+    if (item.status !== 'baneado') {
+      acts.push({ label:'Banear', action:'banear', style:{ ...mobileBase, background:'#8A1E1E', color:'#FFFFFF' }, desktopStyle:{ ...desktopBase, background:'#8A1E1E', color:'#FFFFFF' }, onClick:open('banear') });
+    }
+    return acts;
+  }
+
+  renderVals() {
+    const s = this.state;
+    const items = this._items();
+    const history = this._history();
+
+    const pCount = (tipo) => items.filter(i => i.tipo === tipo && i.status === 'pendiente').length;
+    const pendingNegocios = pCount('negocio');
+    const pendingProductos = pCount('producto');
+    const pendingApoyo = pCount('apoyo');
+
+    const typeMap = { negocios:'negocio', productos:'producto', apoyo:'apoyo' };
+    const currentType = typeMap[s.activeTab];
+
+    const filteredItems = s.activeTab === 'historial' ? [] : items.filter(i => {
+      if (i.tipo !== currentType) return false;
+      if (s.statusFilter !== 'todos' && i.status !== s.statusFilter) return false;
+      const q = s.searchQuery.toLowerCase();
+      if (q && !i.nombre.toLowerCase().includes(q) && !(i.telefono||'').includes(q) && !(i.autor||'').toLowerCase().includes(q)) return false;
+      return true;
+    });
+
+    const sel = items.find(i => i.id === s.selectedId) || items[0];
+    const selectedActions = sel ? this._makeActions(sel) : [];
+    const selectedIsBanned = sel ? sel.status === 'baneado' : false;
+
+    const itemsForList = filteredItems.map(item => ({
+      ...item,
+      isSelected: item.id === s.selectedId,
+      statusLabel: this._statusLabel[item.status],
+      statusStyle: this._statusStyle(item.status),
+      tipoLabel: this._tipoLabel(item),
+      tipoStyle: this._tipoStyle(item),
+      actions: this._makeActions(item),
+      onClick: () => this.setState({ selectedId:item.id, mobileScreen:'detail' }),
+      cardStyle: { padding:'9px 12px', background:item.id===s.selectedId ? 'var(--color-primary-dim)' : 'var(--color-surface)', borderLeft:`3px solid ${item.id===s.selectedId ? 'var(--color-primary)' : 'transparent'}`, borderBottom:'1px solid var(--color-divider)', cursor:'pointer', display:'flex', flexDirection:'column', gap:'3px', flexShrink:'0' },
+    }));
+
+    const historyItems = history.map(h => ({ ...h, actionStyle: this._histActionStyle(h.actionLabel) }));
+
+    const tabBase = { padding:'10px 12px', fontSize:'13px', background:'none', border:'none', borderBottom:'2px solid transparent', cursor:'pointer', display:'flex', alignItems:'center', gap:'5px', flexShrink:'0', whiteSpace:'nowrap' };
+    const tabActive = { ...tabBase, fontWeight:'700', color:'var(--color-primary)', borderBottom:'2px solid var(--color-primary)' };
+    const tabInactive = { ...tabBase, fontWeight:'400', color:'var(--color-text-secondary)' };
+    const desktopTabBase = { padding:'0 14px', height:'44px', fontSize:'12px', background:'none', border:'none', borderBottom:'2px solid transparent', cursor:'pointer', display:'flex', alignItems:'center', gap:'5px', flexShrink:'0', whiteSpace:'nowrap' };
+    const dtActive = { ...desktopTabBase, fontWeight:'700', color:'rgba(255,255,255,1)', borderBottom:'2px solid rgba(255,255,255,0.9)' };
+    const dtInactive = { ...desktopTabBase, fontWeight:'400', color:'rgba(255,255,255,0.6)' };
+
+    const chipBase = { padding:'4px 9px', fontSize:'11px', borderRadius:'9999px', cursor:'pointer', border:'1px solid', whiteSpace:'nowrap', flexShrink:'0' };
+    const chipActive2 = { ...chipBase, fontWeight:'600', background:'var(--color-primary)', color:'var(--color-text-on-primary)', borderColor:'var(--color-primary)' };
+    const chipInactive2 = { ...chipBase, fontWeight:'400', background:'transparent', color:'var(--color-text-secondary)', borderColor:'var(--color-border)' };
+    const fc = (val) => s.statusFilter === val ? chipActive2 : chipInactive2;
+
+    const modalNoteLen = s.modalNote.trim().length;
+    const modalNoteValid = modalNoteLen >= 10;
+    const modalItem = items.find(i => i.id === s.modalTargetId);
+    const CONSEQUENCES = { publicar:'El contenido será visible para todos los usuarios del directorio.', restaurar:'El contenido volverá a ser visible para todos los usuarios.', ocultar:'El contenido dejará de mostrarse al público. El usuario puede corregirlo.', banear:'⚠ Acción irreversible. El contenido será eliminado y el número de WhatsApp quedará bloqueado permanentemente.' };
+    const TITLES = { publicar:'Publicar en el directorio', restaurar:'Restaurar publicación', ocultar:'Ocultar publicación', banear:'Banear contenido' };
+    const CONFIRM_BG = { publicar:'#1C5935', restaurar:'#1C5935', ocultar:'#754808', banear:'#8A1E1E' };
+
+    const rootStyle = {
+      '--color-bg':'#F2EDE4','--color-surface':'#FFFFFF','--color-surface-raised':'#ECE6DD',
+      '--color-primary':'#6D3A18','--color-primary-dim':'#F5E6D6','--color-secondary':'#245839',
+      '--color-text':'#1A1310','--color-text-secondary':'#6A5A4F','--color-text-on-primary':'#FFFFFF',
+      '--color-success':'#1C5935','--color-error':'#8A1E1E','--color-warning':'#754808',
+      '--color-border':'rgba(26,19,16,0.14)','--color-divider':'rgba(26,19,16,0.07)',
+      background:'linear-gradient(160deg,#3D2C1E 0%,#2A1C10 60%,#1A1410 100%)',
+      fontFamily:"'Roboto',system-ui,-apple-system,sans-serif", minHeight:'100vh', color:'#1A1310',
+    };
+
+    const phoneStyle = { width:'390px', height:'780px', background:'var(--color-bg)', borderRadius:'44px', overflow:'hidden', display:'flex', flexDirection:'column', boxShadow:'0 0 0 10px #1A1814, 0 40px 80px rgba(0,0,0,0.45)', flexShrink:'0', position:'relative' };
+    const desktopStyle = { width:'680px', height:'760px', background:'var(--color-bg)', borderRadius:'12px', overflow:'hidden', display:'flex', flexDirection:'column', boxShadow:'0 12px 48px rgba(0,0,0,0.4)', flexShrink:'0' };
+    const notchStyle = { position:'absolute', top:'10px', left:'50%', transform:'translateX(-50%)', width:'90px', height:'6px', background:'#1A1814', borderRadius:'3px', zIndex:'10' };
+    const sbStyle = { height:'44px', background:'var(--color-bg)', display:'flex', alignItems:'flex-end', justifyContent:'space-between', padding:'0 24px 8px', flexShrink:'0' };
+    const homeStyle = { height:'22px', background:'var(--color-surface)', display:'flex', alignItems:'center', justifyContent:'center', flexShrink:'0' };
+    const homeBarStyle = { width:'100px', height:'4px', background:'rgba(26,19,16,0.18)', borderRadius:'2px' };
+    const backBtnStyle = { width:'34px', height:'34px', borderRadius:'7px', background:'var(--color-bg)', border:'1px solid var(--color-border)', display:'flex', alignItems:'center', justifyContent:'center', cursor:'pointer', color:'var(--color-text)', flexShrink:'0' };
+    const lblStyle = { display:'block', fontSize:'13px', fontWeight:'600', color:'var(--color-text-secondary)', marginBottom:'5px' };
+    const badgePendStyle = { background:'#754808', color:'white', fontSize:'10px', fontWeight:'700', padding:'1px 5px', borderRadius:'9999px', marginLeft:'3px' };
+    const loginInputStyle = { width:'100%', background:'var(--color-bg)', border:'1.5px solid var(--color-border)', borderRadius:'9px', padding:'11px 13px', fontSize:'15px', color:'var(--color-text)', outline:'none' };
+    const loginBtnStyle = { width:'100%', height:'50px', background:'var(--color-primary)', color:'var(--color-text-on-primary)', border:'none', borderRadius:'10px', fontSize:'16px', fontWeight:'700', cursor: s.loginSubmitting ? 'not-allowed' : 'pointer', display:'flex', alignItems:'center', justifyContent:'center', gap:'8px' };
+
+    return {
+      rootStyle, phoneStyle, desktopStyle, notchStyle, sbStyle, homeStyle, homeBarStyle,
+      backBtnStyle, lblStyle, badgePendStyle, loginInputStyle, loginBtnStyle,
+
+      // Auth
+      showLogin: !s.auth, showApp: s.auth,
+      loginEmail: s.loginEmail, loginPassword: s.loginPassword,
+      loginError: s.loginError, loginSubmitting: s.loginSubmitting, loginNotSubmitting: !s.loginSubmitting,
+      setLoginEmail: (e) => this.setState({ loginEmail:e.target.value, loginError:null }),
+      setLoginPassword: (e) => this.setState({ loginPassword:e.target.value, loginError:null }),
+      submitLogin: () => {
+        const email = this.state.loginEmail, pwd = this.state.loginPassword;
+        if (!email.trim() || !pwd) { this.setState({ loginError:'Completa correo y contraseña.' }); return; }
+        this.setState({ loginSubmitting:true });
+        setTimeout(() => {
+          if (pwd === 'demo2025') this.setState({ auth:true, loginSubmitting:false, mobileScreen:'queue' });
+          else this.setState({ loginSubmitting:false, loginError:'Correo o contraseña incorrectos. Contacta al administrador.' });
+        }, 800);
+      },
+      logout: () => this.setState({ auth:false, mobileScreen:'queue', loginEmail:'', loginPassword:'', loginError:null }),
+      moderatorName: 'admin@directorio.co',
+
+      // Tabs
+      pendingNegocios, pendingProductos, pendingApoyo,
+      tabNegociosStyle: s.activeTab==='negocios' ? tabActive : tabInactive,
+      tabProductosStyle: s.activeTab==='productos' ? tabActive : tabInactive,
+      tabApoyoStyle: s.activeTab==='apoyo' ? tabActive : tabInactive,
+      desktopTabNegStyle: s.activeTab==='negocios' ? dtActive : dtInactive,
+      desktopTabProdStyle: s.activeTab==='productos' ? dtActive : dtInactive,
+      desktopTabApoyoStyle: s.activeTab==='apoyo' ? dtActive : dtInactive,
+      desktopTabHistStyle: s.activeTab==='historial' ? dtActive : dtInactive,
+      setTabNegocios: () => this.setState({ activeTab:'negocios', mobileScreen:'queue' }),
+      setTabProductos: () => this.setState({ activeTab:'productos', mobileScreen:'queue' }),
+      setTabApoyo: () => this.setState({ activeTab:'apoyo', mobileScreen:'queue' }),
+      setTabHistorial: () => this.setState({ activeTab:'historial', mobileScreen:'history' }),
+
+      // Search + filter
+      searchQuery: s.searchQuery,
+      setSearch: (e) => this.setState({ searchQuery:e.target.value }),
+      statusFilter: s.statusFilter,
+      filterTodosStyle: fc('todos'), filterPendienteStyle: fc('pendiente'),
+      filterVisibleStyle: fc('visible'), filterOcultoStyle: fc('oculto'), filterBaneadoStyle: fc('baneado'),
+      setFilterTodos: () => this.setState({ statusFilter:'todos' }),
+      setFilterPendiente: () => this.setState({ statusFilter:'pendiente' }),
+      setFilterVisible: () => this.setState({ statusFilter:'visible' }),
+      setFilterOculto: () => this.setState({ statusFilter:'oculto' }),
+      setFilterBaneado: () => this.setState({ statusFilter:'baneado' }),
+
+      // Items
+      itemsForList, showEmptyList: itemsForList.length === 0 && s.activeTab !== 'historial',
+      itemCount: itemsForList.length, itemCountPlural: itemsForList.length !== 1 ? 's' : '',
+
+      // Selected
+      selectedItem: sel, selectedActions, selectedIsBanned,
+      selectedTipoLabel: sel ? this._tipoLabel(sel) : '',
+      selectedTipoStyle: sel ? this._tipoStyle(sel) : {},
+      selectedStatusLabel: sel ? this._statusLabel[sel.status] : '',
+      selectedStatusStyle: sel ? this._statusStyle(sel.status) : {},
+
+      // Mobile screens
+      mobileShowQueue: s.auth && s.mobileScreen === 'queue',
+      mobileShowDetail: s.auth && s.mobileScreen === 'detail',
+      mobileShowHistory: s.auth && s.mobileScreen === 'history',
+      goToQueue: () => this.setState({ mobileScreen:'queue' }),
+      goToHistory: () => this.setState({ mobileScreen:'history', activeTab:'historial' }),
+
+      // Desktop views
+      showHistoryDesktop: s.auth && s.activeTab === 'historial',
+      showQueueDesktop: s.auth && s.activeTab !== 'historial',
+
+      // History
+      historyItems,
+
+      // Modal
+      modalOpen: s.modalOpen, modalAction: s.modalAction,
+      modalNote: s.modalNote, modalNoteValid, modalNoteLen,
+      modalItemName: modalItem ? modalItem.nombre : '',
+      modalConsequence: CONSEQUENCES[s.modalAction] || '',
+      modalTitle: TITLES[s.modalAction] || '',
+      modalNoteCounterStyle: { fontSize:'11px', color: modalNoteValid ? '#1C5935' : 'var(--color-text-secondary)' },
+      modalConfirmStyle: { flex:'2', height:'44px', background: s.modalAction ? CONFIRM_BG[s.modalAction] : '#1A1310', color:'#FFFFFF', border:'none', borderRadius:'8px', fontSize:'14px', fontWeight:'600', cursor: modalNoteValid ? 'pointer' : 'not-allowed', opacity: modalNoteValid ? '1' : '0.4', display:'flex', alignItems:'center', justifyContent:'center' },
+      modalConfirmDisabled: !modalNoteValid,
+      setModalNote: (e) => this.setState({ modalNote:e.target.value }),
+      closeModal: () => this.setState({ modalOpen:false, modalAction:null, modalTargetId:null, modalNote:'' }),
+      confirmModal: () => {
+        const { modalAction, modalTargetId, modalNote } = this.state;
+        if (modalNote.trim().length < 10) return;
+        const items2 = this._items();
+        const item = items2.find(i => i.id === modalTargetId);
+        if (!item) return;
+        const newStatus = { publicar:'visible', restaurar:'visible', ocultar:'oculto', banear:'baneado' }[modalAction];
+        const lbl = { publicar:'Publicó', restaurar:'Restauró', ocultar:'Ocultó', banear:'Baneó' }[modalAction];
+        const entry = { id:Date.now(), moderator:'admin@directorio.co', actionLabel:lbl, sobre:item.nombre, nota:modalNote.trim(), fecha:'Ahora mismo' };
+        this.setState(prev => ({
+          items: (prev.items||this._initialItems).map(i => i.id===modalTargetId ? {...i, status:newStatus} : i),
+          historyLog: [entry, ...(prev.historyLog||this._initialHistory)],
+          modalOpen:false, modalAction:null, modalTargetId:null, modalNote:'',
+        }));
+      },
+    };
+  }
+}
+</script>
+</body>
+</html>
