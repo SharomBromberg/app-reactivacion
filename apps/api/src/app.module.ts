@@ -5,6 +5,9 @@ import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 import { validateEnv } from './config/env.validation';
 import { PrismaModule } from './prisma/prisma.module';
 import { HealthModule } from './health/health.module';
+import { BusinessesModule } from './businesses/businesses.module';
+import { ProductsModule } from './products/products.module';
+import { SupportPostsModule } from './support-posts/support-posts.module';
 
 @Module({
   imports: [
@@ -25,6 +28,9 @@ import { HealthModule } from './health/health.module';
     }),
     PrismaModule,
     HealthModule,
+    BusinessesModule,
+    ProductsModule,
+    SupportPostsModule,
   ],
   providers: [
     {
