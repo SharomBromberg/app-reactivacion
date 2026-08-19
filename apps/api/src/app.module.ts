@@ -8,6 +8,8 @@ import { HealthModule } from './health/health.module';
 import { BusinessesModule } from './businesses/businesses.module';
 import { ProductsModule } from './products/products.module';
 import { SupportPostsModule } from './support-posts/support-posts.module';
+import { AuthModule } from './auth/auth.module';
+import { AdminModule } from './admin/admin.module';
 
 @Module({
   imports: [
@@ -31,6 +33,8 @@ import { SupportPostsModule } from './support-posts/support-posts.module';
     BusinessesModule,
     ProductsModule,
     SupportPostsModule,
+    AuthModule,
+    AdminModule,
   ],
   providers: [
     {
