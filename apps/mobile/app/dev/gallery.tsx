@@ -118,7 +118,7 @@ export default function ComponentGalleryScreen() {
       </Text>
 
       <Section title="Text">
-        <Text variant="display">Directorio Solidario</Text>
+        <Text variant="display">Barrio Activo</Text>
         <Text variant="heading">Panadería La Esperanza</Text>
         <Text variant="title">Muro de Apoyo</Text>
         <Text variant="body">Arreglos de ropa, uniformes y cortinas. Atención a domicilio disponible.</Text>

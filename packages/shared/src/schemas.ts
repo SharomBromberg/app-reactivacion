@@ -40,6 +40,18 @@ export const createBusinessSchema = z.object({
 
 export type CreateBusinessInput = z.infer<typeof createBusinessSchema>;
 
+export const createProductSchema = z.object({
+  name: z
+    .string()
+    .trim()
+    .min(2, 'Ingresa al menos 2 caracteres.')
+    .max(80, 'Máximo 80 caracteres.'),
+  description: z.string().trim().max(300, 'Máximo 300 caracteres.').optional().or(z.literal('')),
+  website: honeypotField,
+});
+
+export type CreateProductInput = z.infer<typeof createProductSchema>;
+
 export const createSupportPostSchema = z.object({
   type: z.nativeEnum(SupportPostType),
   title: z

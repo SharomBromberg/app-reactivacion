@@ -7,6 +7,7 @@ export {
   type ModerationActionModalProps,
 } from './ModerationActionModal';
 export { ModerationQueueList, type ModerationQueueListProps } from './ModerationQueueList';
+export { ProductForm, type ProductFormProps } from './ProductForm';
 export { RegisterBusinessForm, type RegisterBusinessFormProps } from './RegisterBusinessForm';
 export { SupportPostForm, type SupportPostFormProps } from './SupportPostForm';
 export { SupportPostList, type SupportPostListProps } from './SupportPostList';

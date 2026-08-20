@@ -21,8 +21,12 @@ export default function RootLayout() {
         <Stack screenOptions={{ headerShown: false }}>
           <Stack.Screen name="(tabs)" />
           <Stack.Screen
-            name="negocio/[id]"
+            name="negocio/[id]/index"
             options={{ headerShown: true, title: 'Detalle del negocio', headerBackTitle: 'Atrás' }}
+          />
+          <Stack.Screen
+            name="negocio/[id]/producto-nuevo"
+            options={{ headerShown: true, title: 'Agregar producto', headerBackTitle: 'Atrás', presentation: 'modal' }}
           />
           <Stack.Screen
             name="apoyo/nuevo"

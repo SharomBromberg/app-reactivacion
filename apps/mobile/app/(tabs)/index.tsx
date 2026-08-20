@@ -30,7 +30,7 @@ export default function DirectorioScreen() {
   const header = (
     <View style={styles.header}>
       <Text variant="display" style={styles.title}>
-        Directorio Solidario
+        Barrio Activo
       </Text>
       <View style={styles.searchRow}>
         <Icon name="buscar" size={18} color={colors.textSecondary} />

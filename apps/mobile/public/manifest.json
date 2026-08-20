@@ -1,6 +1,6 @@
 {
-  "name": "Directorio Solidario",
-  "short_name": "Red Local",
+  "name": "Barrio Activo",
+  "short_name": "Barrio Activo",
   "description": "Directorio y marketplace solidario para negocios y vecinos afectados por el sismo en Manizales.",
   "start_url": "/?source=pwa",
   "display": "standalone",

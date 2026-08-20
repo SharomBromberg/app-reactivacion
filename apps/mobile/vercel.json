@@ -1,4 +1,8 @@
 {
   "buildCommand": "pnpm run build:web",
-  "outputDirectory": "dist"
+  "outputDirectory": "dist",
+  "rewrites": [
+    { "source": "/negocio/:id/producto-nuevo", "destination": "/negocio/[id]/producto-nuevo.html" },
+    { "source": "/negocio/:id", "destination": "/negocio/[id].html" }
+  ]
 }
