@@ -46,3 +46,6 @@ Thumbs.db
 # Datos semilla reales (contienen teléfonos, no se versionan)
 data/seed/businesses.csv
 data/seed/errors.csv
+
+.vercel
+.env*
