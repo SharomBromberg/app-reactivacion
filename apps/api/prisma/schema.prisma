@@ -67,6 +67,14 @@ enum SupportPostType {
   OFREZCO
 }
 
+/// Origen del registro: PUBLIC = formulario público, SEED = carga masiva
+/// inicial (pnpm seed). Permite distinguir datos de arranque de los que
+/// entran por la app una vez el piloto está en marcha.
+enum BusinessSource {
+  PUBLIC
+  SEED
+}
+
 /// Estado de moderación de un contenido publicado.
 /// Default APROBADO: moderación reactiva (se ve de inmediato, el equipo lo
 /// retira si hace falta). Cambiar el @default a PENDIENTE activa
@@ -114,6 +122,8 @@ model Business {
   /// Formato E.164 (ej. +573001234567), se usa para armar el enlace wa.me.
   phone       String
   description String?
+  /// Origen del registro (formulario público o carga semilla `pnpm seed`).
+  source      BusinessSource @default(PUBLIC)
 
   // --- Moderación ---
   status         ModerationStatus @default(APROBADO)

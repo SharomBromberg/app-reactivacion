@@ -42,3 +42,7 @@ Thumbs.db
 # Cache
 .turbo/
 .cache/
+
+# Datos semilla reales (contienen teléfonos, no se versionan)
+data/seed/businesses.csv
+data/seed/errors.csv
