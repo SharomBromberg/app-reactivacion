@@ -25,6 +25,15 @@ export class ApiError extends Error {
   }
 }
 
+// Handler global para 401: lo registra AdminAuthProvider al montar. Así una
+// sesión expirada/ inválida en cualquier llamada a /admin/* limpia el token y
+// redirige a login sin tener que decodificar el JWT a mano en cada pantalla.
+let onUnauthorized: (() => void) | null = null;
+
+export function setUnauthorizedHandler(handler: (() => void) | null): void {
+  onUnauthorized = handler;
+}
+
 async function request<T>(path: string, options: RequestOptions = {}): Promise<T> {
   const response = await fetch(`${API_URL}${path}`, {
     ...options,
@@ -36,6 +45,10 @@ async function request<T>(path: string, options: RequestOptions = {}): Promise<T
   });
 
   if (!response.ok) {
+    if (response.status === 401) {
+      onUnauthorized?.();
+    }
+
     const errorBody = (await response.json().catch(() => null)) as ApiErrorBody | null;
     const message = errorBody?.message ?? response.statusText;
     throw new ApiError(Array.isArray(message) ? message.join(', ') : message, response.status);
