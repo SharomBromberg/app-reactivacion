@@ -43,7 +43,7 @@ describe('BusinessesController (e2e)', () => {
       .send({
         name: `${TEST_RUN_ID}-negocio-valido`,
         zone: 'CUMANDAY',
-        sector: 'ALIMENTOS_Y_BEBIDAS',
+        sector: 'ALIMENTOS_RESTAURANTES',
         damageLevel: 'AFECTACION_LEVE',
         phone: '+573001234567',
         description: 'Panadería de barrio',
@@ -66,7 +66,7 @@ describe('BusinessesController (e2e)', () => {
       .send({
         name: `${TEST_RUN_ID}-bot`,
         zone: 'CUMANDAY',
-        sector: 'ALIMENTOS_Y_BEBIDAS',
+        sector: 'ALIMENTOS_RESTAURANTES',
         damageLevel: 'AFECTACION_LEVE',
         phone: '+573001234567',
         website: 'http://spam.example.com',
@@ -87,7 +87,7 @@ describe('BusinessesController (e2e)', () => {
       .send({
         name: `${TEST_RUN_ID}-zona-tesorito`,
         zone: 'TESORITO',
-        sector: 'TECNOLOGIA',
+        sector: 'TECNOLOGIA_DIGITAL',
         damageLevel: 'SIN_AFECTACION',
         phone: '+573007654321',
       })
@@ -110,7 +110,7 @@ describe('BusinessesController (e2e)', () => {
       .send({
         name: `${TEST_RUN_ID}-eliminado`,
         zone: 'PALOGRANDE',
-        sector: 'SALUD',
+        sector: 'SALUD_BIENESTAR',
         damageLevel: 'AFECTACION_MODERADA',
         phone: '+573009998877',
       })

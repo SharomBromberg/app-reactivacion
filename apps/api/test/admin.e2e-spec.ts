@@ -74,7 +74,7 @@ describe('AdminController (e2e)', () => {
       .send({
         name: `${TEST_RUN_ID}-negocio`,
         zone: 'CUMANDAY',
-        sector: 'ALIMENTOS_Y_BEBIDAS',
+        sector: 'ALIMENTOS_RESTAURANTES',
         damageLevel: 'AFECTACION_LEVE',
         phone: '+573001234567',
       })
@@ -118,7 +118,7 @@ describe('AdminController (e2e)', () => {
       .send({
         name: `${TEST_RUN_ID}-negocio-ban`,
         zone: 'TESORITO',
-        sector: 'TECNOLOGIA',
+        sector: 'TECNOLOGIA_DIGITAL',
         damageLevel: 'SIN_AFECTACION',
         phone: '+573007654321',
       })

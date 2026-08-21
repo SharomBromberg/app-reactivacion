@@ -17,38 +17,43 @@ datasource db {
 // Enums de dominio (compartidos con packages/shared)
 // ---------------------------------------------------------------------------
 
-/// Comunas urbanas de Manizales (Acuerdo 589 de 2004, 11 comunas). Lista
-/// editable: agregar corregimientos rurales u otras zonas si hace falta
-/// durante la contingencia; OTRA cubre lo no listado mientras tanto.
+/// Comunas urbanas de Manizales + zona rural/aledaña. Lista editable. Orden
+/// alfabético por nombre legible (ver ZONE_LABELS en packages/shared), con
+/// RURAL_ALEDANA al final.
 enum Zone {
   ATARDECERES
   CIUDADELA_DEL_NORTE
   CUMANDAY
   ECOTURISTICO_CERRO_DE_ORO
-  ESTACION
+  LA_ESTACION
+  LA_ESTRELLA
   LA_FUENTE
   LA_MACARENA
+  NUEVO_HORIZONTE
   PALOGRANDE
   SAN_JOSE
   TESORITO
   UNIVERSITARIA
-  OTRA
+  RURAL_ALEDANA
 }
 
-/// Rubro/actividad económica del negocio.
+/// Rubro/actividad económica del negocio. Orden alfabético por nombre
+/// legible (ver SECTOR_LABELS en packages/shared), con OTRO al final.
 enum Sector {
-  ALIMENTOS_Y_BEBIDAS
-  ABARROTES_Y_TIENDA
-  ROPA_Y_CALZADO
-  BELLEZA_Y_CUIDADO_PERSONAL
-  SALUD
-  EDUCACION
-  TECNOLOGIA
-  CONSTRUCCION_Y_FERRETERIA
-  TRANSPORTE
-  SERVICIOS_PROFESIONALES
-  ARTE_Y_ARTESANIAS
-  AGROPECUARIO
+  ALIMENTOS_RESTAURANTES
+  BELLEZA_CUIDADO
+  CONFECCION_COSTURA
+  DISENO_ARTE
+  EDUCACION_CLASES
+  FERRETERIA_CONSTRUCCION
+  HOGAR_ASEO
+  JARDINERIA_AGRO
+  MASCOTAS
+  MECANICA_REPARACIONES
+  SALUD_BIENESTAR
+  TECNOLOGIA_DIGITAL
+  TIENDAS_VIVERES
+  TRANSPORTE_MENSAJERIA
   OTRO
 }
 
