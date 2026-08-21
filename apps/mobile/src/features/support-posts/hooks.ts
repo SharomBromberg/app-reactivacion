@@ -1,4 +1,4 @@
-import { useInfiniteQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { keepPreviousData, useInfiniteQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import {
   createSupportPost,
   fetchSupportPosts,
@@ -12,6 +12,9 @@ export function useSupportPostsQuery(params: SupportPostsQueryParams) {
     queryFn: ({ pageParam }) => fetchSupportPosts({ ...params, cursor: pageParam }),
     initialPageParam: undefined as string | undefined,
     getNextPageParam: (lastPage) => lastPage.nextCursor ?? undefined,
+    // Ver comentario en useBusinessesQuery: evita el salto a la vista de
+    // "cargando" (y el remount del ScrollView de filtros) al cambiar de zona/tipo.
+    placeholderData: keepPreviousData,
   });
 }
 

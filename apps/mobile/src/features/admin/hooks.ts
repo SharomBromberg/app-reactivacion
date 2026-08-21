@@ -1,4 +1,4 @@
-import { useInfiniteQuery, useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { keepPreviousData, useInfiniteQuery, useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { ModerationTargetType } from '@plataforma/shared';
 import {
   banContent,
@@ -80,6 +80,7 @@ export function useAdminBusinessesQuery(params: Pick<FetchAdminContentParams, 's
     queryFn: ({ pageParam }) => fetchAdminBusinesses({ ...params, cursor: pageParam }),
     initialPageParam: undefined as string | undefined,
     getNextPageParam: (lastPage) => lastPage.nextCursor ?? undefined,
+    placeholderData: keepPreviousData,
   });
 }
 
@@ -89,6 +90,7 @@ export function useAdminSupportPostsQuery(params: Pick<FetchAdminContentParams, 
     queryFn: ({ pageParam }) => fetchAdminSupportPosts({ ...params, cursor: pageParam }),
     initialPageParam: undefined as string | undefined,
     getNextPageParam: (lastPage) => lastPage.nextCursor ?? undefined,
+    placeholderData: keepPreviousData,
   });
 }
 
