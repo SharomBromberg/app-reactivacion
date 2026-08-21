@@ -75,3 +75,9 @@ packages/shared  Tipos y enums compartidos entre api y mobile
 - No se recolecta información financiera ni datos personales sensibles.
 - `.env` nunca se commitea; usa siempre `.env.example` como referencia.
 - Rate limiting activo por defecto (30 req/min por IP) vía `ThrottlerModule`.
+
+## Licencia
+
+© 2026 Sharom Bromberg, Emilia Alarcón. Todos los derechos reservados. Ver
+[LICENSE](./LICENSE). El código es público en este repositorio con fines de
+transparencia y colaboración, no de reuso libre.
