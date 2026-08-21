@@ -9,7 +9,17 @@ export default function TabsLayout() {
         headerShown: false,
         tabBarActiveTintColor: colors.primary,
         tabBarInactiveTintColor: colors.textSecondary,
-        tabBarStyle: { backgroundColor: colors.surface, borderTopColor: colors.border },
+        // Alto explícito: en web, react-navigation no siempre calcula bien
+        // el alto del tab bar y termina más chico de lo que necesitan el
+        // ícono + la etiqueta, recortándolos.
+        tabBarStyle: {
+          backgroundColor: colors.surface,
+          borderTopColor: colors.border,
+          height: 64,
+          paddingTop: 8,
+          paddingBottom: 8,
+        },
+        tabBarItemStyle: { paddingVertical: 2 },
         tabBarLabelStyle: { fontSize: 12, fontWeight: '500' },
       }}
     >
