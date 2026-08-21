@@ -9,17 +9,18 @@ export default function TabsLayout() {
         headerShown: false,
         tabBarActiveTintColor: colors.primary,
         tabBarInactiveTintColor: colors.textSecondary,
-        // Alto explícito: en web, react-navigation no siempre calcula bien
-        // el alto del tab bar y termina más chico de lo que necesitan el
-        // ícono + la etiqueta, recortándolos.
+        // Solo el alto: el default de la librería (49px) queda muy justo
+        // para ícono (28px) + etiqueta y se recorta en web. OJO — un
+        // "height" en tabBarStyle reemplaza por completo el padding interno
+        // que la librería calcula sola (insets.bottom, etc.), porque
+        // tabBarStyle se aplica al final del mismo array de estilos: por
+        // eso NO se agrega padding manual acá, alteraría ese cálculo y
+        // recortaría el contenido por el otro lado.
         tabBarStyle: {
           backgroundColor: colors.surface,
           borderTopColor: colors.border,
-          height: 64,
-          paddingTop: 8,
-          paddingBottom: 8,
+          height: 58,
         },
-        tabBarItemStyle: { paddingVertical: 2 },
         tabBarLabelStyle: { fontSize: 12, fontWeight: '500' },
       }}
     >
