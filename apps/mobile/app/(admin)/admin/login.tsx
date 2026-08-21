@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'expo-router';
+import Head from 'expo-router/head';
 import { ScrollView, StyleSheet, View } from 'react-native';
 import type { LoginInput } from '@plataforma/shared';
 import { ApiError } from '@/lib/api';
@@ -39,6 +40,18 @@ export default function AdminLoginScreen() {
 
   return (
     <ScrollView contentContainerStyle={styles.container} keyboardShouldPersistTaps="handled">
+      {/*
+        Manifest propio (no el de la app pública): si un moderador entra acá
+        desde el navegador y usa "Agregar a pantalla de inicio", le queda un
+        ícono aparte ("Barrio Activo Moderador") que abre directo a este
+        login en modo standalone, sin pasar por el directorio público.
+      */}
+      <Head>
+        <link rel="manifest" href="/admin-manifest.json" />
+        <meta name="theme-color" content="#6D3A18" />
+        <link rel="icon" href="/admin-favicon.png" type="image/png" />
+        <link rel="apple-touch-icon" href="/admin-icon-192.png" />
+      </Head>
       <View style={styles.header}>
         <Text variant="display" style={styles.title}>
           Panel de moderación

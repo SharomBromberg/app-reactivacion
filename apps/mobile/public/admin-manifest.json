@@ -1,0 +1,16 @@
+{
+  "name": "Barrio Activo Moderador",
+  "short_name": "Moderador",
+  "description": "Panel de moderación de Barrio Activo — solo para el equipo.",
+  "start_url": "/admin/login?source=pwa-admin",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#F2EDE4",
+  "theme_color": "#6D3A18",
+  "lang": "es-CO",
+  "icons": [
+    { "src": "/admin-icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/admin-icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/admin-icon-maskable.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

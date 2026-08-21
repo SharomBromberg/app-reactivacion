@@ -92,12 +92,17 @@ function inRoundedRect(x, y, size, radius) {
  *   false = fondo cuadrado a sangre completa (ícono "maskable").
  * `scale`/`offset`: para dejar zona segura en el ícono maskable.
  */
-function renderIcon(size, { roundedBg, contentScale = 1, contentOffset = 0 }) {
+function renderIcon(size, { roundedBg, contentScale = 1, contentOffset = 0, invert = false }) {
   // Supersampling para bordes suaves sin librerías externas; más bajo en
   // lienzos grandes para que el rasterizado a mano siga siendo rápido.
   const SS = size >= 384 ? 2 : 4;
   const hi = size * SS;
   const pixels = Buffer.alloc(hi * hi * 3);
+  // invert: variante "moderador" — mismo glyph, fondo/trazo con los
+  // colores intercambiados para que el ícono se distinga a simple vista
+  // del de la app pública en la pantalla de inicio.
+  const bg = invert ? CREAM : BROWN;
+  const fg = invert ? BROWN : CREAM;
 
   for (let py = 0; py < hi; py++) {
     for (let px = 0; px < hi; px++) {
@@ -110,13 +115,13 @@ function renderIcon(size, { roundedBg, contentScale = 1, contentOffset = 0 }) {
       const bgHit = roundedBg
         ? inRoundedRect(px / SS, py / SS, size, size * 0.2)
         : true;
-      if (bgHit) color = BROWN;
+      if (bgHit) color = bg;
 
-      if (color && pointInPolygon(vx, vy, PIN_POLYGON)) color = CREAM;
-      if (color && inCircle(vx, vy, 50, 42, 16)) color = BROWN;
-      if (color && inCircle(vx, vy, 50, 33, 5)) color = CREAM;
-      if (color && inCircle(vx, vy, 43, 50, 5)) color = CREAM;
-      if (color && inCircle(vx, vy, 57, 50, 5)) color = CREAM;
+      if (color && pointInPolygon(vx, vy, PIN_POLYGON)) color = fg;
+      if (color && inCircle(vx, vy, 50, 42, 16)) color = bg;
+      if (color && inCircle(vx, vy, 50, 33, 5)) color = fg;
+      if (color && inCircle(vx, vy, 43, 50, 5)) color = fg;
+      if (color && inCircle(vx, vy, 57, 50, 5)) color = fg;
 
       const idx = (py * hi + px) * 3;
       if (color) {
@@ -237,5 +242,32 @@ writeIcon(path.join(PUBLIC_DIR, 'icon-maskable.png'), 512, {
   contentOffset: 512 * 0.15,
 });
 writeIcon(path.join(PUBLIC_DIR, 'favicon.png'), 48, { roundedBg: true, contentScale: 1, contentOffset: 0 });
+
+// Variante "moderador" (colores invertidos) para la PWA instalable aparte
+// del panel admin — ver apps/mobile/public/admin-manifest.json.
+writeIcon(path.join(PUBLIC_DIR, 'admin-icon-192.png'), 192, {
+  roundedBg: true,
+  contentScale: 1,
+  contentOffset: 0,
+  invert: true,
+});
+writeIcon(path.join(PUBLIC_DIR, 'admin-icon-512.png'), 512, {
+  roundedBg: true,
+  contentScale: 1,
+  contentOffset: 0,
+  invert: true,
+});
+writeIcon(path.join(PUBLIC_DIR, 'admin-icon-maskable.png'), 512, {
+  roundedBg: false,
+  contentScale: 0.7,
+  contentOffset: 512 * 0.15,
+  invert: true,
+});
+writeIcon(path.join(PUBLIC_DIR, 'admin-favicon.png'), 48, {
+  roundedBg: true,
+  contentScale: 1,
+  contentOffset: 0,
+  invert: true,
+});
 
 console.log('Íconos generados.');
