@@ -1,4 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import type { Prisma } from '@prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
 import { publicVisibilityWhere } from '../common/prisma/public-scope.util';
@@ -11,7 +12,10 @@ import type { SupportPostResponseDto } from './dto/support-post-response.dto';
 
 @Injectable()
 export class SupportPostsService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(
+    private readonly prisma: PrismaService,
+    private readonly config: ConfigService,
+  ) {}
 
   /** Devuelve null cuando el honeypot se disparó: la ruta no guarda nada. */
   async create(dto: CreateSupportPostDto): Promise<SupportPostResponseDto | null> {
@@ -47,9 +51,12 @@ export class SupportPostsService {
 
   async findAll(query: QuerySupportPostDto): Promise<PaginatedResponseDto<SupportPostResponseDto>> {
     const limit = query.limit ?? 20;
+    const expiryDays = this.config.get<number>('SUPPORT_POST_EXPIRY_DAYS', 30);
+    const notExpired = new Date(Date.now() - expiryDays * 24 * 60 * 60 * 1000);
 
     const where: Prisma.SupportPostWhereInput = {
       ...publicVisibilityWhere(),
+      createdAt: { gte: notExpired },
       ...(query.type ? { type: query.type } : {}),
       ...(query.zone ? { zone: query.zone } : {}),
     };

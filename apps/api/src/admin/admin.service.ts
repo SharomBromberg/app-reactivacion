@@ -1,11 +1,17 @@
 import { Injectable } from '@nestjs/common';
+import type { Prisma } from '@prisma/client';
 import { ModerationStatus, ModerationTargetType } from '@prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
 import type { PaginatedResponseDto } from '../common/dto/paginated-response.dto';
 import type { QueryActionsDto } from './dto/query-actions.dto';
+import type { QueryAdminContentDto } from './dto/query-admin-content.dto';
 import type { QueueItemResponseDto } from './dto/queue-item-response.dto';
 import { toModerationActionResponse } from './dto/moderation-action-response.dto';
 import type { ModerationActionResponseDto } from './dto/moderation-action-response.dto';
+import { toAdminBusinessItem } from './dto/admin-business-item.dto';
+import type { AdminBusinessItemDto } from './dto/admin-business-item.dto';
+import { toAdminSupportPostItem } from './dto/admin-support-post-item.dto';
+import type { AdminSupportPostItemDto } from './dto/admin-support-post-item.dto';
 
 /**
  * Tope de la cola de moderación. No hay modelo de "reportes" en el MVP
@@ -84,6 +90,57 @@ export class AdminService {
 
     return {
       items: items.map(toModerationActionResponse),
+      nextCursor: hasNext ? items[items.length - 1].id : null,
+    };
+  }
+
+  /**
+   * Todo el contenido (cualquier status/deletedAt/bannedAt), a diferencia de
+   * BusinessesService.findAll: acá el admin necesita ver también lo oculto
+   * o baneado para poder revisarlo/restaurarlo.
+   */
+  async listBusinesses(query: QueryAdminContentDto): Promise<PaginatedResponseDto<AdminBusinessItemDto>> {
+    const limit = query.limit ?? 20;
+
+    const where: Prisma.BusinessWhereInput = {
+      ...(query.search ? { name: { contains: query.search, mode: 'insensitive' } } : {}),
+    };
+
+    const businesses = await this.prisma.business.findMany({
+      where,
+      orderBy: { createdAt: 'desc' },
+      take: limit + 1,
+      ...(query.cursor ? { cursor: { id: query.cursor }, skip: 1 } : {}),
+    });
+
+    const hasNext = businesses.length > limit;
+    const items = hasNext ? businesses.slice(0, limit) : businesses;
+
+    return {
+      items: items.map(toAdminBusinessItem),
+      nextCursor: hasNext ? items[items.length - 1].id : null,
+    };
+  }
+
+  async listSupportPosts(query: QueryAdminContentDto): Promise<PaginatedResponseDto<AdminSupportPostItemDto>> {
+    const limit = query.limit ?? 20;
+
+    const where: Prisma.SupportPostWhereInput = {
+      ...(query.search ? { title: { contains: query.search, mode: 'insensitive' } } : {}),
+    };
+
+    const posts = await this.prisma.supportPost.findMany({
+      where,
+      orderBy: { createdAt: 'desc' },
+      take: limit + 1,
+      ...(query.cursor ? { cursor: { id: query.cursor }, skip: 1 } : {}),
+    });
+
+    const hasNext = posts.length > limit;
+    const items = hasNext ? posts.slice(0, limit) : posts;
+
+    return {
+      items: items.map(toAdminSupportPostItem),
       nextCursor: hasNext ? items[items.length - 1].id : null,
     };
   }

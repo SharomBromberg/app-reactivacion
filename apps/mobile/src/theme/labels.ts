@@ -1,4 +1,12 @@
-import { DamageLevel, ModerationActionType, ModerationTargetType, Sector, SupportPostType, Zone } from '@plataforma/shared';
+import {
+  DamageLevel,
+  ModerationActionType,
+  ModerationStatus,
+  ModerationTargetType,
+  Sector,
+  SupportPostType,
+  Zone,
+} from '@plataforma/shared';
 
 export const zoneLabels: Record<Zone, string> = {
   [Zone.ATARDECERES]: 'Atardeceres',
@@ -48,6 +56,12 @@ export const moderationTargetTypeLabels: Record<ModerationTargetType, string> = 
   [ModerationTargetType.BUSINESS]: 'Negocio',
   [ModerationTargetType.PRODUCT]: 'Producto',
   [ModerationTargetType.SUPPORT_POST]: 'Publicación de apoyo',
+};
+
+export const moderationStatusLabels: Record<ModerationStatus, string> = {
+  [ModerationStatus.PENDIENTE]: 'Pendiente',
+  [ModerationStatus.APROBADO]: 'Aprobado',
+  [ModerationStatus.RECHAZADO]: 'Rechazado',
 };
 
 export const moderationActionTypeLabels: Record<ModerationActionType, string> = {

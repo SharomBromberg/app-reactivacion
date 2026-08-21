@@ -9,6 +9,8 @@ export const envSchema = z.object({
   JWT_EXPIRES_IN: z.string().default('12h'),
   THROTTLE_TTL: z.coerce.number().int().positive().default(60),
   THROTTLE_LIMIT: z.coerce.number().int().positive().default(30),
+  /** Días desde su creación tras los que una publicación del muro deja de verse públicamente. */
+  SUPPORT_POST_EXPIRY_DAYS: z.coerce.number().int().positive().default(30),
 });
 
 export type EnvConfig = z.infer<typeof envSchema>;

@@ -1,5 +1,5 @@
-import { Linking, Pressable, RefreshControl, ScrollView, StyleSheet, View } from 'react-native';
-import { useLocalSearchParams, useRouter } from 'expo-router';
+import { Linking, RefreshControl, ScrollView, StyleSheet, View } from 'react-native';
+import { useLocalSearchParams } from 'expo-router';
 import { Button, Icon, Skeleton, Text } from '@/components/atoms';
 import { ErrorState, ProductCard } from '@/components/molecules';
 import { useBusinessQuery } from '@/features/businesses/hooks';
@@ -10,7 +10,6 @@ const WHATSAPP_MESSAGE = 'Hola, vi tu negocio en la Plataforma de Reactivación 
 
 export default function NegocioDetalleScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
-  const router = useRouter();
   const query = useBusinessQuery(id);
 
   if (query.isPending) {
@@ -79,19 +78,17 @@ export default function NegocioDetalleScreen() {
         </Text>
       </View>
 
-      <View style={styles.productsHeader}>
-        <Text variant="title">Productos y servicios</Text>
-        <Pressable
-          accessibilityRole="button"
-          onPress={() => router.push(`/negocio/${id}/producto-nuevo`)}
-          style={styles.addProductLink}
-        >
-          <Icon name="agregar" size={16} color={colors.primary} />
-          <Text variant="label" color={colors.primary}>
-            Agregar
-          </Text>
-        </Pressable>
-      </View>
+      {/*
+        "Agregar producto" queda deshabilitado a propósito: cualquiera podría
+        publicar productos en cualquier negocio sin ser el dueño (no hay
+        verificación de identidad en el MVP, ver CLAUDE.md "fuera de
+        alcance"). La pantalla, el form y el endpoint ya existen
+        (negocio/[id]/producto-nuevo.tsx, ProductForm, POST /products) —
+        reconectar el link de abajo cuando haya verificación por WhatsApp/SMS.
+      */}
+      <Text variant="title" style={styles.productsTitle}>
+        Productos y servicios
+      </Text>
       {business.products.length === 0 ? (
         <Text variant="body" color={colors.textSecondary}>
           Este negocio aún no ha publicado productos o servicios.
@@ -135,17 +132,9 @@ const styles = StyleSheet.create({
     backgroundColor: colors.surfaceRaised,
     borderRadius: radius.md,
   },
-  productsHeader: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
+  productsTitle: {
     marginTop: spacing[8],
     marginBottom: spacing[3],
-  },
-  addProductLink: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: spacing[1],
   },
   productsList: {
     gap: spacing[3],

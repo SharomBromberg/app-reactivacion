@@ -10,4 +10,5 @@ export {
   supportPostTypeLabels,
   moderationTargetTypeLabels,
   moderationActionTypeLabels,
+  moderationStatusLabels,
 } from './labels';

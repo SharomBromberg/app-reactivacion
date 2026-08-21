@@ -38,6 +38,7 @@ export default function ProtectedAdminLayout() {
       }}
     >
       <Stack.Screen name="index" options={{ title: 'Cola de moderación' }} />
+      <Stack.Screen name="contenido" options={{ title: 'Negocios y publicaciones' }} />
       <Stack.Screen name="historial" options={{ title: 'Historial' }} />
     </Stack>
   );

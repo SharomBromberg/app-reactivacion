@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react';
+import type { ReactElement, ReactNode } from 'react';
 import { ActivityIndicator, FlatList, RefreshControl, StyleSheet, View } from 'react-native';
 import { Skeleton } from '../atoms';
 import { BusinessCard, EmptyState, ErrorState } from '../molecules';
@@ -60,7 +60,11 @@ export function BusinessList({
       renderItem={({ item }) => <BusinessCard business={item} onPress={() => onSelectBusiness(item)} />}
       ItemSeparatorComponent={() => <View style={{ height: spacing[3] }} />}
       contentContainerStyle={styles.list}
-      ListHeaderComponent={header ? () => <>{header}</> : undefined}
+      // Pasar el elemento directo (no envuelto en una función nueva cada
+      // render): si se envuelve, ListHeaderComponent cambia de identidad en
+      // cada re-render y React Native remonta el header entero, reseteando
+      // el scroll de cualquier ScrollView anidado ahí (ver FilterBar).
+      ListHeaderComponent={header ? (header as ReactElement) : undefined}
       ListEmptyComponent={
         <EmptyState title="Sin resultados" description="Intenta con otro barrio o tipo de negocio." />
       }

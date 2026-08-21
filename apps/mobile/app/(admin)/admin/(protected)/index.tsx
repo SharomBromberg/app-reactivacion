@@ -18,16 +18,20 @@ export default function AdminQueueScreen() {
 
   return (
     <View style={styles.container}>
-      <Pressable
-        accessibilityRole="link"
-        style={styles.historialLink}
-        onPress={() => router.push('/admin/historial')}
-      >
-        <Text variant="label" color={colors.primary}>
-          Ver historial de acciones
-        </Text>
-        <Icon name="adelante" size={16} color={colors.primary} />
-      </Pressable>
+      <View style={styles.linksRow}>
+        <Pressable accessibilityRole="link" style={styles.link} onPress={() => router.push('/admin/contenido')}>
+          <Text variant="label" color={colors.primary}>
+            Negocios y publicaciones
+          </Text>
+          <Icon name="adelante" size={16} color={colors.primary} />
+        </Pressable>
+        <Pressable accessibilityRole="link" style={styles.link} onPress={() => router.push('/admin/historial')}>
+          <Text variant="label" color={colors.primary}>
+            Ver historial de acciones
+          </Text>
+          <Icon name="adelante" size={16} color={colors.primary} />
+        </Pressable>
+      </View>
 
       <ModerationQueueList
         items={queueQuery.data ?? []}
@@ -46,12 +50,15 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.bg,
   },
-  historialLink: {
+  linksRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingHorizontal: spacing[4],
+    paddingTop: spacing[3],
+  },
+  link: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: spacing[1],
-    alignSelf: 'flex-end',
-    paddingHorizontal: spacing[4],
-    paddingTop: spacing[3],
   },
 });

@@ -1,6 +1,15 @@
 import { useInfiniteQuery, useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import type { ModerationTargetType } from '@plataforma/shared';
-import { banContent, fetchActions, fetchQueue, hideContent, restoreContent } from './api';
+import { ModerationTargetType } from '@plataforma/shared';
+import {
+  banContent,
+  fetchActions,
+  fetchAdminBusinesses,
+  fetchAdminSupportPosts,
+  fetchQueue,
+  hideContent,
+  restoreContent,
+  type FetchAdminContentParams,
+} from './api';
 import type { QueueItem } from './types';
 
 const QUEUE_KEY = ['admin', 'queue'] as const;
@@ -59,5 +68,56 @@ export function useModerationActionsQuery() {
     queryFn: ({ pageParam }) => fetchActions({ cursor: pageParam }),
     initialPageParam: undefined as string | undefined,
     getNextPageParam: (lastPage) => lastPage.nextCursor ?? undefined,
+  });
+}
+
+const ADMIN_BUSINESSES_KEY = ['admin', 'businesses'] as const;
+const ADMIN_SUPPORT_POSTS_KEY = ['admin', 'support-posts'] as const;
+
+export function useAdminBusinessesQuery(params: Pick<FetchAdminContentParams, 'search'>) {
+  return useInfiniteQuery({
+    queryKey: [...ADMIN_BUSINESSES_KEY, params],
+    queryFn: ({ pageParam }) => fetchAdminBusinesses({ ...params, cursor: pageParam }),
+    initialPageParam: undefined as string | undefined,
+    getNextPageParam: (lastPage) => lastPage.nextCursor ?? undefined,
+  });
+}
+
+export function useAdminSupportPostsQuery(params: Pick<FetchAdminContentParams, 'search'>) {
+  return useInfiniteQuery({
+    queryKey: [...ADMIN_SUPPORT_POSTS_KEY, params],
+    queryFn: ({ pageParam }) => fetchAdminSupportPosts({ ...params, cursor: pageParam }),
+    initialPageParam: undefined as string | undefined,
+    getNextPageParam: (lastPage) => lastPage.nextCursor ?? undefined,
+  });
+}
+
+export type AdminContentTargetType = ModerationTargetType.BUSINESS | ModerationTargetType.SUPPORT_POST;
+
+export type AdminContentModerateVariables = {
+  targetType: AdminContentTargetType;
+  id: string;
+  action: ModerateAction;
+  note?: string;
+};
+
+/**
+ * A diferencia de useModerateMutation (cola de pendientes, saca el ítem de
+ * la lista al moderar), acá el ítem debe seguir visible con su nuevo status
+ * — por eso invalida en vez de actualizar de forma optimista.
+ */
+export function useAdminContentModerateMutation() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: (vars: AdminContentModerateVariables) => {
+      if (vars.action === 'hide') return hideContent(vars.targetType, vars.id);
+      if (vars.action === 'restore') return restoreContent(vars.targetType, vars.id);
+      return banContent(vars.targetType, vars.id, vars.note ?? '');
+    },
+    onSuccess: (_data, vars) => {
+      const key = vars.targetType === ModerationTargetType.BUSINESS ? ADMIN_BUSINESSES_KEY : ADMIN_SUPPORT_POSTS_KEY;
+      queryClient.invalidateQueries({ queryKey: key });
+    },
   });
 }

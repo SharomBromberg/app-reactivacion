@@ -1,4 +1,5 @@
 export { ActionLogList, type ActionLogListProps } from './ActionLogList';
+export { AdminContentList } from './AdminContentList';
 export { AdminLoginForm, type AdminLoginFormProps } from './AdminLoginForm';
 export { BusinessList, type BusinessListProps } from './BusinessList';
 export {

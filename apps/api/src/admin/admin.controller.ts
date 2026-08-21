@@ -8,6 +8,7 @@ import { AdminService } from './admin.service';
 import { AdminModerationService } from './admin-moderation.service';
 import { BanDto } from './dto/ban.dto';
 import { QueryActionsDto } from './dto/query-actions.dto';
+import { QueryAdminContentDto } from './dto/query-admin-content.dto';
 
 @Controller('admin')
 @UseGuards(JwtAuthGuard, RolesGuard)
@@ -26,6 +27,17 @@ export class AdminController {
   @Get('actions')
   listActions(@Query() query: QueryActionsDto) {
     return this.adminService.listActions(query);
+  }
+
+  /** A diferencia de /admin/queue (solo PENDIENTE), esto trae todo para poder buscar y revisar cualquier negocio. */
+  @Get('businesses')
+  listBusinesses(@Query() query: QueryAdminContentDto) {
+    return this.adminService.listBusinesses(query);
+  }
+
+  @Get('support-posts')
+  listSupportPosts(@Query() query: QueryAdminContentDto) {
+    return this.adminService.listSupportPosts(query);
   }
 
   @Patch('businesses/:id/hide')

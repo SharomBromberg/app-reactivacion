@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react';
+import type { ReactElement, ReactNode } from 'react';
 import { ActivityIndicator, FlatList, RefreshControl, StyleSheet, View } from 'react-native';
 import { Skeleton } from '../atoms';
 import { ActionLogCard, EmptyState, ErrorState } from '../molecules';
@@ -57,7 +57,8 @@ export function ActionLogList({
       renderItem={({ item }) => <ActionLogCard action={item} />}
       ItemSeparatorComponent={() => <View style={{ height: spacing[3] }} />}
       contentContainerStyle={styles.list}
-      ListHeaderComponent={header ? () => <>{header}</> : undefined}
+      // Elemento directo, no envuelto en función: ver comentario en BusinessList.tsx.
+      ListHeaderComponent={header ? (header as ReactElement) : undefined}
       ListEmptyComponent={<EmptyState title="Sin acciones" description="Todavía no hay movimientos registrados." />}
       ListFooterComponent={isFetchingNextPage ? <ActivityIndicator color={colors.primary} style={styles.footer} /> : null}
       onEndReached={onEndReached}
